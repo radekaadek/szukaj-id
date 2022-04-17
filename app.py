@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request
 from steamwebapi.api import ISteamUser, IPlayerService, ISteamUserStats
 from steamwebapi import profiles
-import json
+import json, operator
 
 app = Flask(__name__)
-
+sortkey= operator.itemgetter('playtime_forever')
 steam_api_key = 'EE03692ACB03E4371522180E26926643'
 riot_api_key = 'RGAPI-872636ab-9da1-4355-8afa-a1ab624dd6f4'
 
@@ -21,22 +21,26 @@ def search():
     steamuserinfo = ISteamUser(steam_api_key = steam_api_key) 
     steamplayerinfo = IPlayerService(steam_api_key = steam_api_key)
     steamstatsinfo = ISteamUserStats(steam_api_key = steam_api_key)
+    
+    if len(nazwa_uzytkownika) > 0:
+        #api request by pozyskać steam ID
+        steamid = steamuserinfo.resolve_vanity_url(str(nazwa_uzytkownika), format="json")['response']['steamid']
 
-    #api request by pozyskać steam ID
-    steamid = steamuserinfo.resolve_vanity_url(str(nazwa_uzytkownika), format="json")['response']['steamid']
+        #api request by pozyskać dane w obiektach
+        steamgamesinfo = steamplayerinfo.get_owned_games(steamid, format="json")['response']
+        usersummary = steamuserinfo.get_player_summaries(steamid, format="json")['response']['players'][0]
 
-    #api request by pozyskać dane w obiektach
-    steamgamesinfo = steamplayerinfo.get_owned_games(steamid, format="json")['response']
-    usersummary = steamuserinfo.get_player_summaries(steamid, format="json")['response']['players'][0]
+        #obróbka obiektów
+        count_of_games = steamgamesinfo['game_count']
+        steamgamesinfo = steamgamesinfo['games']
+        usersummary = {"avatar": usersummary['avatarfull'],"personaname": usersummary['personaname'],'url':usersummary['profileurl']}
+        # steamgamesinfo = steamgamesinfo.sort(key=sortkey, reverse=True)
+        zwrot = {"steam":usersummary}
 
-    #obróbka obiektów
-    count_of_games = steamgamesinfo['game_count']
-    steamgamesinfo = steamgamesinfo['games']
-    usersummary = {"avatar": usersummary['avatarfull'],"personaname": usersummary['personaname'],'url':usersummary['profileurl']}
+        print(steamgamesinfo)
+        print(steamgamesinfo.sort(key=sortkey, reverse=True))
 
-    zwrot = {"steam":usersummary}
-
-    return steamgamesinfo
+        return str(count_of_games)
 
     
 
