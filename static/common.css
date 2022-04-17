@@ -16,9 +16,11 @@
  margin-left: auto;
 }
 
-#livebox{
+#liveboxContainer{
     margin-top: 10px;
     margin-right: auto;
     margin-bottom: 0px;
     margin-left: auto;
+    width: 165px;
+    height: auto;
 }
