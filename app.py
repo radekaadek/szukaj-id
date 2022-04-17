@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 
+print('pit')
 
 app = Flask(__name__)
 
