@@ -1,0 +1,17 @@
+.errorMessage{
+ background-position: 8px 4px;
+ background-repeat: no-repeat;
+ background-color: rgba(255, 229, 238, 1);
+ background-image: url(../static/padlockred.svg);
+ background-size: 25px;
+ color: #c00;
+ padding: 10px 10px 10px 45px; 
+ border: 2px solid rgb(215 0 0);
+ border-radius: 10px;
+ width: 500px;
+ height: auto;
+ margin-top: 10px;
+ margin-right: auto;
+ margin-bottom: 0px;
+ margin-left: auto;
+}
