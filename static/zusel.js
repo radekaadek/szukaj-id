@@ -1,5 +1,8 @@
+var wtokuapi = false;
 $(document).ready(function () {
     $("#livebox").on("input", function (e) {
+        wtokuapi = true;
+        if (!wtokuapi) {
         $("#datalist").empty();
         $.ajax({
             method: "post",
@@ -13,5 +16,7 @@ $(document).ready(function () {
                 console.log(res);
             },
         });
+        wtokuapi = false;
+    }
     });
 });
