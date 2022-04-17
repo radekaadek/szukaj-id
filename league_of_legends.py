@@ -10,7 +10,7 @@ lol_watcher = LolWatcher(riot_api_key)
 
 my_region = 'eun1'
 
-me = lol_watcher.summoner.by_name(my_region, 'radekaadek')
+me = lol_watcher.summoner.by_name(my_region, 'psit')
 print(me)
 
 # all objects are returned (by default) as a dict
