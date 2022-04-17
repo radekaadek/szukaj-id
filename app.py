@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request
 from steamwebapi.api import ISteamUser, IPlayerService, ISteamUserStats
 from steamwebapi import profiles
-import json, operator
+import json
 
 app = Flask(__name__)
-sortkey= operator.itemgetter('playtime_forever')
+
 steam_api_key = 'EE03692ACB03E4371522180E26926643'
 riot_api_key = 'RGAPI-872636ab-9da1-4355-8afa-a1ab624dd6f4'
 
@@ -33,12 +33,12 @@ def search():
         #obróbka obiektów
         count_of_games = steamgamesinfo['game_count']
         steamgamesinfo = steamgamesinfo['games']
+        steamgamesinfo = steamgamesinfo.sort(key=lambda x: x.get('playtime_forever'), reverse=True)
         usersummary = {"avatar": usersummary['avatarfull'],"personaname": usersummary['personaname'],'url':usersummary['profileurl']}
-        # steamgamesinfo = steamgamesinfo.sort(key=sortkey, reverse=True)
         zwrot = {"steam":usersummary}
 
-        print(steamgamesinfo)
-        print(steamgamesinfo.sort(key=sortkey, reverse=True))
+        print(str(steamgamesinfo))
+    
 
         return str(count_of_games)
 
