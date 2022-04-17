@@ -21,4 +21,4 @@ def search():
     return usersummary
 
 if __name__ == "__main__":
-    app.run(host="25.85.5.88", debug=True)
+    app.run(debug=True)
