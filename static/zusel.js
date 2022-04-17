@@ -6,13 +6,11 @@ $(document).ready(function () {
             url: "/search",
             data: { nazwa_uzytkownika: $("#livebox").val() },
             success: function (res) {
-                if (res.length > 0) {
-                    var data = "<ul>";
-                    data += "<li>" + res + "</li>";
-                    data += "</ul>";
-                    $("#datalist").html(data);
-                    console.log(res);
-                }
+                // var data = "<ul>";
+                // data += "<li>" + res + "</li>";
+                // data += "</ul>";
+                // $("#datalist").html(data);
+                console.log(res);
             },
         });
     });
