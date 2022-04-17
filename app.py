@@ -20,9 +20,14 @@ def search():
     steamuserinfo = ISteamUser(steam_api_key = steam_api_key)
     steamplayerinfo = IPlayerService(steam_api_key = steam_api_key, format="json")
     steamid = steamuserinfo.resolve_vanity_url(str(nazwa_uzytkownika), format="json")['response']['steamid']
-    usersummary = steamuserinfo.get_player_summaries(steamid, format="json")
+
+    usersummary = steamuserinfo.get_player_summaries(steamid, format="json")['response']['players'][0]
+    usersummary = {"avatar": usersummary['avatarfull'],"personaname": usersummary['personaname'],'url':usersummary['profileurl']}
+
     steamgamesinfo = steamplayerinfo.get_owned_games(steamid)
+
     
+
     zwrot = {"steam":usersummary}
     return steamgamesinfo
 
