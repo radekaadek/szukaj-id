@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request
 from steamwebapi.api import ISteamUser, IPlayerService, ISteamUserStats
 from steamwebapi import profiles
+import json
 
 app = Flask(__name__)
-
 
 @app.route("/")
 def index():
@@ -17,8 +17,8 @@ def search():
     steamuserinfo = ISteamUser(steam_api_key=steam_api_key)
     steamid = steamuserinfo.resolve_vanity_url(str(nazwa_uzytkownika), format="json")['response']['steamid']
     usersummary = steamuserinfo.get_player_summaries(steamid, format="json")['response']['players'][0]
-
-    return usersummary
+    zwrot = {"steam":usersummary}
+    return zwrot
 
 if __name__ == "__main__":
     app.run(debug=True)
