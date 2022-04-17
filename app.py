@@ -17,18 +17,25 @@ def search():
     #dokumentacja: https://pypi.org/project/steamwebapi/
     nazwa_uzytkownika = request.form["nazwa_uzytkownika"]
 
-    steamuserinfo = ISteamUser(steam_api_key = steam_api_key)
-    steamplayerinfo = IPlayerService(steam_api_key = steam_api_key, format="json")
+    #deklaracje głównych interfejsów API steam
+    steamuserinfo = ISteamUser(steam_api_key = steam_api_key) 
+    steamplayerinfo = IPlayerService(steam_api_key = steam_api_key)
+    steamstatsinfo = ISteamUserStats(steam_api_key = steam_api_key)
+
+    #api request by pozyskać steam ID
     steamid = steamuserinfo.resolve_vanity_url(str(nazwa_uzytkownika), format="json")['response']['steamid']
 
+    #api request by pozyskać dane w obiektach
+    steamgamesinfo = steamplayerinfo.get_owned_games(steamid, format="json")['response']
     usersummary = steamuserinfo.get_player_summaries(steamid, format="json")['response']['players'][0]
+
+    #obróbka obiektów
+    count_of_games = steamgamesinfo['game_count']
+    steamgamesinfo = steamgamesinfo['games']
     usersummary = {"avatar": usersummary['avatarfull'],"personaname": usersummary['personaname'],'url':usersummary['profileurl']}
 
-    steamgamesinfo = steamplayerinfo.get_owned_games(steamid)
-
-    
-
     zwrot = {"steam":usersummary}
+
     return steamgamesinfo
 
     
