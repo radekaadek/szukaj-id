@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from steamwebapi.api import ISteamUser, IPlayerService, ISteamUserStats
 from steamwebapi import profiles
 import json, operator
@@ -27,7 +27,7 @@ def search():
     steamplayerinfo = IPlayerService(steam_api_key = steam_api_key)
     steamstatsinfo = ISteamUserStats(steam_api_key = steam_api_key)
     
-    if len(nazwa_uzytkownika) > 0:
+    try:
         #api request by pozyskać steam ID
         steamid = steamuserinfo.resolve_vanity_url(str(nazwa_uzytkownika), format="json")['response']['steamid']
 
@@ -45,7 +45,7 @@ def search():
 
         print(type(steamgamesinfo))
         return zwrot
-
+    except:   return "ZAMKOR"
     
 
 if __name__ == "__main__":

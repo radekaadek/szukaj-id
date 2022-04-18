@@ -11,11 +11,14 @@ $(document).ready(async function () {
                     url: "/search",
                     data: { nazwa_uzytkownika: $("#livebox").val() },
                     success: function (res) {
+                        if (res !== 'ZAMKOR'){
+                        $("#attentionMessage").css({ display: "none" })    
                         var data = "<ul>";
-                        data += "<li>" + res + "</li>";
+                        data += "<li>" + JSON.stringify(res) + "</li>";
                         data += "</ul>";
                         $("#datalist").html(data);
-                        console.log(res);
+                        console.log(res);}
+                        else $("#attentionMessage").css({ display: "block" })
                     },
                 });
                 wtokuapi = false;
