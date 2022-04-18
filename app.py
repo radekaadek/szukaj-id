@@ -33,15 +33,14 @@ def search():
         #obróbka obiektów
         count_of_games = steamgamesinfo['game_count']
         steamgamesinfo = steamgamesinfo['games']
-        print(str(steamgamesinfo))
         steamgamesinfo.sort(key=sortkey, reverse=True)
         usersummary = {"avatar": usersummary['avatarfull'],"personaname": usersummary['personaname'],'url':usersummary['profileurl']}
         zwrot = {"steam":usersummary}
 
-        print(str(steamgamesinfo))
-    
-
-        return str(count_of_games)
+        steamgamesinfokeys = dict.fromkeys(range(1, len(steamgamesinfo)))
+        steamgamesinfo = dict(zip(steamgamesinfokeys,steamgamesinfo))
+        print(type(steamgamesinfo))
+        return zwrot
 
     
 
