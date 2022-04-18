@@ -8,6 +8,11 @@ sortkey= operator.itemgetter('playtime_forever')
 steam_api_key = 'EE03692ACB03E4371522180E26926643'
 riot_api_key = 'RGAPI-872636ab-9da1-4355-8afa-a1ab624dd6f4'
 
+def arrayToDictionary(arrlist):
+    arrlistkeys = dict.fromkeys(range(1, len(arrlist)))
+    arrlist = dict(zip(arrlistkeys,arrlist))
+    return arrlist
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -34,11 +39,11 @@ def search():
         count_of_games = steamgamesinfo['game_count']
         steamgamesinfo = steamgamesinfo['games']
         steamgamesinfo.sort(key=sortkey, reverse=True)
-        usersummary = {"avatar": usersummary['avatarfull'],"personaname": usersummary['personaname'],'url':usersummary['profileurl']}
+        steamgamesinfo[0:3]
+
+        usersummary = {"avatar": usersummary['avatarfull'],"personaname": usersummary['personaname'],'url':usersummary['profileurl'],"favgames":arrayToDictionary(steamgamesinfo),"gamequantity":count_of_games}
         zwrot = {"steam":usersummary}
 
-        steamgamesinfokeys = dict.fromkeys(range(1, len(steamgamesinfo)))
-        steamgamesinfo = dict(zip(steamgamesinfokeys,steamgamesinfo))
         print(type(steamgamesinfo))
         return zwrot
 
