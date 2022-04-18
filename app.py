@@ -39,9 +39,8 @@ def search():
         count_of_games = steamgamesinfo['game_count']
         steamgamesinfo = steamgamesinfo['games']
         steamgamesinfo.sort(key=sortkey, reverse=True)
-        steamgamesinfo[0:3]
 
-        usersummary = {"avatar": usersummary['avatarfull'],"personaname": usersummary['personaname'],'url':usersummary['profileurl'],"favgames":arrayToDictionary(steamgamesinfo),"gamequantity":count_of_games}
+        usersummary = {"avatar": usersummary['avatarfull'],"personaname": usersummary['personaname'],'url':usersummary['profileurl'],"favgames":arrayToDictionary(steamgamesinfo[0:4]),"gamequantity":count_of_games}
         zwrot = {"steam":usersummary}
 
         print(type(steamgamesinfo))
