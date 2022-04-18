@@ -43,7 +43,7 @@ def search():
         usersummary = {"avatar": usersummary['avatarfull'],"personaname": usersummary['personaname'],'url':usersummary['profileurl'],"favgames":arrayToDictionary(steamgamesinfo[0:4]),"gamequantity":count_of_games}
         zwrot = {"steam":usersummary}
 
-        print(type(steamgamesinfo))
+
         return zwrot
     except:   return "ZAMKOR"
     

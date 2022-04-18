@@ -1,5 +1,21 @@
 var wtokuapi = false;
 
+
+function crHtml(res) {
+    const datalistContainerDiv = document.querySelector("body #datalists_contaier");
+    for (const d in res) {
+        const newUL = document.createElement("UL");
+        for (const r in res[d]) {
+            const newLI = document.createElement("li");
+            newLI.innerText = JSON.stringify(res[d][r]);
+            newUL.appendChild(newLI);
+        }
+        newUL.id = d + "List"
+        datalistContainerDiv.appendChild(newUL);
+    }
+
+}
+
 $(document).ready(async function () {
     $("#livebox").on("input", async function (e) {
         if (wtokuapi === false) {
@@ -13,10 +29,7 @@ $(document).ready(async function () {
                     success: function (res) {
                         if (res !== 'ZAMKOR'){
                         $("#attentionMessage").css({ display: "none" })    
-                        var data = "<ul>";
-                        data += "<li>" + JSON.stringify(res) + "</li>";
-                        data += "</ul>";
-                        $("#datalist").html(data);
+                        crHtml(res);
                         console.log(res);}
                         else $("#attentionMessage").css({ display: "block" })
                     },

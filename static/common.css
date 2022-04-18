@@ -24,3 +24,12 @@
     width: 165px;
     height: auto;
 }
+
+ul li::before {
+    content: "🟢";
+    font-size: 5px;
+}
+
+ul{
+    list-style-type: none;
+}
