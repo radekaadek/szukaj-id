@@ -13,12 +13,15 @@ function newline(input) {
     profileAvatar.style.backgroundImage = `url(${input.avatar})`;
     profileAvatar.style.width = "184px";
     profileAvatar.style.height = "184px";
+    profileAvatar.style.display = "inline-block";
     profileAvatar.href = input.avatar;
 
 
     
     newLI.appendChild(profileAvatar);
     newLI.appendChild(profileLink);
+    
+    return newLI;
 }
 
 function crHtml(res) {
@@ -26,7 +29,7 @@ function crHtml(res) {
     datalistContainerDiv.innerHTML = "";
     const newUL = document.createElement("UL");
     for (const d in res) {
-        const newLine = newline(d);
+        const newLine = newline(res[d]);
         newLine.id = d + "Line"
         newUL.appendChild(newLine);
     }
