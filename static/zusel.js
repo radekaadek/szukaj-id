@@ -4,9 +4,15 @@ let favgamesplaytime = [];
 function gamelist(games){
     const gameUL = document.createElement("UL");
     for (const g in games) {
-        const newLine = 
-        newLine.id = "game" + g
-        gameUL.appendChild(newLine);
+        const newGame = document.createElement("LI");
+        const nSpan = document.createElement("span");
+        const gameIMG = document.createElement("IMG")
+
+        nSpan.innerText = g + ". " + games.name;
+        gameIMG.scr = ""
+
+        newGame.id = "game" + g;
+        gameUL.appendChild(newGame);
     }
 }
 
