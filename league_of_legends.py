@@ -3,7 +3,6 @@ from riotwatcher import LolWatcher, ApiError
 #dokumentacja: https://riot-watcher.readthedocs.io/en/latest/index.html
 
 riot_api_key = 'RGAPI-c2b2f4f6-583d-4056-a05d-331d863e0243'
-
 lol_watcher = LolWatcher(riot_api_key)
 
 regiony = {'Brasil': 'BR1', 'Europe Nordic & East': 'EUN1', 'Europe West': 'EUW1', 'Japan': 'JP1', 'Korea': 'KR', 'Latin America North': 'LA1', 'Latin America South': 'LA2', 'North America': 'NA1', 'Oceania': 'OC1', 'Russia': 'RU', 'Turkey': 'TR1'}
@@ -40,14 +39,6 @@ class player:
                 return [element['tier'], element['rank'], element['leaguePoints'], element['wins'], element['losses']]
         return 'Nie znaleziono rangi'
 
-region_gracza = zwroc_region('Europe Nordic & East')
-nazwa_gracza = 'wiesiek5monster'
-uzytkownik = zwroc_uzytkownika(region_gracza, nazwa_gracza)
-
-gracz = player(nazwa_gracza, region_gracza, uzytkownik)
-
-print(gracz.avatar())
-
 
 # For Riot's API, the 404 status code indicates that the requested data wasn't found and
 # should be expected to occur in normal operation, as in the case of a an
@@ -56,16 +47,16 @@ print(gracz.avatar())
 # The 429 status code indicates that the user has sent too many requests
 # in a given amount of time ("rate limiting").
 
-my_region = 'eun1'
+# my_region = 'eun1'
 
-try:
-    response = lol_watcher.summoner.by_name(my_region, 'radekaadek')
-except ApiError as err:
-    if err.response.status_code == 429:
-        print('We should retry in {} seconds.'.format(err.response.headers['Retry-After']))
-        print('this retry-after is handled by default by the RiotWatcher library')
-        print('future requests wait until the retry-after time passes')
-    elif err.response.status_code == 404:
-        print('Summoner with that ridiculous name not found.')
-    else:
-        raise
+# try:
+#     response = lol_watcher.summoner.by_name(my_region, 'radekaadek')
+# except ApiError as err:
+#     if err.response.status_code == 429:
+#         print('We should retry in {} seconds.'.format(err.response.headers['Retry-After']))
+#         print('this retry-after is handled by default by the RiotWatcher library')
+#         print('future requests wait until the retry-after time passes')
+#     elif err.response.status_code == 404:
+#         print('Summoner with that ridiculous name not found.')
+#     else:
+#         raise

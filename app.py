@@ -2,11 +2,21 @@ from flask import Flask, render_template, request, redirect
 from steamwebapi.api import ISteamUser, IPlayerService, ISteamUserStats
 from steamwebapi import profiles
 import json, operator
+import league_of_legends as lol
+
+#regiony = ['Brasil', 'Europe Nordic & East', 'Europe West', 'Japan', 'Korea', 'Latin America North', 'Latin America South', 'North America', 'Oceania', 'Russia', 'Turkey']
 
 app = Flask(__name__)
 sortkey= operator.itemgetter('playtime_forever')
 steam_api_key = 'EE03692ACB03E4371522180E26926643'
-riot_api_key = 'RGAPI-c2b2f4f6-583d-4056-a05d-331d863e0243'
+
+region_gracza = lol.zwroc_region('Europe Nordic & East')
+nazwa_gracza = 'wiesiek5monster'
+uzytkownik = lol.zwroc_uzytkownika(region_gracza, nazwa_gracza)
+
+gracz = lol.player(nazwa_gracza, region_gracza, uzytkownik)
+zwrotDanych = {}
+print(gracz.avatar())
 
 def arrayToDictionary(arrlist):
     arrlistkeys = dict.fromkeys(range(1, len(arrlist)))
