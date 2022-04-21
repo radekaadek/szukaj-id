@@ -10,7 +10,7 @@ function gamelist(games){
         const gameIMG = document.createElement("IMG")
 
         nSpan.innerText = g + ". " + games[g].name;
-        gameIMG.src = `http://media.steampowered.com/steamcommunity/public/images/apps/${games[g].appid}/${games[g].img_icon_url}.jpg`;
+        gameIMG.src = `http://media.steampowered.com/steamcommunity/public/images/apps/${games[g].appid}/${games[g].img_icon_url}.jpg`; bn 
         newGame.id = "game" + g;
         newGame.appendChild(gameIMG);
         newGame.appendChild(nSpan);
