@@ -6,7 +6,7 @@ import json, operator
 app = Flask(__name__)
 sortkey= operator.itemgetter('playtime_forever')
 steam_api_key = 'EE03692ACB03E4371522180E26926643'
-riot_api_key = 'RGAPI-872636ab-9da1-4355-8afa-a1ab624dd6f4'
+riot_api_key = 'RGAPI-c2b2f4f6-583d-4056-a05d-331d863e0243'
 
 def arrayToDictionary(arrlist):
     arrlistkeys = dict.fromkeys(range(1, len(arrlist)))
