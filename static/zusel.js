@@ -1,6 +1,21 @@
 var wtokuapi = false;
 let favgamesplaytime = [];
 
+function gamelist(games){
+    const gameUL = document.createElement("UL");
+    for (const g in games) {
+        const newGame = document.createElement("LI");
+        const nSpan = document.createElement("span");
+        const gameIMG = document.createElement("IMG")
+
+        nSpan.innerText = g + ". " + games.name;
+        gameIMG.scr = ""
+
+        newGame.id = "game" + g;
+        gameUL.appendChild(newGame);
+    }
+}
+
 function newline(input) {
     const newLI = document.createElement("li");
     const profileAvatar = document.createElement("a");
@@ -11,13 +26,14 @@ function newline(input) {
     profileLink.classList.add('profile-link');
 
     profileAvatar.style.backgroundImage = `url(${input.avatar})`;
-    profileAvatar.style.width = "184px";
-    profileAvatar.style.height = "184px";
+    profileAvatar.style.width = "100px";
+    profileAvatar.style.backgroundSize = "100px 100px";
+    profileAvatar.style.height = "100px";
     profileAvatar.style.display = "inline-block";
     profileAvatar.href = input.avatar;
 
 
-    
+    newLI.appendChild(gamelist(input.favgames));
     newLI.appendChild(profileAvatar);
     newLI.appendChild(profileLink);
     
