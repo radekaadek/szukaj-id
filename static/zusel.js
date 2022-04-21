@@ -3,24 +3,29 @@ let favgamesplaytime = [];
 
 function gamelist(games){
     const gameUL = document.createElement("UL");
+    gameUL.style.display = "inline-block";
     for (const g in games) {
         const newGame = document.createElement("LI");
         const nSpan = document.createElement("span");
         const gameIMG = document.createElement("IMG")
 
-        nSpan.innerText = g + ". " + games.name;
-        gameIMG.scr = ""
-
+        nSpan.innerText = g + ". " + games[g].name;
+        gameIMG.src = `http://media.steampowered.com/steamcommunity/public/images/apps/${games[g].appid}/${games[g].img_icon_url}.jpg`;
         newGame.id = "game" + g;
+        newGame.appendChild(gameIMG);
+        newGame.appendChild(nSpan);
+
         gameUL.appendChild(newGame);
     }
+    return gameUL;
 }
 
 function newline(input) {
     const newLI = document.createElement("li");
     const profileAvatar = document.createElement("a");
-    const profileLink = document.createElement("a")
-    
+    const profileLink = document.createElement("a");
+    const games = gamelist(input.favgames);
+
     profileLink.innerText = input.personaname
     profileLink.href = input.url
     profileLink.classList.add('profile-link');
@@ -32,10 +37,9 @@ function newline(input) {
     profileAvatar.style.display = "inline-block";
     profileAvatar.href = input.avatar;
 
-
-    newLI.appendChild(gamelist(input.favgames));
     newLI.appendChild(profileAvatar);
     newLI.appendChild(profileLink);
+    newLI.appendChild(games);
     
     return newLI;
 }

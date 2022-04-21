@@ -59,4 +59,4 @@ def search():
     
 
 if __name__ == "__main__":
-    app.run(debug=True, host = '25.85.5.88')
+    app.run(debug=True)
