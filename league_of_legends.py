@@ -29,6 +29,16 @@ class player:
     # poziom gracza
     def poziom(self):
         return self.uzytkownik['summonerLevel']
+    
+    def czy_w_grze(self):
+        try:
+            lol_watcher.spectator.by_summoner(self.region, self.uzytkownik['id'])['gameId']
+            return True
+        except:
+            return False
+
+    def link_do_gry(self):
+        return f'https://{self.region}.op.gg/summoner/userName={self.nazwa}'
 
     # zwraca tier, range, lp, wygrane i przegrane
     def ranga(self):
@@ -36,7 +46,7 @@ class player:
         for element in lista:
             if element['queueType'] == 'RANKED_SOLO_5x5':
                 return [element['tier'], element['rank'], element['leaguePoints'], element['wins'], element['losses']]
-        return 'Nie znaleziono rangi'
+        return 'Nie znaleziono rangi na solo/duo'
     
 
 
