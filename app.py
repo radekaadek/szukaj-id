@@ -21,7 +21,7 @@ def czy_wszystko_none(dane):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("home.html")
 
 @app.route("/search", methods = ["POST", "GET"])
 def search():
@@ -33,7 +33,10 @@ def search():
     if czy_wszystko_none(zwrot):
         return 'ZAMKOR'
     else: return zwrot
-   
+
+@app.route('/<piotr>', methods = ['GET', 'POST'])
+def strona(piotr):
+    return render_template("error.html")   
     
 
 if __name__ == "__main__":
