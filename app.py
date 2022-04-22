@@ -15,7 +15,6 @@ nazwa_gracza = 'mansplain'
 
 gracz = lol.player(nazwa_gracza, region_gracza)
 zwrotDanych = {}
-print(gracz.czy_w_grze())
 
 @app.route("/")
 def index():
