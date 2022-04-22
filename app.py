@@ -12,9 +12,8 @@ steam_api_key = 'EE03692ACB03E4371522180E26926643'
 
 region_gracza = lol.zwroc_region('Europe Nordic & East')
 nazwa_gracza = 'wiesiek5monster'
-uzytkownik = lol.zwroc_uzytkownika(region_gracza, nazwa_gracza)
 
-gracz = lol.player(nazwa_gracza, region_gracza, uzytkownik)
+gracz = lol.player(nazwa_gracza, region_gracza)
 zwrotDanych = {}
 print(gracz.avatar())
 

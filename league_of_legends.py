@@ -18,11 +18,10 @@ def zwroc_uzytkownika(region, nazwa_uzytkownika):
             return "Error with code {}: {}".format(err.response.status_code, err.message)
 
 class player:
-    def __init__(self, nazwa, region, uzytkownik):
+    def __init__(self, nazwa, region):
         self.nazwa = nazwa
         self.region = region
-        self.uzytkownik = uzytkownik
-
+        self.uzytkownik = zwroc_uzytkownika(self.region, self.nazwa)
     # zwraca link do profilowego
     def avatar(self):
         return f'https://ddragon.leagueoflegends.com/cdn/10.18.1/img/profileicon/{self.uzytkownik["profileIconId"]}.png'
@@ -38,6 +37,7 @@ class player:
             if element['queueType'] == 'RANKED_SOLO_5x5':
                 return [element['tier'], element['rank'], element['leaguePoints'], element['wins'], element['losses']]
         return 'Nie znaleziono rangi'
+    
 
 
 # For Riot's API, the 404 status code indicates that the requested data wasn't found and
