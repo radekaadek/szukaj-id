@@ -33,3 +33,7 @@
 ul{
     list-style-type: none;
 }
+
+#attentionMessage{
+    background-image: url(../static/clown.svg);
+}
