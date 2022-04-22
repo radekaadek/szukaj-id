@@ -4,6 +4,7 @@ let favgamesplaytime = [];
 function gamelist(games) {
     const gameUL = document.createElement("UL");
     gameUL.style.display = "inline-block";
+    gameUL.classList.add("gamesList");
     for (const g in games) {
         const newGame = document.createElement("LI");
         const nSpan = document.createElement("span");
@@ -14,6 +15,7 @@ function gamelist(games) {
         newGame.id = "game" + g;
         newGame.appendChild(gameIMG);
         newGame.appendChild(nSpan);
+        newGame.classList.add("gameLine");
 
         gameUL.appendChild(newGame);
     }
@@ -25,11 +27,13 @@ function newline(input) {
     const profileAvatar = document.createElement("a");
     const profileLink = document.createElement("a");
     const games = gamelist(input.favgames);
+    const level = document.createElement("span")
 
     profileLink.innerText = input.personaname;
     profileLink.href = input.url;
-    profileLink.classList.add("profile-link");
+    profileLink.classList.add("profileLink");
 
+    profileAvatar.classList.add("profileAvatar");
     profileAvatar.style.backgroundImage = `url(${input.avatar})`;
     profileAvatar.style.width = "100px";
     profileAvatar.style.backgroundSize = "100px 100px";
@@ -37,9 +41,13 @@ function newline(input) {
     profileAvatar.style.display = "inline-block";
     profileAvatar.href = input.avatar;
 
+    level.innerText = input.level
+    level.classList.add("levelIndicator");
+
     newLI.appendChild(profileAvatar);
     newLI.appendChild(profileLink);
     newLI.appendChild(games);
+    newLI.appendChild(level);
 
     return newLI;
 }

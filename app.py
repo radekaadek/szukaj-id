@@ -29,9 +29,10 @@ def search():
     nazwa_uzytkownika = request.form["nazwa_uzytkownika"]
 
     zwrot = {"steam":steam.checkSteam(nazwa_uzytkownika, steam_api_key), "lol":None} 
-    for k in zwrot:
-        print(zwrot[k])
-    return zwrot
+    
+    if czy_wszystko_none(zwrot):
+        return 'ZAMKOR'
+    else: return zwrot
    
     
 
