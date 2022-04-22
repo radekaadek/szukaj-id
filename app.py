@@ -36,7 +36,10 @@ def search():
 
 @app.route('/<piotr>', methods = ['GET', 'POST'])
 def strona(piotr):
-    return render_template("error.html")   
+    try:
+        return render_template(f"{piotr}.html")
+    except:
+        return render_template("error.html")   
     
 
 if __name__ == "__main__":
