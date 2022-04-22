@@ -8,12 +8,12 @@ import steam
 app = Flask(__name__)
 steam_api_key = 'EE03692ACB03E4371522180E26926643'
 
-region_gracza = lol.zwroc_region('Europe Nordic & East')
-nazwa_gracza = 'wiesiek5monster'
+region_gracza = lol.zwroc_region('North America')
+nazwa_gracza = 'mansplain'
 
 gracz = lol.player(nazwa_gracza, region_gracza)
 zwrotDanych = {}
-print(gracz.avatar())
+print(gracz.czy_w_grze())
 
 @app.route("/")
 def index():
