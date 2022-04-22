@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request, redirect
 import json, operator
-
-from jinja2 import Undefined
 import league_of_legends as lol
 import steam
 
@@ -26,7 +24,7 @@ def search():
     #nazwa z formularza
     nazwa_uzytkownika = request.form["nazwa_uzytkownika"]
 
-    zwrot = {"steam":steam.checkSteam(nazwa_uzytkownika, steam_api_key), "lol":Undefined} 
+    zwrot = {"steam":steam.checkSteam(nazwa_uzytkownika, steam_api_key), "lol":0} 
 
     return zwrot
    
