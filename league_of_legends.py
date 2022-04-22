@@ -38,7 +38,7 @@ class player:
             return False
 
     def link_do_profilu(self):
-        return f'https://{self.region}.op.gg/summoner/userName={self.nazwa}'
+        return {'link':f'https://{self.region}.op.gg/summoner/userName={self.nazwa}', "name1":self.nazwa,}
 
     # zwraca tier, range, lp, wygrane i przegrane
     def ranga(self):
