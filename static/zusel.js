@@ -1,13 +1,13 @@
 var wtokuapi = false;
 let favgamesplaytime = [];
 
-function gamelist(games){
+function gamelist(games) {
     const gameUL = document.createElement("UL");
     gameUL.style.display = "inline-block";
     for (const g in games) {
         const newGame = document.createElement("LI");
         const nSpan = document.createElement("span");
-        const gameIMG = document.createElement("IMG")
+        const gameIMG = document.createElement("IMG");
 
         nSpan.innerText = g + ". " + games[g].name;
         gameIMG.src = `http://media.steampowered.com/steamcommunity/public/images/apps/${games[g].appid}/${games[g].img_icon_url}.jpg`;
@@ -26,9 +26,9 @@ function newline(input) {
     const profileLink = document.createElement("a");
     const games = gamelist(input.favgames);
 
-    profileLink.innerText = input.personaname
-    profileLink.href = input.url
-    profileLink.classList.add('profile-link');
+    profileLink.innerText = input.personaname;
+    profileLink.href = input.url;
+    profileLink.classList.add("profile-link");
 
     profileAvatar.style.backgroundImage = `url(${input.avatar})`;
     profileAvatar.style.width = "100px";
@@ -40,7 +40,7 @@ function newline(input) {
     newLI.appendChild(profileAvatar);
     newLI.appendChild(profileLink);
     newLI.appendChild(games);
-    
+
     return newLI;
 }
 
@@ -49,8 +49,11 @@ function crHtml(res) {
     datalistContainerDiv.innerHTML = "";
     const newUL = document.createElement("UL");
     for (const d in res) {
+        if (res[d] == null) {
+            continue;
+        }
         const newLine = newline(res[d]);
-        newLine.id = d + "Line"
+        newLine.id = d + "Line";
         newUL.appendChild(newLine);
     }
     datalistContainerDiv.appendChild(newUL);
@@ -67,12 +70,12 @@ $(document).ready(async function () {
                     url: "/search",
                     data: { nazwa_uzytkownika: $("#livebox").val() },
                     success: function (res) {
-                        if (res !== 'ZAMKOR'){
-                        $("#attentionMessage").css({ display: "none" })    
-                        crHtml(res);
-                        console.log(res);}
-                        else {
-                            $("#attentionMessage").css({ display: "block" })
+                        if (res !== "ZAMKOR") {
+                            $("#attentionMessage").css({ display: "none" });
+                            crHtml(res);
+                            console.log(res);
+                        } else {
+                            $("#attentionMessage").css({ display: "block" });
                             $("#datalists_contaier").empty();
                         }
                     },

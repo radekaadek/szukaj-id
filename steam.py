@@ -1,6 +1,5 @@
 from steamwebapi.api import ISteamUser, IPlayerService, ISteamUserStats
-from steamwebapi import profiles
-import json, operator
+import operator
 sortkey= operator.itemgetter('playtime_forever')
 
 def arrayToDictionary(arrlist):
@@ -10,8 +9,6 @@ def arrayToDictionary(arrlist):
 
 def checkSteam(nazwa_uzytkownika,steam_api_key):
     #dokumentacja: https://pypi.org/project/steamwebapi/
-    
-
     #deklaracje głównych interfejsów API steam
     steamuserinfo = ISteamUser(steam_api_key = steam_api_key) 
     steamplayerinfo = IPlayerService(steam_api_key = steam_api_key)
@@ -24,15 +21,12 @@ def checkSteam(nazwa_uzytkownika,steam_api_key):
         #api request by pozyskać dane w obiektach
         steamgamesinfo = steamplayerinfo.get_owned_games(steamid, format="json")['response']
         usersummary = steamuserinfo.get_player_summaries(steamid, format="json")['response']['players'][0]
-
+        levelsteam = steamplayerinfo.get_steam_level(steamid, format="json")['response']
         #obróbka obiektów
         count_of_games = steamgamesinfo['game_count']
         steamgamesinfo = steamgamesinfo['games']
         steamgamesinfo.sort(key=sortkey, reverse=True)
 
-        usersummary = {"avatar": usersummary['avatarfull'],"personaname": usersummary['personaname'],'url':usersummary['profileurl'],"favgames":arrayToDictionary(steamgamesinfo[0:4]),"gamequantity":count_of_games}
-        
-
-
+        usersummary = {"avatar": usersummary['avatarfull'],"personaname": usersummary['personaname'],'url':usersummary['profileurl'],"favgames":arrayToDictionary(steamgamesinfo[0:4]),"gamequantity":count_of_games,"level":levelsteam['player_level']}
         return usersummary
-    except:   return "ZAMKOR"
+    except:   return None
