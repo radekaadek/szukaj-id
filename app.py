@@ -7,6 +7,17 @@ import steam, asyncio
 app = Flask(__name__)
 steam_api_key = 'EE03692ACB03E4371522180E26926643'
 
+region_gracza = lol.zwroc_region('North America')
+nazwa_gracza = 'mansplain'
+
+gracz = lol.player(nazwa_gracza, region_gracza)
+zwrotDanych = {}
+
+def czy_wszystko_none(dane):
+    for i in dane:
+        if dane[i] != None:
+            return False
+    return True
 
 
 

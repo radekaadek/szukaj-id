@@ -23,7 +23,6 @@ class player:
         self.nazwa = nazwa
         self.region = region
         self.uzytkownik = zwroc_uzytkownika(self.region, self.nazwa)
-
     def czy_istnieje(self):
         if self.uzytkownik == 404:
             return None
