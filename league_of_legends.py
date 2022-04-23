@@ -15,7 +15,13 @@ def zwroc_uzytkownika(region, nazwa_uzytkownika):
             uzytkownik = lol_watcher.summoner.by_name(region, nazwa_uzytkownika)
             return uzytkownik
         except ApiError as err:
-            return "Error with code {}: {}".format(err.response.status_code, err.message)
+            if err.response.status_code == 404:
+                return 'Nie znaleziono użytkownika'
+            elif err.response.status_code == 429:
+                return 'Zbyt dużo żądań'
+            else:
+                return 'Wystąpił błąd'
+                
 
 class player:
     def __init__(self, nazwa, region):
