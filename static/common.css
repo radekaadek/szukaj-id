@@ -24,3 +24,16 @@
     width: 165px;
     height: auto;
 }
+
+/* ul li::before {
+    content: "🟢";
+    font-size: 5px;
+} */
+
+ul{
+    list-style-type: none;
+}
+
+#attentionMessage{
+    background-image: url(../static/clown.svg);
+}
