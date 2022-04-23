@@ -15,12 +15,7 @@ def zwroc_uzytkownika(region, nazwa_uzytkownika):
             uzytkownik = lol_watcher.summoner.by_name(region, nazwa_uzytkownika)
             return uzytkownik
         except ApiError as err:
-            if err.response.status_code == 404:
-                return 'Nie znaleziono użytkownika'
-            elif err.response.status_code == 429:
-                return 'Zbyt dużo żądań'
-            else:
-                return 'Wystąpił błąd'
+            return err.response.status_code
                 
 
 class player:
@@ -28,6 +23,16 @@ class player:
         self.nazwa = nazwa
         self.region = region
         self.uzytkownik = zwroc_uzytkownika(self.region, self.nazwa)
+    
+    def czy_istnieje(self):
+        if self.uzytkownik == 404:
+            return None
+        elif self.uzytkownik == 429:
+            return 'Zbyt dużo zapytań'
+        else:
+            return self.uzytkownik
+        
+
     # zwraca link do profilowego
     def avatar(self):
         return f'https://ddragon.leagueoflegends.com/cdn/10.18.1/img/profileicon/{self.uzytkownik["profileIconId"]}.png'
