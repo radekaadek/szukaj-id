@@ -7,7 +7,7 @@ def arrayToDictionary(arrlist):
     arrlist = dict(zip(arrlistkeys,arrlist))
     return arrlist
 
-def checkSteam(nazwa_uzytkownika,steam_api_key):
+async def checkSteam(nazwa_uzytkownika,steam_api_key):
     #dokumentacja: https://pypi.org/project/steamwebapi/
     #deklaracje głównych interfejsów API steam
     steamuserinfo = ISteamUser(steam_api_key = steam_api_key) 

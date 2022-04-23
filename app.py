@@ -24,7 +24,7 @@ def index():
     return render_template("home.html")
 
 @app.route("/search", methods = ["POST", "GET"])
-def search():
+async def search():
     #nazwa z formularza
     nazwa_uzytkownika = request.form["nazwa_uzytkownika"]
 
