@@ -57,6 +57,5 @@ async def search():
 def strona(piotr):
     return render_template("error.html", mordula = piotr)   
     
-
 if __name__ == "__main__":
     app.run(debug=True)
