@@ -39,9 +39,9 @@ class player:
     def poziom(self):
         return self.uzytkownik['summonerLevel']
     
-    def czy_w_grze(self):
+    async def czy_w_grze(self):
         try:
-            lol_watcher.spectator.by_summoner(self.region, self.uzytkownik['id'])['gameId']
+            await lol_watcher.spectator.by_summoner(self.region, self.uzytkownik['id'])['gameId']
             return True
         except:
             return False
@@ -50,8 +50,8 @@ class player:
         return {'link':f'https://{self.region}.op.gg/summoner/userName={self.nazwa}', "name1":self.nazwa,}
 
     # zwraca tier, range, lp, wygrane i przegrane
-    def ranga(self):
-        lista = lol_watcher.league.by_summoner(self.region, self.uzytkownik['id'])
+    async def ranga(self):
+        lista = await lol_watcher.league.by_summoner(self.region, self.uzytkownik['id'])
         for element in lista:
             if element['queueType'] == 'RANKED_SOLO_5x5':
                 return [element['tier'], element['rank'], element['leaguePoints'], element['wins'], element['losses']]

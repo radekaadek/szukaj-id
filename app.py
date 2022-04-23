@@ -34,7 +34,7 @@ def index():
 @app.route("/search", methods = ["POST", "GET"])
 async def search():
     #nazwa z formularza
-    nazwa_uzytkownika = request.form["nazwa_uzytkownika"]
+    nazwa_uzytkownika = request.form["nazwa_uzytkownika"] 
 
     region_gracza = lol.zwroc_region('North America')
     graczLOL = lol.player(nazwa_uzytkownika, region_gracza)
