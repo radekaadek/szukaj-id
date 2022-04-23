@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect
 import league_of_legends as lol
-import steam
+import steam, asyncio
 
 #regiony = ['Brasil', 'Europe Nordic & East', 'Europe West', 'Japan', 'Korea', 'Latin America North', 'Latin America South', 'North America', 'Oceania', 'Russia', 'Turkey']
 
@@ -19,6 +19,14 @@ def czy_wszystko_none(dane):
             return False
     return True
 
+
+
+def czy_wszystko_none(dane):
+    for i in dane:
+        if dane[i] != None:
+            return False
+    return True
+
 @app.route("/")
 def index():
     return render_template("home.html")
@@ -28,7 +36,18 @@ async def search():
     #nazwa z formularza
     nazwa_uzytkownika = request.form["nazwa_uzytkownika"]
 
-    zwrot = {"steam":steam.checkSteam(nazwa_uzytkownika, steam_api_key), "lol":None} 
+    region_gracza = lol.zwroc_region('North America')
+    graczLOL = lol.player(nazwa_uzytkownika, region_gracza)
+
+    steamTask = asyncio.create_task(steam.checkSteam(nazwa_uzytkownika, steam_api_key))
+    lolTaskIsPlaying = asyncio.create_task(graczLOL.czy_w_grze())
+    lolTaskRank = asyncio.create_task(graczLOL.ranga())
+
+    # lolTaskLink = graczLOL.link_do_profilu()
+    # lolTaskLevel = graczLOL.poziom()
+
+
+    zwrot = {"steam":await steamTask, "lol":None} 
     
     if czy_wszystko_none(zwrot):
         return 'ZAMKOR'
@@ -36,10 +55,7 @@ async def search():
 
 @app.route('/<piotr>', methods = ['GET', 'POST'])
 def strona(piotr):
-    try:
-        return render_template(f"{piotr}.html")
-    except:
-        return render_template("error.html")   
+    return render_template("error.html", mordula = piotr)   
     
 
 if __name__ == "__main__":
