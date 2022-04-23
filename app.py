@@ -7,11 +7,8 @@ import steam, asyncio
 app = Flask(__name__)
 steam_api_key = 'EE03692ACB03E4371522180E26926643'
 
-region_gracza = lol.zwroc_region('North America')
-nazwa_gracza = 'mansplain'
 
-gracz = lol.player(nazwa_gracza, region_gracza)
-zwrotDanych = {}
+
 
 def czy_wszystko_none(dane):
     for i in dane:
@@ -28,7 +25,18 @@ async def search():
     #nazwa z formularza
     nazwa_uzytkownika = request.form["nazwa_uzytkownika"]
 
-    zwrot = {"steam":await asyncio.create_task(steam.checkSteam(nazwa_uzytkownika, steam_api_key)), "lol":None} 
+    region_gracza = lol.zwroc_region('North America')
+    graczLOL = lol.player(nazwa_uzytkownika, region_gracza)
+
+    steamTask = asyncio.create_task(steam.checkSteam(nazwa_uzytkownika, steam_api_key))
+    lolTaskIsPlaying = asyncio.create_task(graczLOL.czy_w_grze())
+    lolTaskRank = asyncio.create_task(graczLOL.ranga())
+
+    # lolTaskLink = graczLOL.link_do_profilu()
+    # lolTaskLevel = graczLOL.poziom()
+
+
+    zwrot = {"steam":await steamTask, "lol":None} 
     
     if czy_wszystko_none(zwrot):
         return 'ZAMKOR'

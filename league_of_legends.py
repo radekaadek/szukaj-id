@@ -15,13 +15,23 @@ def zwroc_uzytkownika(region, nazwa_uzytkownika):
             uzytkownik = lol_watcher.summoner.by_name(region, nazwa_uzytkownika)
             return uzytkownik
         except ApiError as err:
-            return "Error with code {}: {}".format(err.response.status_code, err.message)
+            return err.response.status_code
+                
 
 class player:
     def __init__(self, nazwa, region):
         self.nazwa = nazwa
         self.region = region
         self.uzytkownik = zwroc_uzytkownika(self.region, self.nazwa)
+
+    def czy_istnieje(self):
+        if self.uzytkownik == 404:
+            return None
+        elif self.uzytkownik == 429:
+            return 'Zbyt dużo zapytań'
+        else:
+            return self.uzytkownik
+
     # zwraca link do profilowego
     def avatar(self):
         return f'https://ddragon.leagueoflegends.com/cdn/10.18.1/img/profileicon/{self.uzytkownik["profileIconId"]}.png'
@@ -46,7 +56,7 @@ class player:
         for element in lista:
             if element['queueType'] == 'RANKED_SOLO_5x5':
                 return [element['tier'], element['rank'], element['leaguePoints'], element['wins'], element['losses']]
-        return 'Nie znaleziono rangi na solo/duo'
+        return None
     
 
 
