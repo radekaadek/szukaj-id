@@ -31,7 +31,6 @@ class player:
             return 'Zbyt dużo zapytań'
         else:
             return self.uzytkownik
-        
 
     # zwraca link do profilowego
     def avatar(self):
