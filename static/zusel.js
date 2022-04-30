@@ -35,9 +35,9 @@ function newline(input) {
 
     profileAvatar.classList.add("profileAvatar");
     profileAvatar.style.backgroundImage = `url(${input.avatar})`;
-    profileAvatar.style.width = "100px";
-    profileAvatar.style.backgroundSize = "100px 100px";
-    profileAvatar.style.height = "100px";
+    profileAvatar.style.width = "184px";
+    profileAvatar.style.backgroundSize = "184px 184px";
+    profileAvatar.style.height = "184px";
     profileAvatar.style.display = "inline-block";
     profileAvatar.href = input.avatar;
 

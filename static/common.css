@@ -17,12 +17,29 @@
 }
 
 #liveboxContainer{
-    margin-top: 10px;
+    margin-top: 20px;
     margin-right: auto;
     margin-bottom: 0px;
     margin-left: auto;
-    width: 165px;
+    width: 500px;
     height: auto;
+}
+
+#livebox{
+    font-size: 16px !important;
+    font-weight: 300 !important;
+    color: #333 !important;
+    line-height: 1.625 !important;
+    background-color: #fff !important;
+    background-image: url( //addsearch.com/logo/AAAAAA-20.png ) !important;
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+    border: 1px solid #eee !important;
+    border-radius: 4px !important;
+    width: 500px !important;
+    padding: 15px !important;
+    cursor: auto !important;
+
 }
 
 /* ul li::before {
