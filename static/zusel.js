@@ -8,7 +8,7 @@ function gamelist(games) {
     for (const g in games) {
         const newGame = document.createElement("LI");
         const nSpan = document.createElement("span");
-        const gameIMG = document.createElement("IMG") as HTMLImageElement;
+        const gameIMG = document.createElement("IMG");
         
         nSpan.innerText = g + ". " + games[g].name;
         gameIMG.src = `http://media.steampowered.com/steamcommunity/public/images/apps/${games[g].appid}/${games[g].img_icon_url}.jpg`;
