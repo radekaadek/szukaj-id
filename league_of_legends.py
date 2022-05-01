@@ -47,18 +47,21 @@ class player:
             return False
 
     def link_do_profilu(self):
-        return {'link':f'https://{self.region}.op.gg/summoner/userName={self.nazwa}', "name1":self.nazwa,}
+        regiony_opgg = {'BR1': 'br', 'EUN1': 'eune', 'EUW1': 'euw', 'JP1': 'jp', 'KR': 'kr', 'LA1': 'lan', 'LA2': 'las', 'NA1': 'na', 'OC1': 'oc', 'RU': 'ru', 'TR1': 'tr'}
+        return {'link':f'https://{regiony_opgg[self.region]}.op.gg/summoner/userName={self.nazwa}', "name1":self.nazwa,}
 
     # zwraca tier, range, lp, wygrane i przegrane
     def ranga(self):
-        lista = lol_watcher.league.by_summoner(self.region, self.uzytkownik['id'])
-        for element in lista:
-            if element['queueType'] == 'RANKED_SOLO_5x5':
-                return [element['tier'], element['rank'], element['leaguePoints'], element['wins'], element['losses']]
-        return None
+        try:
+            lista = lol_watcher.league.by_summoner(self.region, self.uzytkownik['id'])
+            if len(lista) != 5:
+                return [None for _ in range(5)]
+            for element in lista:
+                if element['queueType'] == 'RANKED_SOLO_5x5':
+                    return [element['tier'], element['rank'], element['leaguePoints'], element['wins'], element['losses']]
+        except:
+            return [None for _ in range(5)]
     
-
-
 # For Riot's API, the 404 status code indicates that the requested data wasn't found and
 # should be expected to occur in normal operation, as in the case of a an
 # invalid summoner name, match ID, etc.

@@ -30,20 +30,28 @@ async def search():
     #nazwa z formularza
     nazwa_uzytkownika = request.form["nazwa_uzytkownika"] 
 
-    region_gracza = lol.zwroc_region('North America')
+    region_gracza = lol.zwroc_region('Europe Nordic & East')
     graczLOL = lol.player(nazwa_uzytkownika, region_gracza)
 
     steamTask = asyncio.create_task(steam.checkSteam(nazwa_uzytkownika, steam_api_key))
     graczLOL.czy_w_grze()
     graczLOL.ranga()
     
+
     
     match graczLOL.czy_istnieje():
-            case True : zwrotLol = {"avatar": graczLOL.avatar(),
-                                    "personaname": graczLOL.link_do_profilu()['name1'],
-                                    'url':graczLOL.link_do_profilu()['link'],"level":graczLOL.poziom(),
-                                    "wins":graczLOL.ranga()[3],"losses":graczLOL.ranga()[4],"tier":graczLOL.ranga()[0],
-                                    "rank":graczLOL.ranga()[1],"lp":graczLOL.ranga()[2]}
+            case True : 
+                wypakowane = graczLOL.ranga()
+                print(wypakowane)
+                zwrotLol = {"avatar": graczLOL.avatar(),
+                            "personaname": graczLOL.link_do_profilu()['name1'],
+                            'url':graczLOL.link_do_profilu()['link'],
+                            "level":graczLOL.poziom(),
+                            "wins":graczLOL.ranga()[3],
+                            "losses":graczLOL.ranga()[4],
+                            "tier":graczLOL.ranga()[0],
+                            "rank":graczLOL.ranga()[1],
+                            "lp":graczLOL.ranga()[2]}
             case False : zwrotLol = None
             case _: print("Za dużo zapytań")
 
