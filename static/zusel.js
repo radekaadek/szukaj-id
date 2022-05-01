@@ -1,6 +1,19 @@
 var wtokuapi = false;
 let favgamesplaytime = [];
 
+function minutesToDhms(seconds) {
+    seconds = Number(seconds);
+    seconds = seconds*60
+    var d = Math.floor(seconds / (3600*24));
+    var h = Math.floor(seconds % (3600*24) / 3600);
+    var m = Math.floor(seconds % 3600 / 60);
+    
+    var dDisplay = d > 0 ? d + (d == 1 ? " day, " : " days, ") : "";
+    var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " minute " : " minutes ") : "";
+    return dDisplay + hDisplay + mDisplay;
+    }
+
 function gamelist(games) {
     const gameUL = document.createElement("UL");
     gameUL.style.display = "inline-block";
@@ -8,13 +21,20 @@ function gamelist(games) {
     for (const g in games) {
         const newGame = document.createElement("LI");
         const nSpan = document.createElement("span");
+        const tSpan = document.createElement("span");
         const gameIMG = document.createElement("IMG");
         
+        favgamesplaytime[Number(g) - 1] = games[g].playtime_forever;
+
         nSpan.innerText = g + ". " + games[g].name;
         gameIMG.src = `http://media.steampowered.com/steamcommunity/public/images/apps/${games[g].appid}/${games[g].img_icon_url}.jpg`;
         newGame.id = "game" + g;
+        tSpan.classList.add("timeIndicator");
+        tSpan.innerText = favgamesplaytime[Number(g) - 1] + ' minutes';
+        tSpan.id = "time" + g;
         newGame.appendChild(gameIMG);
         newGame.appendChild(nSpan);
+        newGame.appendChild(tSpan);
         newGame.classList.add("gameLine");
 
         gameUL.appendChild(newGame);
@@ -65,6 +85,12 @@ function crHtml(res) {
         newUL.appendChild(newLine);
     }
     datalistContainerDiv.appendChild(newUL);
+}
+
+function zamienCzas() {
+    for (i = 1; i <= 3; i++) {
+        document.getElementById("time" + i).innerText = minutesToDhms(favgamesplaytime[i - 1]);
+    }   
 }
 
 $(document).ready(async function () {

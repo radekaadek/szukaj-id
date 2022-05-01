@@ -31,19 +31,20 @@ html{
 }
 
 #livebox{
-    font-size: 16px !important;
-    font-weight: 300 !important;
-    color: #333 !important;
-    line-height: 1.625 !important;
-    background-color: #fff !important;
-    background-image: url( //addsearch.com/logo/AAAAAA-20.png ) !important;
+    font-size: 16px;
+    font-weight: 300;
+    color: #333;
+    line-height: 1.625;
+    background-color: #fff;
+    background-image: url(../static/search.svg);
+    background-size: 25px;
     background-repeat: no-repeat;
     background-position: 95% 50%;
-    border: 2px solid rgb(238, 238, 238) !important;
-    border-radius: 4px !important;
-    width: 500px !important;
-    padding: 15px !important;
-    cursor: auto !important;
+    border: 2px solid rgb(238, 238, 238);
+    border-radius: 4px;
+    width: 500px;
+    padding: 15px;
+    cursor: auto;
 
 }
 
@@ -64,4 +65,7 @@ ul{
 
 #attentionMessage{
     background-image: url(../static/clown.svg);
+}
+.timeIndicator{
+    margin-left: 10px;
 }

@@ -40,8 +40,8 @@ async def search():
     graczLOL = lol.player(nazwa_uzytkownika, region_gracza)
 
     steamTask = asyncio.create_task(steam.checkSteam(nazwa_uzytkownika, steam_api_key))
-    lolTaskIsPlaying = asyncio.create_task(graczLOL.czy_w_grze())
-    lolTaskRank = asyncio.create_task(graczLOL.ranga())
+    graczLOL.czy_w_grze()
+    graczLOL.ranga()
 
     # lolTaskLink = graczLOL.link_do_profilu()
     # lolTaskLevel = graczLOL.poziom()
