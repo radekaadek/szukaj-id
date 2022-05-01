@@ -1,0 +1,5 @@
+obramowka steama zmienia kolor na podstawie statusu: in game/online/offline
+czy ma range w lolu i to wyswietla
+layout informacji ladny w css
+fortnite api
+

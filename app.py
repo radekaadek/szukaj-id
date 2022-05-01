@@ -41,8 +41,6 @@ async def search():
     
     match graczLOL.czy_istnieje():
             case True : 
-                wypakowane = graczLOL.ranga()
-                print(wypakowane)
                 zwrotLol = {"avatar": graczLOL.avatar(),
                             "personaname": graczLOL.link_do_profilu()['name1'],
                             'url':graczLOL.link_do_profilu()['link'],
