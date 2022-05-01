@@ -1,3 +1,4 @@
+from ast import match_case
 from flask import Flask, render_template, request, redirect
 import league_of_legends as lol
 import steam, asyncio
@@ -7,18 +8,11 @@ import steam, asyncio
 app = Flask(__name__)
 steam_api_key = 'EE03692ACB03E4371522180E26926643'
 
-region_gracza = lol.zwroc_region('North America')
-nazwa_gracza = 'mansplain'
-
-gracz = lol.player(nazwa_gracza, region_gracza)
-zwrotDanych = {}
-
 def czy_wszystko_none(dane):
     for i in dane:
         if dane[i] != None:
             return False
     return True
-
 
 
 def czy_wszystko_none(dane):
@@ -42,12 +36,16 @@ async def search():
     steamTask = asyncio.create_task(steam.checkSteam(nazwa_uzytkownika, steam_api_key))
     graczLOL.czy_w_grze()
     graczLOL.ranga()
+    
+    
+    
+    
+    match graczLOL.czy_istnieje():
+            case True : zwrotLol = {"avatar": graczLOL.avatar(),"personaname": graczLOL.link_do_profilu()['name1'],'url':graczLOL.link_do_profilu()['link'],"level":graczLOL.poziom(), "wins":graczLOL.ranga()[3],"losses":graczLOL.ranga()[4],"tier":graczLOL.ranga()[0],"rank":graczLOL.ranga()[1],"lp":graczLOL.ranga()[2]}
+            case False : zwrotLol = None
+            case _: print("Za dużo zapytań")
 
-    # lolTaskLink = graczLOL.link_do_profilu()
-    # lolTaskLevel = graczLOL.poziom()
-
-
-    zwrot = {"steam":await steamTask, "lol":None} 
+    zwrot = {"steam":await steamTask, "lol":zwrotLol} 
     
     if czy_wszystko_none(zwrot):
         return 'ZAMKOR'

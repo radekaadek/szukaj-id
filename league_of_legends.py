@@ -25,11 +25,11 @@ class player:
         self.uzytkownik = zwroc_uzytkownika(self.region, self.nazwa)
     def czy_istnieje(self):
         if self.uzytkownik == 404:
-            return None
+            return False
         elif self.uzytkownik == 429:
             return 'Zbyt dużo zapytań'
         else:
-            return self.uzytkownik
+            return True
 
     # zwraca link do profilowego
     def avatar(self):
