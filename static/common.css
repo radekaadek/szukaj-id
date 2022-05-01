@@ -1,5 +1,5 @@
 html{
-    background: linear-gradient(rgba(213,103,50,1) 0%, rgba(125,9,9,1) 100%);
+    background: linear-gradient(rgb(183, 255, 149) 0%, rgb(24, 173, 121) 100%);
     min-height: 100%;
 }
 
@@ -37,7 +37,7 @@ html{
     line-height: 1.625;
     background-color: #fff;
     background-image: url(../static/search.svg);
-    background-size: 25px;
+    background-size: 30px;
     background-repeat: no-repeat;
     background-position: 95% 50%;
     border: 2px solid rgb(238, 238, 238);
