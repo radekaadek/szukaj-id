@@ -39,7 +39,11 @@ async def search():
     
     
     match graczLOL.czy_istnieje():
-            case True : zwrotLol = {"avatar": graczLOL.avatar(),"personaname": graczLOL.link_do_profilu()['name1'],'url':graczLOL.link_do_profilu()['link'],"level":graczLOL.poziom(), "wins":graczLOL.ranga()[3],"losses":graczLOL.ranga()[4],"tier":graczLOL.ranga()[0],"rank":graczLOL.ranga()[1],"lp":graczLOL.ranga()[2]}
+            case True : zwrotLol = {"avatar": graczLOL.avatar(),
+                                    "personaname": graczLOL.link_do_profilu()['name1'],
+                                    'url':graczLOL.link_do_profilu()['link'],"level":graczLOL.poziom(),
+                                    "wins":graczLOL.ranga()[3],"losses":graczLOL.ranga()[4],"tier":graczLOL.ranga()[0],
+                                    "rank":graczLOL.ranga()[1],"lp":graczLOL.ranga()[2]}
             case False : zwrotLol = None
             case _: print("Za dużo zapytań")
 
