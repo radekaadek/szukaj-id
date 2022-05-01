@@ -1,9 +1,7 @@
-body{
-    background: rgb(213,103,50);
+html{
     background: linear-gradient(rgba(213,103,50,1) 0%, rgba(125,9,9,1) 100%);
+    min-height: 100%;
 }
-
-
 
 .errorMessage{
  background-position: 8px 4px;
