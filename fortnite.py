@@ -1,52 +1,16 @@
 import fortnite_api
 import asyncio
-from timeit import default_timer as timer
-from datetime import timedelta
+from platform import system
+if system()=='Windows':
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
-api = fortnite_api.FortniteAPI('b4dab92b-ac98-4d0f-8cc9-5e2bc93de384', True)
-api_false = fortnite_api.FortniteAPI('b4dab92b-ac98-4d0f-8cc9-5e2bc93de384', False)
+typy_kont = {'pc': 'epic', 'psn': 'psn', 'xbl': 'xbl'}
 
-def main2():
-    play = api.playlist.fetch_all()
-    szop = api.shop.fetch()
-    newsy = api.news.fetch()
-    jezyk = api.map.fetch()
-    staty = api.cosmetics.fetch_all()
-    taski = [play, szop, newsy, jezyk, staty]
-    return taski
-
-def main2_false():
-    play = api_false.playlist.fetch_all()
-    szop = api_false.shop.fetch()
-    newsy = api_false.news.fetch()
-    jezyk = api_false.map.fetch()
-    staty = api_false.cosmetics.fetch_all()
-    return [play, szop, newsy, jezyk, staty]
+api = fortnite_api.FortniteAPI('b4dab92b-ac98-4d0f-8cc9-5e2bc93de384', False)
 
 
+def player_stats(name, platform):
+    stats = api.stats.fetch_by_name(name, platform)
+    return stats
 
-async def main():
-    odp = []
-    start = timer()
-    taski = main2()
-    odpowiedzi = await asyncio.gather(*taski)
-    for odpowiedz in odpowiedzi:
-        odp.append(odpowiedz)
-    print(odp)
-    end = timer()
-    print(timedelta(seconds=end-start))
-    start = timer()
-    sad = main2_false()
-    print(sad)
-    end = timer()
-    print(timedelta(seconds=end-start))
-    start = timer()
-    play = api_false.playlist.fetch_all()
-    end = timer()
-    print(timedelta(seconds=end-start))
-
-
-if __name__ == '__main__':
-    asyncio.run(main())
-
-
+print(player_stats('Krzysztof', 'epic'))
