@@ -9,6 +9,9 @@ api = fortnite_api.FortniteAPI('b4dab92b-ac98-4d0f-8cc9-5e2bc93de384')
 #'ninja' - niepubliczny
 
 
+print(api.stats.fetch_by_name('elyzy').raw_data)
+
+
 class Gracz_fortnite:
     def __init__(self, username, platform='epic'):
         self.username = username
@@ -17,6 +20,8 @@ class Gracz_fortnite:
             self.player_base = api.stats.fetch_by_name(username).raw_data
             self.player = self.player_base['stats']['all']['overall']
         except Exception as error:
+            print(type(error))
+            print(error)
             self.player_base = error
             self.player = error
             
@@ -35,5 +40,7 @@ class Gracz_fortnite:
     
     def last_played(self):
         return self.player['lastModified']
+    
+print(Gracz_fortnite('ninja'))
 
 
