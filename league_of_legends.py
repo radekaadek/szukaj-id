@@ -59,8 +59,7 @@ class player:
             for element in lista:
                 if element['queueType'] == 'RANKED_SOLO_5x5':
                     return [element['tier'], element['rank'], element['leaguePoints'], element['wins'], element['losses']]
-        except Exception as error:
-            print(error)
+        except:
             return [None for _ in range(5)]
 
 
