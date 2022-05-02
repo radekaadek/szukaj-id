@@ -3,16 +3,45 @@ let favgamesplaytime = [];
 
 function minutesToDhms(seconds) {
     seconds = Number(seconds);
-    seconds = seconds*60
-    var d = Math.floor(seconds / (3600*24));
-    var h = Math.floor(seconds % (3600*24) / 3600);
-    var m = Math.floor(seconds % 3600 / 60);
-    
+    seconds = seconds * 60;
+    var d = Math.floor(seconds / (3600 * 24));
+    var h = Math.floor((seconds % (3600 * 24)) / 3600);
+    var m = Math.floor((seconds % 3600) / 60);
+
     var dDisplay = d > 0 ? d + (d == 1 ? " day, " : " days, ") : "";
     var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
     var mDisplay = m > 0 ? m + (m == 1 ? " minute " : " minutes ") : "";
     return dDisplay + hDisplay + mDisplay;
+}
+
+async function avatar(input, newLI) {
+    const urlLink = input.avatar;
+    const profileAvatar = document.createElement("a");
+    profileAvatar.classList.add("profileAvatar");
+    let exists = false;
+
+    await $.ajax({
+        type: "HEAD",
+        url: urlLink,
+        success: () => {
+            exists = true;
+        }
+    }).catch((e) => {
+        console.log("O ja cie w ten czas");
+    });;
+
+    if (urlLink !== null && exists) {
+        profileAvatar.style.backgroundImage = `url(${urlLink})`;
+        profileAvatar.href = urlLink;
+    } else {
+        profileAvatar.style.backgroundImage = "url(../static/happy_face.svg)";
     }
+    profileAvatar.style.width = "180px";
+    profileAvatar.style.backgroundSize = "180px 180px";
+    profileAvatar.style.height = "180px";
+    profileAvatar.style.display = "inline-block";
+    newLI.appendChild(profileAvatar);
+}
 
 function gamelist(games) {
     const gameUL = document.createElement("UL");
@@ -23,14 +52,14 @@ function gamelist(games) {
         const nSpan = document.createElement("span");
         const tSpan = document.createElement("span");
         const gameIMG = document.createElement("IMG");
-        
+
         favgamesplaytime[Number(g) - 1] = games[g].playtime_forever;
 
         nSpan.innerText = g + ". " + games[g].name;
         gameIMG.src = `http://media.steampowered.com/steamcommunity/public/images/apps/${games[g].appid}/${games[g].img_icon_url}.jpg`;
         newGame.id = "game" + g;
         tSpan.classList.add("timeIndicator");
-        tSpan.innerText = favgamesplaytime[Number(g) - 1] + ' minutes';
+        tSpan.innerText = favgamesplaytime[Number(g) - 1] + " minutes";
         tSpan.id = "time" + g;
         newGame.appendChild(gameIMG);
         newGame.appendChild(nSpan);
@@ -42,10 +71,10 @@ function gamelist(games) {
     return gameUL;
 }
 
-function newline(input) {
+async function newline(input) {
     const newLI = document.createElement("li");
 
-    avatar(input, newLI);
+    await avatar(input, newLI);
 
     if (input.url !== null && input.personaname !== null) {
         const profileLink = document.createElement("a");
@@ -70,27 +99,7 @@ function newline(input) {
     return newLI;
 }
 
-
-function avatar(input, newLI) {
-    const profileAvatar = document.createElement("a");
-        profileAvatar.classList.add("profileAvatar");
-    if (input.avatar !== null) {
-        profileAvatar.style.backgroundImage = `url(${input.avatar})`;
-        profileAvatar.href = input.avatar;
-    }
-    else{
-        profileAvatar.style.backgroundImage = 'url(../static/happy_face.svg)';
-        profileAvatar.href = input.avatar;
-        
-    }
-    profileAvatar.style.width = "180px";
-    profileAvatar.style.backgroundSize = "180px 180px";
-    profileAvatar.style.height = "180px";
-    profileAvatar.style.display = "inline-block";
-    newLI.appendChild(profileAvatar);
-}
-
-function crHtml(res) {
+async function crHtml(res) {
     const datalistContainerDiv = document.querySelector("body #datalists_contaier");
     datalistContainerDiv.innerHTML = "";
     const newUL = document.createElement("UL");
@@ -98,7 +107,7 @@ function crHtml(res) {
         if (res[d] == null) {
             continue;
         }
-        const newLine = newline(res[d]);
+        const newLine = await newline(res[d]);
         newLine.id = d + "Line";
         newUL.appendChild(newLine);
     }
@@ -108,7 +117,7 @@ function crHtml(res) {
 function zamienCzas() {
     for (i = 1; i <= 3; i++) {
         document.getElementById("time" + i).innerText = minutesToDhms(favgamesplaytime[i - 1]);
-    }   
+    }
 }
 
 $(document).ready(async function () {

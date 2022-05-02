@@ -1,7 +1,6 @@
-obramowka steama zmienia kolor na podstawie statusu: in game/online/offline
+obramowka steama zmienia kolor na podstawie statusu: in game/online/offline - patialy done
 czy ma range w lolu i to wyswietla - patialy done
 layout informacji ladny w css
 fortnite api
 wyswietla konto na regionie z najwyzszym poziomem, jezeli nie uzytkownik didnt specify w fortnucie i lolu
 bar ktory pokazuje poziom battlepassa w fortnite; jest ich 100
-

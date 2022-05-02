@@ -20,10 +20,10 @@ class bekazapi:
 
 
 class Gracz_fortnite:
-    def __init__(self, username, platform='epic'):
+    def __init__(self, username, platform='EPIC'):
         self.username = username
         self.platform = platform
-        self.player_base = api.stats.fetch_by_name(username, platform).raw_data
+        self.player_base = api.stats.fetch_by_name(username, bekazapi(platform)).raw_data
         self.player = self.player_base['stats']['all']['overall']
     
     def player_name(self):

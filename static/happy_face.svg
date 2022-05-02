@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Icons" version="1.1" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<svg id="a" version="1.1" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
  <defs>
   <style><![CDATA[
 .cls-1 {
@@ -41,13 +41,14 @@
 ]]></style>
  </defs>
  <title>piotr</title>
- <g id="_Group_" data-name="&lt;Group&gt;">
-  <circle id="_Ellipse_" class="cls-1" cx="24" cy="21.5" r="20" data-name="&lt;Ellipse&gt;"/>
-  <path id="_Compound_Path_" class="cls-2" d="m24 1.5a20 20 0 1 0 20 20 20 20 0 0 0-20-20zm0 37a18.25 18.25 0 1 1 18.25-18.25 18.25 18.25 0 0 1-18.25 18.25z" data-name="&lt;Compound Path&gt;"/>
+ <rect width="48" height="48" fill="#2c2c2c"/>
+ <g id="b" data-name="&lt;Group&gt;">
+  <circle id="c" class="cls-1" cx="24" cy="21.5" r="20" data-name="&lt;Ellipse&gt;"/>
+  <path id="d" class="cls-2" d="m24 1.5a20 20 0 1 0 20 20 20 20 0 0 0-20-20zm0 37a18.25 18.25 0 1 1 18.25-18.25 18.25 18.25 0 0 1-18.25 18.25z" data-name="&lt;Compound Path&gt;"/>
   <ellipse class="cls-3" cx="24" cy="5.5" rx="6" ry="1.5" data-name="&lt;Ellipse&gt;"/>
   <ellipse class="cls-4" cx="24" cy="45.5" rx="16" ry="1.5" data-name="&lt;Ellipse&gt;"/>
   <circle class="cls-5" cx="24" cy="21.5" r="20" data-name="&lt;Ellipse&gt;"/>
-  <path id="_Path_" class="cls-6" d="m38.5 26.5c0 0.83-1.12 1.5-2.5 1.5s-2.5-0.67-2.5-1.5 1.12-1.5 2.5-1.5 2.5 0.67 2.5 1.5z" data-name="&lt;Path&gt;"/>
+  <path id="e" class="cls-6" d="m38.5 26.5c0 0.83-1.12 1.5-2.5 1.5s-2.5-0.67-2.5-1.5 1.12-1.5 2.5-1.5 2.5 0.67 2.5 1.5z" data-name="&lt;Path&gt;"/>
   <path class="cls-6" d="m9.5 26.5c0 0.83 1.12 1.5 2.5 1.5s2.5-0.67 2.5-1.5-1.12-1.5-2.5-1.5-2.5 0.67-2.5 1.5z" data-name="&lt;Path&gt;"/>
   <path class="cls-7" d="m14.5 20.5a1 1 0 1 1-1-1 1 1 0 0 1 1 1z" data-name="&lt;Path&gt;"/>
   <path class="cls-7" d="m33.5 20.5a1 1 0 1 0 1-1 1 1 0 0 0-1 1z" data-name="&lt;Path&gt;"/>
