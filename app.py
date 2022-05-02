@@ -33,11 +33,7 @@ async def search():
     graczLOL = lol.player(nazwa_uzytkownika, region_gracza)
 
     steamTask = asyncio.create_task(steam.checkSteam(nazwa_uzytkownika, steam_api_key))
-    graczLOL.czy_w_grze()
-    graczLOL.ranga()
-    
-
-    
+      
     match graczLOL.czy_istnieje():
             case True : 
                 zwrotLol = {"avatar": graczLOL.avatar(),
