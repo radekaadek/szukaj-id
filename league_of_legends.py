@@ -23,8 +23,9 @@ class player:
         self.nazwa = nazwa
         self.region = region
         self.uzytkownik = zwroc_uzytkownika(self.region, self.nazwa)
-        lista = lol_watcher.league.by_summoner(self.region, self.uzytkownik['id'])    
-        if lista:
+        if self.czy_istnieje():
+         lista = lol_watcher.league.by_summoner(self.region, self.uzytkownik['id'])    
+        if 'lista' in locals():
             for element in lista:
                 if element['queueType'] == 'RANKED_SOLO_5x5':
                     self.lista = element
