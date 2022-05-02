@@ -102,6 +102,11 @@ async function newline(input) {
         const rankImg = document.createElement("img")
         const rankSpan = document.createElement("span")
 
+        rankContainer.classList.add("rankContainer");
+        rankImg.src = `../static/lolranks/${input.tier}.png`;
+        rankImg.classList.add("tierImg");
+        rankSpan.innerText = input.tier + input.rank;
+
         rankContainer.appendChild(rankImg)
         rankContainer.appendChild(rankSpan)
         newLI.appendChild(rankContainer)
