@@ -23,8 +23,8 @@ class player:
         self.nazwa = nazwa
         self.region = region
         self.uzytkownik = zwroc_uzytkownika(self.region, self.nazwa)
-        lista = lol_watcher.league.by_summoner(self.region, self.uzytkownik['id'])
-        if isinstance(lista, dict):
+        lista = lol_watcher.league.by_summoner(self.region, self.uzytkownik['id'])    
+        if lista:
             for element in lista:
                 if element['queueType'] == 'RANKED_SOLO_5x5':
                     self.lista = element
@@ -84,7 +84,7 @@ class player:
         except:
             return None
 
-
+print(player('radekaadek', 'EUN1'))
     
 # For Riot's API, the 404 status code indicates that the requested data wasn't found and
 # should be expected to occur in normal operation, as in the case of a an
