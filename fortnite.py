@@ -35,12 +35,5 @@ class Gracz_fortnite:
     
     def last_played(self):
         return self.player['lastModified']
-    
-x = Gracz_fortnite('ninja')
-
-if str(x.player) == "the requested account's stats are not public":
-    print("git")
-else:
-    print('nie git')
 
 
