@@ -1,6 +1,38 @@
 var wtokuapi = false;
 let favgamesplaytime = [];
 
+function rankCreator(input, newLI) {
+    const rankContainer = document.createElement('div');
+
+    if (input.tier !== null && input.rank !== null && input.isLOL) {
+        const rankImg = document.createElement("img");
+        const rankSpan = document.createElement("span");
+    
+        rankImg.src = `../static/lolranks/${input.tier}.png`;
+        rankImg.classList.add("tierImg");
+        rankSpan.innerText = input.tier + input.rank;
+
+        rankContainer.appendChild(rankImg);
+        rankContainer.appendChild(rankSpan);
+    }
+
+    else if (input.isLOL){
+        const mindBlownImg = document.createElement("img");
+        const infoSpan = document.createElement("span");
+
+        mindBlownImg.src = '../static/emoji_mindBlown.svg';
+        mindBlownImg.classList.add("mindBlown");
+        infoSpan.classList.add("infoSpan");
+        infoSpan.innerText = "Chłop nie ma rangi";
+
+        rankContainer.appendChild(mindBlownImg);
+        rankContainer.appendChild(infoSpan);
+    }
+
+    rankContainer.classList.add("rankContainer");
+    newLI.appendChild(rankContainer);
+}
+
 function minutesToDhms(seconds) {
     seconds = Number(seconds);
     seconds = seconds * 60;
@@ -97,20 +129,7 @@ async function newline(input) {
         newLI.appendChild(level);
     }
 
-    if (input.tier !== null && input.rank !== null){
-        const rankContainer = document.createElement('div')
-        const rankImg = document.createElement("img")
-        const rankSpan = document.createElement("span")
-
-        rankContainer.classList.add("rankContainer");
-        rankImg.src = `../static/lolranks/${input.tier}.png`;
-        rankImg.classList.add("tierImg");
-        rankSpan.innerText = input.tier + input.rank;
-
-        rankContainer.appendChild(rankImg)
-        rankContainer.appendChild(rankSpan)
-        newLI.appendChild(rankContainer)
-    }    
+    rankCreator(input, newLI);    
 
     return newLI;
 }
@@ -141,23 +160,24 @@ $(document).ready(async function () {
         if (wtokuapi === false) {
             wtokuapi = true;
             $("#datalist").empty();
-
-            $.ajax({
-                method: "post",
-                url: "/search",
-                data: { nazwa_uzytkownika: $("#livebox").val() },
-                success: async function (res) {
-                    if (res !== "ZAMKOR") {
-                        $("#attentionMessage").css({ display: "none" });
-                        await crHtml(res);
-                        console.log(res);
-                    } else {
-                        $("#attentionMessage").css({ display: "block" });
-                        $("#datalists_contaier").empty();
-                    }
-                },
-            });
-            wtokuapi = false;
+            setTimeout(() => {
+                $.ajax({
+                    method: "post",
+                    url: "/search",
+                    data: { nazwa_uzytkownika: $("#livebox").val() },
+                    success: async function (res) {
+                        if (res !== "ZAMKOR") {
+                            $("#attentionMessage").css({ display: "none" });
+                            await crHtml(res);
+                            console.log(res);
+                        } else {
+                            $("#attentionMessage").css({ display: "block" });
+                            $("#datalists_contaier").empty();
+                        }
+                    },
+                });
+                wtokuapi = false;
+            }, 750);
         }
     });
 });
