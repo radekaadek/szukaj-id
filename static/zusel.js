@@ -26,7 +26,7 @@ async function avatar(input, newLI) {
         success: () => {
             exists = true;
         }
-    }).catch((e) => {
+    }).catch(() => {
         console.log("O ja cie w ten czas");
     });;
 
