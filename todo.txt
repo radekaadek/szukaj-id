@@ -7,5 +7,6 @@ bar ktory pokazuje poziom battlepassa w fortnite; jest ich lacznie 100
 laduje staty tylko po 0.75s nie zmieniania tekstu lub gdy uzytkownik wcisnie enter albo kliknie na ikone lup   i tylko zeby nie ladowalo 100 razy jak bedzie spamil enterem
 tytul strony i krotki opis na gorze
 ustawienie kafelkami gier
+czy jest w grze lol
 
 ### wiesiek5monster - ranga w lolu   elyzy - fortnite    ninja - fortnite prywatne konto
