@@ -54,23 +54,14 @@ class player:
     def ranga(self):
         try:
             lista = lol_watcher.league.by_summoner(self.region, self.uzytkownik['id'])
-            if not isinstance(lista, list):
+            if len(lista) != 5:
                 return [None for _ in range(5)]
             for element in lista:
                 if element['queueType'] == 'RANKED_SOLO_5x5':
                     return [element['tier'], element['rank'], element['leaguePoints'], element['wins'], element['losses']]
         except:
             return [None for _ in range(5)]
-
-    def champions_with_most_games(self):
-        try:
-            lista = lol_watcher.champion_mastery.by_summoner(self.region, self.uzytkownik['id'])
-            lista.sort(key=lambda x: x['championPoints'], reverse=True)
-            return [[lista[i]['championId'], lista[i]['championPoints']] for i in range(3)]
-        except:
-            return [[None, None] for _ in range(3)]
-
-
+    
 # For Riot's API, the 404 status code indicates that the requested data wasn't found and
 # should be expected to occur in normal operation, as in the case of a an
 # invalid summoner name, match ID, etc.

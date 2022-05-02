@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect
 import league_of_legends as lol
 import steam, asyncio
-import fortnite as fn
 
 #regiony = ['Brasil', 'Europe Nordic & East', 'Europe West', 'Japan', 'Korea', 'Latin America North', 'Latin America South', 'North America', 'Oceania', 'Russia', 'Turkey']
 
@@ -32,18 +31,9 @@ async def search():
 
     region_gracza = lol.zwroc_region('Europe Nordic & East')
     graczLOL = lol.player(nazwa_uzytkownika, region_gracza)
-    gracz_FORTNITE = fn.Gracz_fortnite(nazwa_uzytkownika)
 
     steamTask = asyncio.create_task(steam.checkSteam(nazwa_uzytkownika, steam_api_key))
-
-    match str(gracz_FORTNITE.player):
-        case "the requested account's stats are not public":
-            zwrotFORTNITE = None
-        case "the requested account does not exist":
-            zwrotFORTNITE = None
-        case _:
-            zwrotFORTNITE = {}
-
+      
     match graczLOL.czy_istnieje():
             case True : 
                 zwrotLol = {"avatar": graczLOL.avatar(),
