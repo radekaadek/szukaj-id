@@ -13,7 +13,7 @@ print(api.stats.fetch_by_name('elyzy').raw_data)
 
 
 class Gracz_fortnite:
-    def __init__(self, username, platform='epic'):
+    def __init__(self, username, platform='EPIC'):
         self.username = username
         self.platform = platform
         try:
