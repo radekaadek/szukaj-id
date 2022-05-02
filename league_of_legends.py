@@ -54,7 +54,6 @@ class player:
     def ranga(self):
         try:
             lista = lol_watcher.league.by_summoner(self.region, self.uzytkownik['id'])
-            print(type(lista))
             if not isinstance(lista, list):
                 return [None for _ in range(5)]
             for element in lista:
