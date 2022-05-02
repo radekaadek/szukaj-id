@@ -66,9 +66,9 @@ class player:
         try:
             lista = lol_watcher.champion_mastery.by_summoner(self.region, self.uzytkownik['id'])
             lista.sort(key=lambda x: x['championPoints'], reverse=True)
-            return [lista[0]['championId'], lista[1]['championId'], lista[2]['championId']]
+            return [[lista[i]['championId'], lista[i]['championPoints']] for i in range(3)]
         except:
-            return [None for _ in range(3)]
+            return [[None, None] for _ in range(3)]
 
 
 # For Riot's API, the 404 status code indicates that the requested data wasn't found and
