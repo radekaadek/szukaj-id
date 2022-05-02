@@ -36,6 +36,7 @@ async function avatar(input, newLI) {
     } else {
         profileAvatar.style.backgroundImage = "url(../static/happy_face.svg)";
     }
+
     profileAvatar.style.width = "180px";
     profileAvatar.style.backgroundSize = "180px 180px";
     profileAvatar.style.height = "180px";
@@ -95,6 +96,16 @@ async function newline(input) {
         level.classList.add("levelIndicator");
         newLI.appendChild(level);
     }
+
+    if (input.tier !== null && input.rank !== null){
+        const rankContainer = document.createElement('div')
+        const rankImg = document.createElement("img")
+        const rankSpan = document.createElement("span")
+
+        rankContainer.appendChild(rankImg)
+        rankContainer.appendChild(rankSpan)
+        newLI.appendChild(rankContainer)
+    }    
 
     return newLI;
 }
