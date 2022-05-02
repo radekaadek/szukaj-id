@@ -54,7 +54,7 @@ class player:
     def ranga(self):
         try:
             lista = lol_watcher.league.by_summoner(self.region, self.uzytkownik['id'])
-            if len(lista) != 5:
+            if not isinstance(lista, list):
                 return [None for _ in range(5)]
             for element in lista:
                 if element['queueType'] == 'RANKED_SOLO_5x5':
