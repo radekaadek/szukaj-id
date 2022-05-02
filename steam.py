@@ -41,6 +41,7 @@ async def checkSteam(nazwa_uzytkownika, steam_api_key):
             "losses": None,
             "tier": None,
             "rank": None,
+            "k/d": None,
             "lp": None,
             "level": levelsteam["player_level"],
         }

@@ -50,7 +50,8 @@ async def search():
                             "rank":graczLOL.ranga()[1],
                             "lp":graczLOL.ranga()[2],
                             "gamequantity":None,
-                            "favgames":None}
+                            "favgames":None,
+                            "k/d":None}
             case False : zwrotLol = None
             case _: print("Za dużo zapytań")
 
