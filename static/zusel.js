@@ -141,24 +141,23 @@ $(document).ready(async function () {
         if (wtokuapi === false) {
             wtokuapi = true;
             $("#datalist").empty();
-            setTimeout(() => {
-                $.ajax({
-                    method: "post",
-                    url: "/search",
-                    data: { nazwa_uzytkownika: $("#livebox").val() },
-                    success: function (res) {
-                        if (res !== "ZAMKOR") {
-                            $("#attentionMessage").css({ display: "none" });
-                            crHtml(res);
-                            console.log(res);
-                        } else {
-                            $("#attentionMessage").css({ display: "block" });
-                            $("#datalists_contaier").empty();
-                        }
-                    },
-                });
-                wtokuapi = false;
-            }, 500);
+
+            $.ajax({
+                method: "post",
+                url: "/search",
+                data: { nazwa_uzytkownika: $("#livebox").val() },
+                success: async function (res) {
+                    if (res !== "ZAMKOR") {
+                        $("#attentionMessage").css({ display: "none" });
+                        await crHtml(res);
+                        console.log(res);
+                    } else {
+                        $("#attentionMessage").css({ display: "block" });
+                        $("#datalists_contaier").empty();
+                    }
+                },
+            });
+            wtokuapi = false;
         }
     });
 });
