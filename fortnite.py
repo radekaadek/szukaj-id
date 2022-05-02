@@ -8,22 +8,15 @@ api = fortnite_api.FortniteAPI('b4dab92b-ac98-4d0f-8cc9-5e2bc93de384')
 #.raw_data['all']['overall']['kd']
 #'ninja' - niepubliczny
 
-print(dir(api.stats.fetch_by_name('elyzy').stats)[26:])
-print(api.stats.fetch_by_name('elyzy').raw_data)
-
-class bekazapi:
-    def __init__(self, platforma):
-        self.platforma = platforma
-    def value(self):
-        return self.platforma
-
+# print(dir(api.stats.fetch_by_name('elyzy').stats)[26:])
+# print(api.stats.fetch_by_name('elyzy').raw_data)
 
 
 class Gracz_fortnite:
     def __init__(self, username, platform='EPIC'):
         self.username = username
         self.platform = platform
-        self.player_base = api.stats.fetch_by_name(username, bekazapi(platform)).raw_data
+        self.player_base = api.stats.fetch_by_name(username).raw_data
         self.player = self.player_base['stats']['all']['overall']
     
     def player_name(self):
@@ -41,7 +34,3 @@ class Gracz_fortnite:
     def last_played(self):
         return self.player['lastModified']
     
-    
-x = Gracz_fortnite('elyzy')
-
-print(x.battle_pass_level())
