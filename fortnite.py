@@ -13,15 +13,18 @@ print(api.stats.fetch_by_name('elyzy').raw_data)
 
 
 class Gracz_fortnite:
-    def __init__(self, username, platform='EPIC'):
+    def __init__(self, username, platform='epic'):
         self.username = username
         self.platform = platform
         try:
             self.player_base = api.stats.fetch_by_name(username).raw_data
             self.player = self.player_base['stats']['all']['overall']
         except Exception as error:
+            print(type(error))
+            print(error)
             self.player_base = error
             self.player = error
+            
 
     def player_name(self):
         return self.player_base['account']['name']
