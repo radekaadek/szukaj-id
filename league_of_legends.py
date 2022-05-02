@@ -54,14 +54,17 @@ class player:
     def ranga(self):
         try:
             lista = lol_watcher.league.by_summoner(self.region, self.uzytkownik['id'])
-            if len(lista) != 5:
+            print(type(lista))
+            if not isinstance(lista, list):
                 return [None for _ in range(5)]
             for element in lista:
                 if element['queueType'] == 'RANKED_SOLO_5x5':
                     return [element['tier'], element['rank'], element['leaguePoints'], element['wins'], element['losses']]
-        except:
+        except Exception as error:
+            print(error)
             return [None for _ in range(5)]
-    
+
+
 # For Riot's API, the 404 status code indicates that the requested data wasn't found and
 # should be expected to occur in normal operation, as in the case of a an
 # invalid summoner name, match ID, etc.
