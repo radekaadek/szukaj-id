@@ -23,6 +23,13 @@ class player:
         self.nazwa = nazwa
         self.region = region
         self.uzytkownik = zwroc_uzytkownika(self.region, self.nazwa)
+        lista = lol_watcher.league.by_summoner(self.region, self.uzytkownik['id'])
+        if isinstance(lista, dict):
+            for element in lista:
+                if element['queueType'] == 'RANKED_SOLO_5x5':
+                    self.lista = element
+        else:
+            self.lista = None
     def czy_istnieje(self):
         if self.uzytkownik == 404:
             return False
@@ -51,16 +58,33 @@ class player:
         return {'link':f'https://{regiony_opgg[self.region]}.op.gg/summoner/userName={self.nazwa}', "name1":self.nazwa,}
 
     # zwraca tier, range, lp, wygrane i przegrane
-    def ranga(self):
+    def rank(self):
         try:
-            lista = lol_watcher.league.by_summoner(self.region, self.uzytkownik['id'])
-            if not isinstance(lista, list):
-                return [None for _ in range(5)]
-            for element in lista:
-                if element['queueType'] == 'RANKED_SOLO_5x5':
-                    return [element['tier'], element['rank'], element['leaguePoints'], element['wins'], element['losses']]
+            return self.lista['rank']
         except:
-            return [None for _ in range(5)]
+            return None
+    def tier(self):
+        try:
+            return self.lista['tier']
+        except:
+            return None
+    def league_points(self):
+        try:
+            return self.lista['leaguePoints']
+        except:
+            return None
+    def wins(self):
+        try:
+            return self.lista['wins']
+        except:
+            return None
+    def losses(self):
+        try:
+            return self.lista['losses']
+        except:
+            return None
+
+
     
 # For Riot's API, the 404 status code indicates that the requested data wasn't found and
 # should be expected to occur in normal operation, as in the case of a an
