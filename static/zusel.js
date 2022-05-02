@@ -45,17 +45,7 @@ function gamelist(games) {
 function newline(input) {
     const newLI = document.createElement("li");
 
-    if (input.avatar !== null) {
-        const profileAvatar = document.createElement("a");
-        profileAvatar.classList.add("profileAvatar");
-        profileAvatar.style.backgroundImage = `url(${input.avatar})`;
-        profileAvatar.style.width = "180px";
-        profileAvatar.style.backgroundSize = "180px 180px";
-        profileAvatar.style.height = "180px";
-        profileAvatar.style.display = "inline-block";
-        profileAvatar.href = input.avatar;
-        newLI.appendChild(profileAvatar);
-    }
+    avatar(input, newLI);
 
     if (input.url !== null && input.personaname !== null) {
         const profileLink = document.createElement("a");
@@ -80,6 +70,25 @@ function newline(input) {
     return newLI;
 }
 
+
+function avatar(input, newLI) {
+    const profileAvatar = document.createElement("a");
+        profileAvatar.classList.add("profileAvatar");
+    if (input.avatar !== null) {
+        profileAvatar.style.backgroundImage = `url(${input.avatar})`;
+        profileAvatar.href = input.avatar;
+    }
+    else{
+        profileAvatar.style.backgroundImage = 'url(../static/happy_face.svg)';
+        profileAvatar.href = input.avatar;
+        
+    }
+    profileAvatar.style.width = "180px";
+    profileAvatar.style.backgroundSize = "180px 180px";
+    profileAvatar.style.height = "180px";
+    profileAvatar.style.display = "inline-block";
+    newLI.appendChild(profileAvatar);
+}
 
 function crHtml(res) {
     const datalistContainerDiv = document.querySelector("body #datalists_contaier");

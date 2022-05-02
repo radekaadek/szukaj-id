@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Icons" version="1.1" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <style><![CDATA[
+.cls-1 {
+  fill:#2c2c2c;
+}
+.cls-2 {
+  fill:#424242;
+}
+.cls-3 {
+  fill:#141414;
+}
+.cls-4,
+.cls-7 {
+  fill:#bdbdbd;
+}
+.cls-4 {
+  opacity:0.15;
+}
+.cls-5 {
+  fill:none;
+}
+.cls-5,
+.cls-7,
+.cls-8,
+.cls-9 {
+  stroke:#bdbdbd;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.cls-6 {
+  fill:#bababa;
+}
+.cls-8 {
+  fill:#343434;
+}
+.cls-9 {
+  fill:#505050;
+}
+]]></style>
+ </defs>
+ <title>piotr</title>
+ <g id="_Group_" data-name="&lt;Group&gt;">
+  <circle id="_Ellipse_" class="cls-1" cx="24" cy="21.5" r="20" data-name="&lt;Ellipse&gt;"/>
+  <path id="_Compound_Path_" class="cls-2" d="m24 1.5a20 20 0 1 0 20 20 20 20 0 0 0-20-20zm0 37a18.25 18.25 0 1 1 18.25-18.25 18.25 18.25 0 0 1-18.25 18.25z" data-name="&lt;Compound Path&gt;"/>
+  <ellipse class="cls-3" cx="24" cy="5.5" rx="6" ry="1.5" data-name="&lt;Ellipse&gt;"/>
+  <ellipse class="cls-4" cx="24" cy="45.5" rx="16" ry="1.5" data-name="&lt;Ellipse&gt;"/>
+  <circle class="cls-5" cx="24" cy="21.5" r="20" data-name="&lt;Ellipse&gt;"/>
+  <path id="_Path_" class="cls-6" d="m38.5 26.5c0 0.83-1.12 1.5-2.5 1.5s-2.5-0.67-2.5-1.5 1.12-1.5 2.5-1.5 2.5 0.67 2.5 1.5z" data-name="&lt;Path&gt;"/>
+  <path class="cls-6" d="m9.5 26.5c0 0.83 1.12 1.5 2.5 1.5s2.5-0.67 2.5-1.5-1.12-1.5-2.5-1.5-2.5 0.67-2.5 1.5z" data-name="&lt;Path&gt;"/>
+  <path class="cls-7" d="m14.5 20.5a1 1 0 1 1-1-1 1 1 0 0 1 1 1z" data-name="&lt;Path&gt;"/>
+  <path class="cls-7" d="m33.5 20.5a1 1 0 1 0 1-1 1 1 0 0 0-1 1z" data-name="&lt;Path&gt;"/>
+  <path class="cls-8" d="m24 38.5a10.9 10.9 0 0 0 11-9.17 1 1 0 0 0-0.31-0.84 1.12 1.12 0 0 0-0.91-0.27 61.58 61.58 0 0 1-19.54 0 1.12 1.12 0 0 0-0.91 0.27 1 1 0 0 0-0.31 0.84 10.9 10.9 0 0 0 10.98 9.17z" data-name="&lt;Path&gt;"/>
+  <path class="cls-9" d="m24 33.5a17.83 17.83 0 0 0-8.07 1.69 11.49 11.49 0 0 0 16.14 0 17.83 17.83 0 0 0-8.07-1.69z" data-name="&lt;Path&gt;"/>
+ </g>
+</svg>
