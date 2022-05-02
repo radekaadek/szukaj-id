@@ -66,6 +66,16 @@ ul{
 #attentionMessage{
     background-image: url(../static/clown.svg);
 }
+
 .timeIndicator{
     margin-left: 10px;
+}
+
+.rankContainer{
+    display:inline-block;
+}
+
+.tierImg{
+    height: 200PX;
+    WIDTH: auto;
 }
