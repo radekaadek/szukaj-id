@@ -62,6 +62,14 @@ class player:
         except:
             return [None for _ in range(5)]
 
+    def champions_with_most_games(self):
+        try:
+            lista = lol_watcher.champion_mastery.by_summoner(self.region, self.uzytkownik['id'])
+            lista.sort(key=lambda x: x['championPoints'], reverse=True)
+            return [lista[0]['championId'], lista[1]['championId'], lista[2]['championId']]
+        except:
+            return [None for _ in range(3)]
+
 
 # For Riot's API, the 404 status code indicates that the requested data wasn't found and
 # should be expected to occur in normal operation, as in the case of a an
