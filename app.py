@@ -1,4 +1,3 @@
-from ast import match_case
 from flask import Flask, render_template, request, redirect
 import league_of_legends as lol
 import steam, asyncio
@@ -49,7 +48,9 @@ async def search():
                             "losses":graczLOL.ranga()[4],
                             "tier":graczLOL.ranga()[0],
                             "rank":graczLOL.ranga()[1],
-                            "lp":graczLOL.ranga()[2]}
+                            "lp":graczLOL.ranga()[2],
+                            "gamequantity":None,
+                            "favgames":None}
             case False : zwrotLol = None
             case _: print("Za dużo zapytań")
 
