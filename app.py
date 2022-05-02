@@ -36,10 +36,13 @@ async def search():
 
     steamTask = asyncio.create_task(steam.checkSteam(nazwa_uzytkownika, steam_api_key))
 
-    if str(gracz_FORTNITE.player) == "the requested account's stats are not public":
-        zwrotFORTNITE = None
-    else:
-        print('a')
+    match str(gracz_FORTNITE.player):
+        case "the requested account's stats are not public":
+            zwrotFORTNITE = None
+        case "the requested account does not exist":
+            zwrotFORTNITE = None
+        case _:
+            zwrotFORTNITE = {}
 
     match graczLOL.czy_istnieje():
             case True : 

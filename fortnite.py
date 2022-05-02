@@ -36,4 +36,5 @@ class Gracz_fortnite:
     def last_played(self):
         return self.player['lastModified']
 
+print(Gracz_fortnite('rewrwerwerwerwer').player)
 
