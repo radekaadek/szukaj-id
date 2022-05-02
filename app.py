@@ -36,7 +36,7 @@ async def search():
 
     steamTask = asyncio.create_task(steam.checkSteam(nazwa_uzytkownika, steam_api_key))
 
-    if gracz_FORTNITE.player == "the requested account's stats are not public":
+    if str(gracz_FORTNITE.player) == "the requested account's stats are not public":
         zwrotFORTNITE = None
     else:
         print('a')
