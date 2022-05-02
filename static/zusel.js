@@ -36,6 +36,7 @@ async function avatar(input, newLI) {
     } else {
         profileAvatar.style.backgroundImage = "url(../static/happy_face.svg)";
     }
+
     profileAvatar.style.width = "180px";
     profileAvatar.style.backgroundSize = "180px 180px";
     profileAvatar.style.height = "180px";
@@ -95,6 +96,21 @@ async function newline(input) {
         level.classList.add("levelIndicator");
         newLI.appendChild(level);
     }
+
+    if (input.tier !== null && input.rank !== null){
+        const rankContainer = document.createElement('div')
+        const rankImg = document.createElement("img")
+        const rankSpan = document.createElement("span")
+
+        rankContainer.classList.add("rankContainer");
+        rankImg.src = `../static/lolranks/${input.tier}.png`;
+        rankImg.classList.add("tierImg");
+        rankSpan.innerText = input.tier + input.rank;
+
+        rankContainer.appendChild(rankImg)
+        rankContainer.appendChild(rankSpan)
+        newLI.appendChild(rankContainer)
+    }    
 
     return newLI;
 }
