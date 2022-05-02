@@ -44,33 +44,42 @@ function gamelist(games) {
 
 function newline(input) {
     const newLI = document.createElement("li");
-    const profileAvatar = document.createElement("a");
-    const profileLink = document.createElement("a");
-    const games = gamelist(input.favgames);
-    const level = document.createElement("span")
 
-    profileLink.innerText = input.personaname;
-    profileLink.href = input.url;
-    profileLink.classList.add("profileLink");
+    if (input.avatar !== null) {
+        const profileAvatar = document.createElement("a");
+        profileAvatar.classList.add("profileAvatar");
+        profileAvatar.style.backgroundImage = `url(${input.avatar})`;
+        profileAvatar.style.width = "180px";
+        profileAvatar.style.backgroundSize = "180px 180px";
+        profileAvatar.style.height = "180px";
+        profileAvatar.style.display = "inline-block";
+        profileAvatar.href = input.avatar;
+        newLI.appendChild(profileAvatar);
+    }
 
-    profileAvatar.classList.add("profileAvatar");
-    profileAvatar.style.backgroundImage = `url(${input.avatar})`;
-    profileAvatar.style.width = "180px";
-    profileAvatar.style.backgroundSize = "180px 180px";
-    profileAvatar.style.height = "180px";
-    profileAvatar.style.display = "inline-block";
-    profileAvatar.href = input.avatar;
+    if (input.url !== null && input.personaname !== null) {
+        const profileLink = document.createElement("a");
+        profileLink.innerText = input.personaname;
+        profileLink.href = input.url;
+        profileLink.classList.add("profileLink");
+        newLI.appendChild(profileLink);
+    }
 
-    level.innerText = input.level
-    level.classList.add("levelIndicator");
+    if (input.favgames !== null) {
+        const games = gamelist(input.favgames);
+        newLI.appendChild(games);
+    }
 
-    newLI.appendChild(profileAvatar);
-    newLI.appendChild(profileLink);
-    newLI.appendChild(games);
-    newLI.appendChild(level);
+    if (input.url !== null) {
+        const level = document.createElement("span");
+        level.innerText = input.level;
+        level.classList.add("levelIndicator");
+        newLI.appendChild(level);
+    }
 
     return newLI;
 }
+
 
 function crHtml(res) {
     const datalistContainerDiv = document.querySelector("body #datalists_contaier");
