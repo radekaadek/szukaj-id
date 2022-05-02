@@ -50,6 +50,7 @@ async def search():
                             "wins":graczLOL.wins(),
                             "losses":graczLOL.losses(),
                             "tier":graczLOL.tier(),
+                            "isLOL": True,
                             "rank":graczLOL.rank(),
                             "lp":graczLOL.league_points(),
                             "gamequantity":None,

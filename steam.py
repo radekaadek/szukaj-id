@@ -37,6 +37,7 @@ async def checkSteam(nazwa_uzytkownika, steam_api_key):
             "url": usersummary["profileurl"],
             "favgames": arrayToDictionary(steamgamesinfo[0:4]),
             "gamequantity": count_of_games,
+            "isLOL": False,
             "wins": None,
             "losses": None,
             "tier": None,
