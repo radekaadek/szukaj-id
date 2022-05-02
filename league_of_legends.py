@@ -23,7 +23,7 @@ class player:
         self.nazwa = nazwa
         self.region = region
         self.uzytkownik = zwroc_uzytkownika(self.region, self.nazwa)
-        if self.czy_istnieje():
+        if self.czy_istnieje() == True:
             lista = lol_watcher.league.by_summoner(self.region, self.uzytkownik['id'])    
         if 'lista' in locals():
             for element in lista:
