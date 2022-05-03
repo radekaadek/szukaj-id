@@ -1,4 +1,4 @@
-obramowka steama zmienia kolor na podstawie statusu: in game/online/offline - patialy done
+obramowka steama zmienia kolor na podstawie statusu: in game/online/offline - DONE
 czy ma range w lolu i to wyswietla DONE
 layout informacji ladny w css
 fortnite api
@@ -8,4 +8,4 @@ laduje staty tylko po 0.75s nie zmieniania tekstu lub gdy uzytkownik wcisnie ent
 tytul strony i krotki opis na gorze
 ustawienie kafelkami gier
 
-### wiesiek5monster - ranga w lolu   elyzy - fortnite    ninja - fortnite prywatne konto  janko - chłop w lolsu bez avataru
+### wiesiek5monster - ranga w lolsku   elyzy - fortnite    ninja - fortnite prywatne konto  janko - chłop w lolsku bez avataru
