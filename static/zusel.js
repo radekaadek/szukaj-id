@@ -134,14 +134,14 @@ async function newline(input) {
         newLI.appendChild(games);
     }
 
+    rankCreator(input, newLI); 
+
     if (input.url !== null) {
         const level = document.createElement("span");
         level.innerText = input.level;
         level.classList.add("levelIndicator");
         newLI.appendChild(level);
-    }
-
-    rankCreator(input, newLI);    
+    }   
 
     return newLI;
 }
