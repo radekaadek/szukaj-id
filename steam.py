@@ -31,6 +31,22 @@ async def checkSteam(nazwa_uzytkownika, steam_api_key):
         steamgamesinfo = steamgamesinfo["games"]
         steamgamesinfo.sort(key=sortkey, reverse=True)
 
+        match usersummary['personastate']:
+            case 0:
+                status = 0
+            case 1:
+                status = 1
+            case 2:
+                status = 2
+            case 3:
+                status = 2
+            case 4:
+                status = 2
+            case 5:
+                status = 1
+            case 6:
+                status = 1
+
         usersummary = {
             "avatar": usersummary["avatarfull"],
             "personaname": usersummary["personaname"],
@@ -43,6 +59,7 @@ async def checkSteam(nazwa_uzytkownika, steam_api_key):
             "tier": None,
             "rank": None,
             "k/d": None,
+            "status": status,
             "lp": None,
             "level": levelsteam["player_level"],
         }

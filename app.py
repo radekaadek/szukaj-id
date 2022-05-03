@@ -55,7 +55,8 @@ async def search():
                             "lp":graczLOL.league_points(),
                             "gamequantity":None,
                             "favgames":None,
-                            "k/d":None}
+                            "k/d":None,
+                            "status":None,}
             case False : zwrotLol = None
             case _: print("Za dużo zapytań")
 
