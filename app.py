@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 import league_of_legends as lol
 import steam, asyncio
 import fortnite as fn
@@ -27,43 +27,46 @@ def index():
 
 @app.route("/search", methods = ["POST", "GET"])
 async def search():
-    #nazwa z formularza
-    nazwa_uzytkownika = request.form["nazwa_uzytkownika"] 
+    if request.method == "POST":
+        #nazwa z formularza
+        nazwa_uzytkownika = request.form["nazwa_uzytkownika"] 
 
-    region_gracza = lol.zwroc_region('Europe Nordic & East')
-    graczLOL = lol.player(nazwa_uzytkownika, region_gracza)
-    gracz_FORTNITE = fn.Gracz_fortnite(nazwa_uzytkownika)
+        region_gracza = lol.zwroc_region('Europe Nordic & East')
+        graczLOL = lol.player(nazwa_uzytkownika, region_gracza)
+        gracz_FORTNITE = fn.Gracz_fortnite(nazwa_uzytkownika)
 
-    steamTask = asyncio.create_task(steam.checkSteam(nazwa_uzytkownika, steam_api_key))
+        steamTask = asyncio.create_task(steam.checkSteam(nazwa_uzytkownika, steam_api_key))
 
-    if str(gracz_FORTNITE.player) == "the requested account's stats are not public":
-        zwrotFORTNITE = None
+        if str(gracz_FORTNITE.player) == "the requested account's stats are not public":
+            zwrotFORTNITE = None
+        else:
+            print('a')
+
+        match graczLOL.czy_istnieje():
+                case True : 
+                    zwrotLol = {"avatar": graczLOL.avatar(),
+                                "personaname": graczLOL.link_do_profilu()['name1'],
+                                'url':graczLOL.link_do_profilu()['link'],
+                                "level":graczLOL.poziom(),
+                                "wins":graczLOL.wins(),
+                                "losses":graczLOL.losses(),
+                                "tier":graczLOL.tier(),
+                                "isLOL": True,
+                                "rank":graczLOL.rank(),
+                                "lp":graczLOL.league_points(),
+                                "gamequantity":None,
+                                "favgames":None,
+                                "k/d":None}
+                case False : zwrotLol = None
+                case _: print("Za dużo zapytań")
+
+        zwrot = {"steam":await steamTask, "lol":zwrotLol} 
+        
+        if czy_wszystko_none(zwrot):
+            return 'ZAMKOR'
+        else: return zwrot
     else:
-        print('a')
-
-    match graczLOL.czy_istnieje():
-            case True : 
-                zwrotLol = {"avatar": graczLOL.avatar(),
-                            "personaname": graczLOL.link_do_profilu()['name1'],
-                            'url':graczLOL.link_do_profilu()['link'],
-                            "level":graczLOL.poziom(),
-                            "wins":graczLOL.wins(),
-                            "losses":graczLOL.losses(),
-                            "tier":graczLOL.tier(),
-                            "isLOL": True,
-                            "rank":graczLOL.rank(),
-                            "lp":graczLOL.league_points(),
-                            "gamequantity":None,
-                            "favgames":None,
-                            "k/d":None}
-            case False : zwrotLol = None
-            case _: print("Za dużo zapytań")
-
-    zwrot = {"steam":await steamTask, "lol":zwrotLol} 
-    
-    if czy_wszystko_none(zwrot):
-        return 'ZAMKOR'
-    else: return zwrot
+        return redirect("/")
 
 @app.route('/<piotr>', methods = ['GET', 'POST'])
 def strona(piotr):

@@ -2,7 +2,7 @@ from riotwatcher import LolWatcher, ApiError
 
 #dokumentacja: https://riot-watcher.readthedocs.io/en/latest/index.html
 
-riot_api_key = 'RGAPI-734283e5-0654-41c0-a79a-e0dc6a7835bc'
+riot_api_key = 'RGAPI-9f065bfe-f86f-4d28-aaf8-1cdcf4bc4d76'
 lol_watcher = LolWatcher(riot_api_key)
 
 regiony = {'Brasil': 'BR1', 'Europe Nordic & East': 'EUN1', 'Europe West': 'EUW1', 'Japan': 'JP1', 'Korea': 'KR', 'Latin America North': 'LA1', 'Latin America South': 'LA2', 'North America': 'NA1', 'Oceania': 'OC1', 'Russia': 'RU', 'Turkey': 'TR1'}

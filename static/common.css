@@ -4,8 +4,11 @@ html{
 }
 
 h1{
-    text-align: center;
     color: rgb(238, 116, 94);
+}
+
+img{
+    height: 50px;
 }
 
 .profileLink {
