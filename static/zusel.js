@@ -69,10 +69,22 @@ async function avatar(input, newLI) {
         profileAvatar.style.backgroundImage = "url(../static/happy_face.svg)";
     }
 
-    profileAvatar.style.width = "180px";
-    profileAvatar.style.backgroundSize = "180px 180px";
-    profileAvatar.style.height = "180px";
-    profileAvatar.style.display = "inline-block";
+    profileAvatar.classList.add("avatarBorder");
+
+    switch (input.status) {
+        case 1:
+            profileAvatar.classList.add("online");
+            break;
+        case 0:
+            profileAvatar.classList.add("offline");
+            break;
+        case 2:
+            profileAvatar.classList.add("busy");
+            break;
+        default:
+            profileAvatar.classList.remove("avatarBorder");
+    }
+    
     newLI.appendChild(profileAvatar);
 }
 
@@ -122,14 +134,14 @@ async function newline(input) {
         newLI.appendChild(games);
     }
 
+    rankCreator(input, newLI); 
+
     if (input.url !== null) {
         const level = document.createElement("span");
         level.innerText = input.level;
         level.classList.add("levelIndicator");
         newLI.appendChild(level);
-    }
-
-    rankCreator(input, newLI);    
+    }   
 
     return newLI;
 }
@@ -142,8 +154,16 @@ async function crHtml(res) {
         if (res[d] == null) {
             continue;
         }
+        const logo = document.createElement("img");
         const newLine = await newline(res[d]);
+
         newLine.id = d + "Line";
+        logo.id = d + "Logo";
+        newLine.classList.add("platformLine");
+        logo.classList.add("platformLogo");
+        logo.src = `../static/${d}_icon.svg`;
+
+        newLine.appendChild(logo);
         newUL.appendChild(newLine);
     }
     datalistContainerDiv.appendChild(newUL);
