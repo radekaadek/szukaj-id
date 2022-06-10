@@ -27,4 +27,4 @@ def dane(username) -> dict:
     return {'status': player_status, 'last_seen': last_seen, 'aliases': aliases}
 
 
-dane(username)
+print(dane(username))
