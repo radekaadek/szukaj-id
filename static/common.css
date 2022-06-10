@@ -8,6 +8,10 @@ h1 {
     color: rgb(238, 116, 94);
 }
 
+img{
+    height: 50px;
+}
+
 .profileLink {
     color: rgb(204, 92, 92);
     text-decoration: none;
