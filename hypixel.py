@@ -5,10 +5,12 @@ from base64 import b64decode
 hypixel_url = 'https://api.hypixel.net'
 hypixel_api_key = '36da01f0-28b9-4bc1-9c33-d24c57f55399'
 mojang_url = 'https://api.mojang.com/users/profiles/minecraft/'
-mojang_skin_url = 'https://sessionserver.mojang.com/session/minecraft/profile' #uuid
+mojang_skin_url = 'https://sessionserver.mojang.com/session/minecraft/profile' #/uuid
 
 username = 'radekaadek'
 
+#mojang api docs: https://wiki.vg/Mojang_API
+#hypixel api docs: https://api.hypixel.net/#tag/Player-Data/paths/~1player/get
 
 # returns a players default skin name if they have one
 # credit: https://github.com/crafatar/crafatar/blob/9d2fe0c45424de3ebc8e0b10f9446e7d5c3738b2/lib/skins.js#L90-L108
@@ -28,8 +30,8 @@ def default_skin(uuid) -> str:
 
 
 
-# returns a dict of data from the api
-def faster(route, uuid) -> dict:
+# returns a dict of data from hypixels api
+def request_pipeline(route, uuid) -> dict:
     PARAMS = {'key': hypixel_api_key, 'uuid': uuid}
     faster_json = requests.get(hypixel_url + '/' + route, params=PARAMS)
     faster_data = faster_json.json()
@@ -41,8 +43,8 @@ def faster(route, uuid) -> dict:
 def dane(username) -> dict:
     uuid = requests.get(f'{mojang_url}{username}').json()['id']
     #hypixel data
-    player_status = faster('status', uuid)['session']['online']
-    stats = faster('player', uuid)
+    player_status = request_pipeline('status', uuid)['session']['online']
+    stats = request_pipeline('player', uuid)
     try:
         rank = stats['player']['rank']
     except:
@@ -70,7 +72,7 @@ def dane(username) -> dict:
             skin_url = 'https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/4b/Alex_%28texture%29_JE1_BE1.png/revision/latest?cb=20201025200833'
         else:
             skin_url = 'https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d1/Steve_%28texture%29_JE4_BE2.png/revision/latest?cb=20210509095344'
-    return {'status': player_status, 'last_seen': last_seen, 'aliases': aliases, 'rank': rank,'default_skin': default_skin, 'skin_url': skin_url}
+    return {'online_status': player_status, 'last_seen': last_seen, 'aliases': aliases, 'rank': rank,'default_skin': default_skin, 'skin_url': skin_url}
 
 
 print(dane(username))
