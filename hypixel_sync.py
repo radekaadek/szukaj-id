@@ -1,5 +1,4 @@
 import requests
-import asyncio
 from ast import literal_eval
 from base64 import b64decode
 
@@ -15,7 +14,7 @@ username = 'radekaadek'
 
 # returns a players default skin name if they have one
 # credit: https://github.com/crafatar/crafatar/blob/9d2fe0c45424de3ebc8e0b10f9446e7d5c3738b2/lib/skins.js#L90-L108
-async def default_skin(uuid) -> str:
+def default_skin(uuid) -> str:
     if (len(uuid)<= 16):
         return 'steve'
     lsbs_even = (
@@ -32,16 +31,15 @@ async def default_skin(uuid) -> str:
 
 
 # returns a dict of data from hypixels api
-async def request_pipeline(route, uuid) -> dict:
+def request_pipeline(route, uuid) -> dict:
     PARAMS = {'key': hypixel_api_key, 'uuid': uuid}
     faster_json = requests.get(hypixel_url + '/' + route, params=PARAMS)
     faster_data = faster_json.json()
     return faster_data
 
-async def hypixel_data(uuid) -> dict:
-    status_response = await request_pipeline('status', uuid)
-    player_status = status_response['session']['online']
-    stats = await request_pipeline('player', uuid)
+def hypixel_data(uuid) -> dict:
+    player_status = request_pipeline('status', uuid)['session']['online']
+    stats = request_pipeline('player', uuid)
     try:
         rank = stats['player']['rank']
     except:
@@ -56,9 +54,9 @@ async def hypixel_data(uuid) -> dict:
         last_seen = 'ZAMKOR'
     return {'online_status': player_status, 'last_seen': last_seen, 'aliases': aliases, 'rank': rank}
 
-async def mojang_data(uuid) -> dict:
-    raw_data = requests.get(f'{mojang_skin_url}/{uuid}').json()
-    decoded_string = b64decode(raw_data['properties'][0]['value']).decode('utf-8')
+def mojang_data(uuid) -> dict:
+    mojang_data = requests.get(f'{mojang_skin_url}/{uuid}').json()
+    decoded_string = b64decode(mojang_data['properties'][0]['value']).decode('utf-8')
     default_skin = False
     try:
         skin_url = literal_eval(decoded_string)['textures']['SKIN']['url']
@@ -73,13 +71,13 @@ async def mojang_data(uuid) -> dict:
 # rank, aliases last_seen values can be 'ZAMKOR' if not found,
 # this depends on the age of a players account
 # if the skin is default, it will return 'default': True, in this case the skin has a diffrent size
-async def dane(username) -> dict:
+def dane(username) -> dict:
     uuid = requests.get(f'{mojang_url}{username}').json()['id']
     #hypixel data
-    player_data = await hypixel_data(uuid)
+    player_data = hypixel_data(uuid)
     #skin
-    skin_data = await mojang_data(uuid)
+    skin_data = mojang_data(uuid)
     return player_data | skin_data
 
-if __name__ == '__main__':
-    asyncio.run(dane(username))
+
+print(dane(username))
