@@ -37,21 +37,13 @@ def request_pipeline(route, uuid) -> dict:
     faster_data = faster_json.json()
     return faster_data
 
-# rank, aliases last_seen values can be 'ZAMKOR' if not found,
-# this depends on the age of a players account
-# if the skin is default, it will return 'default': True, in this case the skin has a diffrent size
-def dane(username) -> dict:
-    uuid = requests.get(f'{mojang_url}{username}').json()['id']
-    #hypixel data
+def hypixel_data(uuid) -> dict:
     player_status = request_pipeline('status', uuid)['session']['online']
     stats = request_pipeline('player', uuid)
     try:
         rank = stats['player']['rank']
     except:
         rank = 'ZAMKOR'
-    # print(stats['player'])
-    # for key, value in stats['player'].items() :
-    #     print(f'{key} {value}')
     try:
         aliases = stats['player']['knownAliases']
     except:
@@ -60,7 +52,9 @@ def dane(username) -> dict:
         last_seen = stats['player']['lastLogout']
     except:
         last_seen = 'ZAMKOR'
-    #skin
+    return {'online_status': player_status, 'last_seen': last_seen, 'aliases': aliases, 'rank': rank}
+
+def mojang_data(uuid) -> dict:
     mojang_data = requests.get(f'{mojang_skin_url}/{uuid}').json()
     decoded_string = b64decode(mojang_data['properties'][0]['value']).decode('utf-8')
     default_skin = False
@@ -72,7 +66,18 @@ def dane(username) -> dict:
             skin_url = 'https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/4b/Alex_%28texture%29_JE1_BE1.png/revision/latest?cb=20201025200833'
         else:
             skin_url = 'https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d1/Steve_%28texture%29_JE4_BE2.png/revision/latest?cb=20210509095344'
-    return {'online_status': player_status, 'last_seen': last_seen, 'aliases': aliases, 'rank': rank,'default_skin': default_skin, 'skin_url': skin_url}
+    return {'default_skin': default_skin, 'skin_url': skin_url}
+
+# rank, aliases last_seen values can be 'ZAMKOR' if not found,
+# this depends on the age of a players account
+# if the skin is default, it will return 'default': True, in this case the skin has a diffrent size
+def dane(username) -> dict:
+    uuid = requests.get(f'{mojang_url}{username}').json()['id']
+    #hypixel data
+    player_data = hypixel_data(uuid)
+    #skin
+    skin_data = mojang_data(uuid)
+    return player_data | skin_data
 
 
 print(dane(username))
