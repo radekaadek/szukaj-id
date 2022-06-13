@@ -20,12 +20,11 @@ async def dane(username, platform='epic') -> dict:
             json_response = await response.json()
             if json_response['status'] == 403:
                 # players account stats are private
-                return {'error': 'PRIVATE'}
+                return {'error': 'PRIVATE', 'name': 'ZAMKOR', 'raw_data': 'ZAMKOR'}
             if json_response['status'] == 404:
                 # player not found
-                return {'error': 'NOT_FOUND', 'name': '', 'raw_data': ''}
+                return {'error': 'NOT_FOUND', 'name': 'ZAMKOR', 'raw_data': 'ZAMKOR'}
             name = json_response['data']['account']['name']
-    print({'error': 'OK', 'name': name, 'raw_data': json_response['data']['account']})
     return {'error': 'OK', 'name': name, 'raw_data': json_response['data']['account']}
     
 
