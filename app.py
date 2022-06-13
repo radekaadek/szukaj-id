@@ -15,12 +15,6 @@ def czy_wszystko_none(dane):
     return True
 
 
-def czy_wszystko_none(dane):
-    for i in dane:
-        if dane[i] != None:
-            return False
-    return True
-
 @app.route("/")
 def index():
     return render_template("home.html")

@@ -1,5 +1,4 @@
-import http3 as requests
-import asyncio
+import requests
 from ast import literal_eval
 from base64 import b64decode
 
@@ -29,30 +28,30 @@ def default_skin(uuid) -> str:
     else:
         return 'steve'
 
-# async def run_sequence(*functions: Awaitable[Any]) -> None:
-#     for function in functions:
-#         await function
-
-# async def run_parallel(*functions: Awaitable[Any]) -> None:
-#     await asyncio.gather(*functions)
 
 
 # returns a dict of data from hypixels api
-async def request_pipeline(route, uuid) -> dict:
+def request_pipeline(route, uuid) -> dict:
     PARAMS = {'key': hypixel_api_key, 'uuid': uuid}
-    faster_api_response = await requests.get(hypixel_url + '/' + route, params=PARAMS)
-    faster_json_response = faster_api_response.json()
-    return faster_json_response
+    faster_json = requests.get(hypixel_url + '/' + route, params=PARAMS)
+    faster_data = faster_json.json()
+    return faster_data
 
 # rank, aliases last_seen values can be 'ZAMKOR' if not found,
 # this depends on the age of a players account
-async def hypixel_data(uuid) -> dict:
+# if the skin is default, it will return 'default': True, in this case the skin has a diffrent size
+def dane(username) -> dict:
+    uuid = requests.get(f'{mojang_url}{username}').json()['id']
+    #hypixel data
     player_status = request_pipeline('status', uuid)['session']['online']
     stats = request_pipeline('player', uuid)
     try:
         rank = stats['player']['rank']
     except:
         rank = 'ZAMKOR'
+    # print(stats['player'])
+    # for key, value in stats['player'].items() :
+    #     print(f'{key} {value}')
     try:
         aliases = stats['player']['knownAliases']
     except:
@@ -61,10 +60,7 @@ async def hypixel_data(uuid) -> dict:
         last_seen = stats['player']['lastLogout']
     except:
         last_seen = 'ZAMKOR'
-    return {'online_status': player_status, 'last_seen': last_seen, 'aliases': aliases, 'rank': rank}
-
-# if the skin is default, it will return 'default': True, in this case the skin has a diffrent size
-async def mojang_data(uuid) -> dict:
+    #skin
     mojang_data = requests.get(f'{mojang_skin_url}/{uuid}').json()
     decoded_string = b64decode(mojang_data['properties'][0]['value']).decode('utf-8')
     default_skin = False
@@ -76,19 +72,7 @@ async def mojang_data(uuid) -> dict:
             skin_url = 'https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/4b/Alex_%28texture%29_JE1_BE1.png/revision/latest?cb=20201025200833'
         else:
             skin_url = 'https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d1/Steve_%28texture%29_JE4_BE2.png/revision/latest?cb=20210509095344'
-    return {'default_skin': default_skin, 'skin_url': skin_url}
+    return {'online_status': player_status, 'last_seen': last_seen, 'aliases': aliases, 'rank': rank,'default_skin': default_skin, 'skin_url': skin_url}
 
 
-async def dane(username) -> dict:
-    uuid_response = await requests.get(f'{mojang_url}{username}')
-    uuid = await uuid_response.json()['id']
-    #hypixel data
-    player_data = await hypixel_data(uuid)
-    #skin
-    skin_data = await mojang_data(uuid)
-    print(player_data | skin_data)
-    return player_data | skin_data
-
-
-if __name__ == '__main__':
-    asyncio.run(dane(username))
+print(dane(username))
