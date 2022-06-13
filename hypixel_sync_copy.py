@@ -1,3 +1,4 @@
+import aiohttp
 import requests
 import asyncio
 from ast import literal_eval
@@ -32,16 +33,15 @@ async def default_skin(uuid) -> str:
 
 
 # returns a dict of data from hypixels api
-async def request_pipeline(route, uuid) -> dict:
+async def request_pipeline(session, route, uuid) -> dict:
     PARAMS = {'key': hypixel_api_key, 'uuid': uuid}
-    faster_json = requests.get(hypixel_url + '/' + route, params=PARAMS)
-    faster_data = faster_json.json()
-    return faster_data
+    async with session.get(hypixel_url + '/' + route, params=PARAMS) as response:
+        return await response.json()
 
-async def hypixel_data(uuid) -> dict:
-    status_response = await request_pipeline('status', uuid)
+async def hypixel_data(session, uuid) -> dict:
+    status_response = await request_pipeline(session, 'status', uuid)
+    stats = await request_pipeline(session, 'player', uuid)
     player_status = status_response['session']['online']
-    stats = await request_pipeline('player', uuid)
     try:
         rank = stats['player']['rank']
     except:
@@ -56,8 +56,9 @@ async def hypixel_data(uuid) -> dict:
         last_seen = 'ZAMKOR'
     return {'online_status': player_status, 'last_seen': last_seen, 'aliases': aliases, 'rank': rank}
 
-async def mojang_data(uuid) -> dict:
-    raw_data = requests.get(f'{mojang_skin_url}/{uuid}').json()
+async def mojang_data(session, uuid) -> dict:
+    async with session.get(f'{mojang_skin_url}/{uuid}') as response:
+        raw_data = await response.json()
     decoded_string = b64decode(raw_data['properties'][0]['value']).decode('utf-8')
     default_skin = False
     try:
@@ -74,12 +75,15 @@ async def mojang_data(uuid) -> dict:
 # this depends on the age of a players account
 # if the skin is default, it will return 'default': True, in this case the skin has a diffrent size
 async def dane(username) -> dict:
-    uuid = requests.get(f'{mojang_url}{username}').json()['id']
-    #hypixel data
-    player_data = await hypixel_data(uuid)
-    #skin
-    skin_data = await mojang_data(uuid)
-    return player_data | skin_data
+    async with aiohttp.ClientSession() as session:
+        uuid = requests.get(f'{mojang_url}{username}').json()['id']
+        #hypixel data
+        player_data = await hypixel_data(session, uuid)
+        #skin
+        skin_data = await mojang_data(session, uuid)
+        print(player_data | skin_data)
+        return player_data | skin_data
 
 if __name__ == '__main__':
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     asyncio.run(dane(username))
