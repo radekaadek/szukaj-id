@@ -10,18 +10,21 @@ fortnite_api_website = 'https://fortnite-api.com/v2/stats/br/v2'
 #.raw_data['all']['overall']['kd']
 #'ninja' - niepubliczny
 
-async def dane(username, platform='epic') -> dict:
-    async with aiohttp.ClientSession() as session:
-        params = {'accountType': platform, 'name': username}
-        headers = {'Authorization': fortnite_api_key}
-        async with session.get(fortnite_api_website, params=params, headers=headers) as response:
-            json_response = await response.json()
-            if json_response['status'] == 403:
-                # players account stats are private
-                return {'error': 'PRIVATE', 'name': 'ZAMKOR'}
-            if json_response['status'] == 404:
-                # player not found
-                return {'error': 'NOT_FOUND', 'name': 'ZAMKOR'}
-            name = json_response['data']['account']['name']     
-    return {'error': 'OK', 'name': name}
+async def dane(username, session, platform='epic') -> dict:
+    params = {'accountType': platform, 'name': username}
+    headers = {'Authorization': fortnite_api_key}
+    async with session.get(fortnite_api_website, params=params, headers=headers) as response:
+        json_response = await response.json()
+        if json_response['status'] == 403:
+            # players account stats are private
+            return {'error': 'PRIVATE'}
+        if json_response['status'] == 404:
+            # player not found
+            return {'error': 'NOT_FOUND'}
+        name = json_response['data']['account']['name']
+        game_data = json_response['data']['stats']['all']['overall']     
+        minutesPlayed = game_data['minutesPlayed']
+        wins = game_data['wins']
+        lastPlayed = game_data['lastModified']
+    return {'error': 'OK', 'name': name, 'minutesPlayed': minutesPlayed, 'wins': wins, 'lastPlayed': lastPlayed}
     

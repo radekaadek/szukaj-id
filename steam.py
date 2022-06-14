@@ -3,14 +3,13 @@ import operator
 
 sortkey = operator.itemgetter("playtime_forever")
 
-
 def arrayToDictionary(arrlist):
     arrlistkeys = dict.fromkeys(range(1, len(arrlist)))
     arrlist = dict(zip(arrlistkeys, arrlist))
     return arrlist
 
 
-async def checkSteam(nazwa_uzytkownika, steam_api_key):
+async def checkSteam(nazwa_uzytkownika, steam_api_key, session):
     # dokumentacja: https://pypi.org/project/steamwebapi/
     # deklaracje głównych interfejsów API steam
     try:

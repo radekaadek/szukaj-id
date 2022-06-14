@@ -72,12 +72,11 @@ async def mojang_data(session, uuid) -> dict:
 # rank, aliases last_seen values can be 'False' if not found,
 # this depends on the age of a players account
 # if the skin is default, it will return 'default': True, in this case the skin has a diffrent size
-async def dane(username) -> dict:
-    async with aiohttp.ClientSession() as session:
-        uuid = requests.get(f'{mojang_url}{username}').json()['id']
-        #hypixel data
-        player_data = await hypixel_data(session, uuid)
-        #skin
-        skin_data = await mojang_data(session, uuid)
-        return player_data | skin_data
+async def dane(username, session) -> dict:
+    uuid = requests.get(f'{mojang_url}{username}').json()['id']
+    #hypixel data
+    player_data = await hypixel_data(session, uuid)
+    #skin
+    skin_data = await mojang_data(session, uuid)
+    return player_data | skin_data 
 
