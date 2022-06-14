@@ -13,14 +13,19 @@ def arrayToDictionary(arrlist):
 async def checkSteam(nazwa_uzytkownika, steam_api_key):
     # dokumentacja: https://pypi.org/project/steamwebapi/
     # deklaracje głównych interfejsów API steam
-    steamuserinfo = ISteamUser(steam_api_key=steam_api_key)
-    steamplayerinfo = IPlayerService(steam_api_key=steam_api_key)
-    steamstatsinfo = ISteamUserStats(steam_api_key=steam_api_key)
+    try:
+        steamuserinfo = ISteamUser(steam_api_key=steam_api_key)
+        steamplayerinfo = IPlayerService(steam_api_key=steam_api_key)
+        steamstatsinfo = ISteamUserStats(steam_api_key=steam_api_key)
+    except:
+        return {'error': 'API_KEY_ERROR'}
 
     try:
         # api request by pozyskać steam ID
         steamid = steamuserinfo.resolve_vanity_url(str(nazwa_uzytkownika), format="json")["response"]["steamid"]
-
+    except:
+        return {'error': 'USERNAME_ERROR'}
+    try:
         # api request by pozyskać dane w obiektach
         steamgamesinfo = steamplayerinfo.get_owned_games(steamid, format="json")["response"]
         usersummary = steamuserinfo.get_player_summaries(steamid, format="json")["response"]["players"][0]
@@ -58,4 +63,4 @@ async def checkSteam(nazwa_uzytkownika, steam_api_key):
         }
         return usersummary
     except:
-        return None
+        return {'error': 'USERNAME_ERROR'}
