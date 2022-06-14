@@ -3,6 +3,11 @@ html {
     min-height: 100%;
 }
 
+h1 {
+    text-align: center;
+    color: rgb(238, 116, 94);
+}
+
 #centerContainer {
     margin-top: 20px;
     margin-right: auto;
