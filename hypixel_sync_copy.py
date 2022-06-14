@@ -73,7 +73,10 @@ async def mojang_data(session, uuid) -> dict:
 # this depends on the age of a players account
 # if the skin is default, it will return 'default': True, in this case the skin has a diffrent size
 async def dane(username, session) -> dict:
-    uuid = requests.get(f'{mojang_url}{username}').json()['id']
+    try:
+        uuid = requests.get(f'{mojang_url}{username}').json()['id']
+    except:
+        return {'error': 'NOT_FOUND'}
     #hypixel data
     player_data = await hypixel_data(session, uuid)
     #skin

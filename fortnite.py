@@ -1,3 +1,4 @@
+import json
 import aiohttp
 import asyncio
 
@@ -5,9 +6,6 @@ fortnite_api_key = 'b4dab92b-ac98-4d0f-8cc9-5e2bc93de384'
 fortnite_api_website = 'https://fortnite-api.com/v2/stats/br/v2'
 
 #dokumentacja: https://dash.fortnite-api.com/endpoints/stats
-#['image_url', 'raw_data', 'stats', 'user']
-#[26:]
-#.raw_data['all']['overall']['kd']
 #'ninja' - niepubliczny
 
 async def dane(username, session, platform='epic') -> dict:
@@ -15,16 +13,23 @@ async def dane(username, session, platform='epic') -> dict:
     headers = {'Authorization': fortnite_api_key}
     async with session.get(fortnite_api_website, params=params, headers=headers) as response:
         json_response = await response.json()
-        if json_response['status'] == 403:
-            # players account stats are private
-            return {'error': 'PRIVATE'}
-        if json_response['status'] == 404:
-            # player not found
-            return {'error': 'NOT_FOUND'}
+        match json_response['status']:
+            case 403:
+                # players account stats are private
+                return {'error': 'PRIVATE'}
+            case 404:
+                # player not found
+                return {'error': 'NOT_FOUND'}
+            case 400:
+                return {'error': 'BAD_REQUEST'}
         name = json_response['data']['account']['name']
+        bp_level = json_response['data']['battlePass']['level']
         game_data = json_response['data']['stats']['all']['overall']     
-        minutesPlayed = game_data['minutesPlayed']
+        hoursPlayed = game_data['minutesPlayed']//60
         wins = game_data['wins']
         lastPlayed = game_data['lastModified']
-    return {'error': 'OK', 'name': name, 'minutesPlayed': minutesPlayed, 'wins': wins, 'lastPlayed': lastPlayed}
+    if lastPlayed == '1970-01-01T00:00:00Z' or not hoursPlayed:
+        return {'error': 'NOT_FOUND'}
+
+    return {'error': 'OK', 'name': name, 'hoursPlayed': hoursPlayed, 'wins': wins, 'lastPlayed': lastPlayed, 'battlepassLevel': bp_level}
     

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect
-import league_of_legends as lol
 import steam, asyncio, aiohttp
+import league_of_legends as lol
 import fortnite as fn
 import hypixel_sync_copy as hyp
 

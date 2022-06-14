@@ -23,7 +23,7 @@ async def checkSteam(nazwa_uzytkownika, steam_api_key, session):
         # api request by pozyskać steam ID
         steamid = steamuserinfo.resolve_vanity_url(str(nazwa_uzytkownika), format="json")["response"]["steamid"]
     except:
-        return {'error': 'USERNAME_ERROR'}
+        return {'error': 'NOT_FOUND'}
     try:
         # api request by pozyskać dane w obiektach
         steamgamesinfo = steamplayerinfo.get_owned_games(steamid, format="json")["response"]
@@ -38,18 +38,10 @@ async def checkSteam(nazwa_uzytkownika, steam_api_key, session):
         match usersummary['personastate']:
             case 0:
                 status = 0
-            case 1:
+            case 1 | 5 | 6:
                 status = 1
-            case 2:
+            case 2 | 3 | 4:
                 status = 2
-            case 3:
-                status = 2
-            case 4:
-                status = 2
-            case 5:
-                status = 1
-            case 6:
-                status = 1
 
         usersummary = {
             "avatar": usersummary["avatarfull"],
@@ -62,4 +54,4 @@ async def checkSteam(nazwa_uzytkownika, steam_api_key, session):
         }
         return usersummary
     except:
-        return {'error': 'USERNAME_ERROR'}
+        return {'error': 'NOT_FOUND'}
