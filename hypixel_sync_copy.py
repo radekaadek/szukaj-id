@@ -9,8 +9,6 @@ hypixel_api_key = '36da01f0-28b9-4bc1-9c33-d24c57f55399'
 mojang_url = 'https://api.mojang.com/users/profiles/minecraft/'
 mojang_skin_url = 'https://sessionserver.mojang.com/session/minecraft/profile' #/uuid
 
-username = 'radekaadek'
-
 #mojang api docs: https://wiki.vg/Mojang_API
 #hypixel api docs: https://api.hypixel.net/#tag/Player-Data/paths/~1player/get
 
@@ -45,15 +43,15 @@ async def hypixel_data(session, uuid) -> dict:
     try:
         rank = stats['player']['rank']
     except:
-        rank = 'ZAMKOR'
+        rank = False
     try:
         aliases = stats['player']['knownAliases']
     except:
-        aliases = 'ZAMKOR'
+        aliases = False
     try:
         last_seen = stats['player']['lastLogout']
     except:
-        last_seen = 'ZAMKOR'
+        last_seen = False
     return {'online_status': player_status, 'last_seen': last_seen, 'aliases': aliases, 'rank': rank}
 
 async def mojang_data(session, uuid) -> dict:
@@ -71,7 +69,7 @@ async def mojang_data(session, uuid) -> dict:
             skin_url = 'https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d1/Steve_%28texture%29_JE4_BE2.png/revision/latest?cb=20210509095344'
     return {'default_skin': default_skin, 'skin_url': skin_url}
 
-# rank, aliases last_seen values can be 'ZAMKOR' if not found,
+# rank, aliases last_seen values can be 'False' if not found,
 # this depends on the age of a players account
 # if the skin is default, it will return 'default': True, in this case the skin has a diffrent size
 async def dane(username) -> dict:
@@ -84,6 +82,3 @@ async def dane(username) -> dict:
         print(player_data | skin_data)
         return player_data | skin_data
 
-if __name__ == '__main__':
-    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    asyncio.run(dane(username))
