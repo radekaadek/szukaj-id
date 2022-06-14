@@ -41,6 +41,7 @@ h1 {
     background-size: 50px;
     background-repeat: no-repeat;
     background-position: center;
+    display: inline-block;
 }
 
 .profileAvatar {
