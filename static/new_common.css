@@ -12,7 +12,7 @@ html {
     height: auto;
 }
 
-.type-3 {
+#poleTxt {
     font-size: 16px;
     font-weight: 300;
     color: #333;
@@ -29,8 +29,13 @@ html {
     cursor: auto;
   }
 
-img{
+#GitHubLink{
+    background-image: url(../static/github.svg);
     height: 50px;
+    width: 50px;
+    background-size: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .profileAvatar {
