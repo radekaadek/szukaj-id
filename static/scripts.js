@@ -1,5 +1,7 @@
-document.querySelector('#poleTxt').addEventListener('keypress', function (e) {
+$(document).ready(()=>{
+    document.querySelector('#poleTxt').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-      window.location.replace('../' + $("#livebox").val())
+      window.location.replace('../' + $("#poleTxt").val())
     }
+});
 });
