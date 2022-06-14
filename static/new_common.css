@@ -3,7 +3,7 @@ html {
     min-height: 100%;
 }
 
-.type-3-container {
+#centerContainer {
     margin-top: 20px;
     margin-right: auto;
     margin-bottom: 0;
@@ -27,9 +27,9 @@ html {
     width: 500px;
     padding: 15px;
     cursor: auto;
-  }
+}
 
-#GitHubLink{
+#githubLink {
     background-image: url(../static/github.svg);
     height: 50px;
     width: 50px;
@@ -45,7 +45,7 @@ html {
     display: inline-block;
 }
 
-.avatarBorder{
+.avatarBorder {
     border: solid 5px;
 }
 
