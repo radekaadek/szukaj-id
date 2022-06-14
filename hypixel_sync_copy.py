@@ -9,6 +9,8 @@ hypixel_api_key = '36da01f0-28b9-4bc1-9c33-d24c57f55399'
 mojang_url = 'https://api.mojang.com/users/profiles/minecraft/'
 mojang_skin_url = 'https://sessionserver.mojang.com/session/minecraft/profile' #/uuid
 
+# api do glowy: https://mc-heads.net
+
 #mojang api docs: https://wiki.vg/Mojang_API
 #hypixel api docs: https://api.hypixel.net/#tag/Player-Data/paths/~1player/get
 
