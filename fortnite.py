@@ -1,6 +1,8 @@
-import fortnite_api
+import aiohttp
+import asyncio
 
-api = fortnite_api.FortniteAPI('b4dab92b-ac98-4d0f-8cc9-5e2bc93de384')
+fortnite_api_key = 'b4dab92b-ac98-4d0f-8cc9-5e2bc93de384'
+fortnite_api_website = 'https://fortnite-api.com/v2/stats/br/v2'
 
 #dokumentacja: https://dash.fortnite-api.com/endpoints/stats
 #['image_url', 'raw_data', 'stats', 'user']
@@ -8,39 +10,24 @@ api = fortnite_api.FortniteAPI('b4dab92b-ac98-4d0f-8cc9-5e2bc93de384')
 #.raw_data['all']['overall']['kd']
 #'ninja' - niepubliczny
 
+username = 'radekaadek'
 
-# print(api.stats.fetch_by_name('elyzy').raw_data)
-
-
-class Gracz_fortnite:
-    def __init__(self, username, platform='epic'):
-        self.username = username
-        self.platform = platform
-        try:
-            self.player_base = api.stats.fetch_by_name(username).raw_data
-            self.player = self.player_base['stats']['all']['overall']
-        except Exception as error:
-            # print(type(error))
-            # print(error)
-            self.player_base = error
-            self.player = error
-            
-
-    def player_name(self):
-        return self.player_base['account']['name']
-
-    def battle_pass_level(self):
-        return self.player_base['battlePass']['level']
-
-    def kd(self):
-        return self.player['kd']
+async def dane(username, platform='epic') -> dict:
+    async with aiohttp.ClientSession() as session:
+        params = {'accountType': platform, 'name': username}
+        headers = {'Authorization': fortnite_api_key}
+        async with session.get(fortnite_api_website, params=params, headers=headers) as response:
+            json_response = await response.json()
+            if json_response['status'] == 403:
+                # players account stats are private
+                return {'error': 'PRIVATE', 'name': 'ZAMKOR', 'raw_data': 'ZAMKOR'}
+            if json_response['status'] == 404:
+                # player not found
+                return {'error': 'NOT_FOUND', 'name': 'ZAMKOR', 'raw_data': 'ZAMKOR'}
+            name = json_response['data']['account']['name']
+    return {'error': 'OK', 'name': name, 'raw_data': json_response['data']['account']}
     
-    def minutesplayed(self):
-        return self.player['minutesPlayed']
-    
-    def last_played(self):
-        return self.player['lastModified']
-    
-# print(Gracz_fortnite('ninja'))
 
-
+if __name__ == '__main__':
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    asyncio.run(dane(username))
