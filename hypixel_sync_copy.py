@@ -79,6 +79,5 @@ async def dane(username) -> dict:
         player_data = await hypixel_data(session, uuid)
         #skin
         skin_data = await mojang_data(session, uuid)
-        print(player_data | skin_data)
         return player_data | skin_data
 
