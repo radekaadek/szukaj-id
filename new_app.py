@@ -21,27 +21,7 @@ async def search(username):
     fortnite_task = asyncio.create_task(fn.dane(username))
     minecraftTask = asyncio.create_task(hyp.dane(username))
     steamTask = asyncio.create_task(steam.checkSteam(username, steam_api_key))
-    region_gracza = lol.zwroc_region('Europe Nordic & East')
-    graczLOL = lol.player(username, region_gracza)
-    match graczLOL.czy_istnieje():
-            case True : 
-                zwrotLol = {
-                            'error': 'OK',
-                            "avatar": graczLOL.avatar(),
-                            "personaname": graczLOL.link_do_profilu()['name1'],
-                            'url':graczLOL.link_do_profilu()['link'],
-                            "level":graczLOL.poziom(),
-                            "wins":graczLOL.wins(),
-                            "losses":graczLOL.losses(),
-                            "tier":graczLOL.tier(),
-                            "isLOL": True,
-                            "rank":graczLOL.rank(),
-                            "lp":graczLOL.league_points(),
-                            }
-            case False : zwrotLol = None
-            case _: {'error': 'BRAK_GRACZA'}
-
-    zwrot = {"steam":await steamTask, "lol":zwrotLol, 'minecraft': await minecraftTask, 'fortnite': await fortnite_task}
+    zwrot = {"steam": await steamTask, 'minecraft': await minecraftTask, 'fortnite': await fortnite_task}
     return render_template("new_home.html", zwrot=zwrot) 
     
 if __name__ == "__main__":

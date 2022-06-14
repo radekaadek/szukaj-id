@@ -14,10 +14,4 @@ def link_do_profilu(username, region):
     regiony_opgg = {'BR1': 'br', 'EUN1': 'eune', 'EUW1': 'euw', 'JP1': 'jp', 'KR': 'kr', 'LA1': 'lan', 'LA2': 'las', 'NA1': 'na', 'OC1': 'oc', 'RU': 'ru', 'TR1': 'tr'}
     return {'link':f'https://{regiony_opgg[region]}.op.gg/summoner/userName={username}', "name1":username,}
 
-async def dane(username):
-    try:
-        summoner = lol_watcher.summoner.by_name(zwroc_region(region), username)
-        return {'name': summoner['name'], 'level': summoner['summonerLevel'], 'id': summoner['id'], 'icon': summoner['profileIconId']}
-    except ApiError as err:
-        return {'error': err}
 
