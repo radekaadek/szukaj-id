@@ -27,17 +27,17 @@ async def checkSteam(username, steam_api_key, session):
         params = {'steamid': steamid, 'key': steam_api_key}
         async with session.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v1', params=params) as resp:
             steamgamesinfo_response = await resp.json()
-        steamgamesinfo = steamgamesinfo_response["response"]
+            teamgamesinfo = steamgamesinfo_response["response"]
 
         params2 = {'steamids': steamid, 'key': steam_api_key}
         async with session.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/', params=params2) as resp:
             steamgamesinfo_response = await resp.json()
-        usersummary = steamgamesinfo_response["response"]["players"][0]
-        
+            usersummary = steamgamesinfo_response["response"]["players"][0]
+
         params3 = {'steamid': steamid, 'key': steam_api_key}
         async with session.get('http://api.steampowered.com/IPlayerService/GetSteamLevel/v1', params=params3) as resp:
             steamgamesinfo_response = await resp.json()
-        levelsteam = steamgamesinfo_response["response"]
+            levelsteam = steamgamesinfo_response["response"]
 
         # obróbka obiektów
         count_of_games = steamgamesinfo["game_count"]
@@ -61,6 +61,6 @@ async def checkSteam(username, steam_api_key, session):
             "status": status,
             "level": levelsteam["player_level"],
         }
-        return usersummary
+        return usersummary | {'error': 'OK'}
     except:
         return {'error': 'NOT_FOUND'}
