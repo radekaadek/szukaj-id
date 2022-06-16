@@ -6,6 +6,7 @@ wyswietla konto na regionie z najwyzszym poziomem, jezeli nie uzytkownik didnt s
 ustawienie kafelkami gier
 
 ### wiesiek5monster - ranga w lolsku   elyzy - fortnite    ninja - fortnite prywatne konto  janko - chłop w lolsku bez avataru
+#### git for-each-ref --format '%(refname:short)' refs/heads | grep -v "master\|main" | xargs git branch -D   #przydatna komenda gitowa
 
 hypixel - wycina glowe w zdjeciu albo tworzy model
 
