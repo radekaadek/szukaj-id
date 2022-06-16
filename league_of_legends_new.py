@@ -1,5 +1,4 @@
-import aiohttp
-import asyncio
+import aiohttp, asyncio
 
 #dokumentacja: https://riot-watcher.readthedocs.io/en/latest/index.html
 
