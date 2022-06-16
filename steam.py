@@ -9,7 +9,7 @@ def arrayToDictionary(arrlist):
     return arrlist
 
 
-async def checkSteam(nazwa_uzytkownika, steam_api_key, session):
+async def checkSteam(username, steam_api_key, session):
     # dokumentacja: https://pypi.org/project/steamwebapi/
     # deklaracje głównych interfejsów API steam
     try:
@@ -21,9 +21,14 @@ async def checkSteam(nazwa_uzytkownika, steam_api_key, session):
 
     try:
         # api request by pozyskać steam ID
-        steamid = steamuserinfo.resolve_vanity_url(str(nazwa_uzytkownika), format="json")["response"]["steamid"]
+        params = {'vanityurl': username, 'key': steam_api_key}
+        async with session.get('http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/', params=params) as resp:
+            data = await resp.json()
+            if data['response']['success'] == 42:
+                return {'error': 'NOT_FOUND'}
+            steamid = data['response']['steamid']
     except:
-        return {'error': 'NOT_FOUND'}
+        return {'error': 'API_ERROR'}
     try:
         # api request by pozyskać dane w obiektach
         steamgamesinfo = steamplayerinfo.get_owned_games(steamid, format="json")["response"]

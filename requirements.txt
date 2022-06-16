@@ -1,6 +1,4 @@
 steamwebapi
 flask
-riotwatcher
-fortnite-api
 flask[async]
 aiohttp
