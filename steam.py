@@ -13,13 +13,6 @@ async def checkSteam(username, steam_api_key, session):
     # dokumentacja: https://pypi.org/project/steamwebapi/
     # deklaracje głównych interfejsów API steam
     try:
-        steamuserinfo = ISteamUser(steam_api_key=steam_api_key)
-        steamplayerinfo = IPlayerService(steam_api_key=steam_api_key)
-        steamstatsinfo = ISteamUserStats(steam_api_key=steam_api_key)
-    except:
-        return {'error': 'API_KEY_ERROR'}
-
-    try:
         # api request by pozyskać steam ID
         params = {'vanityurl': username, 'key': steam_api_key}
         async with session.get('http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/', params=params) as resp:
@@ -35,10 +28,12 @@ async def checkSteam(username, steam_api_key, session):
         async with session.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v1', params=params) as resp:
             steamgamesinfo_response = await resp.json()
         steamgamesinfo = steamgamesinfo_response["response"]
+
         params2 = {'steamids': steamid, 'key': steam_api_key}
         async with session.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/', params=params2) as resp:
             steamgamesinfo_response = await resp.json()
         usersummary = steamgamesinfo_response["response"]["players"][0]
+        
         params3 = {'steamid': steamid, 'key': steam_api_key}
         async with session.get('http://api.steampowered.com/IPlayerService/GetSteamLevel/v1', params=params3) as resp:
             steamgamesinfo_response = await resp.json()
