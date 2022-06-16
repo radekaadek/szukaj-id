@@ -6,5 +6,39 @@
     <h1>Type a username to search someones stats!</h1>
     <div id="centerContainer"><input type="text" id="poleTxt"></input><div>
 <h1>{{zwrot}}</h1>
+
+<div id="datalists_contaier">
+    <ul>
+        <li id="lolLine" class="platformLine">
+            <a class="profileAvatar" style="background-image: url('../static/happy_face.svg');"></a><a href="https://eune.op.gg/summoner/userName=radekaadek" class="profileLink">radekaadek</a>
+            <div class="rankContainer"><img src="../static/lolranks/GOLD.png" class="tierImg" /><span>GOLDII</span></div>
+            <span class="levelIndicator">214</span><img id="lolLogo" class="platformLogo" src="../static/lol_icon.svg" />
+        </li>
+        <li id="steamLine" class="platformLine">
+            <a
+                class="profileAvatar avatarBorder offline"
+                href="https://avatars.akamai.steamstatic.com/5b861fee99593ebdec0e51e20264e7b4e1dd6c7d_full.jpg"
+                style="background-image: url('https://avatars.akamai.steamstatic.com/5b861fee99593ebdec0e51e20264e7b4e1dd6c7d_full.jpg');"
+            ></a>
+            <a href="https://steamcommunity.com/id/radekaadek/" class="profileLink">Mabel Pines</a>
+            <ul class="gamesList" style="display: inline-block;">
+                <li id="game1" class="gameLine">
+                    <img src="http://media.steampowered.com/steamcommunity/public/images/apps/394360/134bcd93ec4d31ec4a6640d6bdd73f22f0a7619f.jpg" /><span>1. Hearts of Iron IV</span>
+                    <span class="timeIndicator" id="time1">38544 minutes</span>
+                </li>
+                <li id="game2" class="gameLine">
+                    <img src="http://media.steampowered.com/steamcommunity/public/images/apps/236390/88259dcb7014dcdb109d9ece0cfc70c100bc2f9c.jpg" /><span>2. War Thunder</span><span class="timeIndicator" id="time2">34289 minutes</span>
+                </li>
+                <li id="game3" class="gameLine">
+                    <img src="http://media.steampowered.com/steamcommunity/public/images/apps/730/69f7ebe2735c366c65c0b33dae00e12dc40edbe4.jpg" /><span>3. Counter-Strike: Global Offensive</span>
+                    <span class="timeIndicator" id="time3">24032 minutes</span>
+                </li>
+            </ul>
+            <div class="rankContainer"></div>
+            <span class="levelIndicator">20</span><img id="steamLogo" class="platformLogo" src="../static/steam_icon.svg" />
+        </li>
+    </ul>
+</div>
+
 </body>
 {% endblock %}
