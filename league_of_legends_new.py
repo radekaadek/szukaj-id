@@ -4,13 +4,54 @@ import aiohttp, asyncio
 
 riot_api_key = 'RGAPI-30babb70-cf93-41b8-8e0c-32fb0fb543f2'
 
-regiony = {'Brasil': 'BR1', 'Europe Nordic & East': 'EUN1', 'Europe West': 'EUW1', 'Japan': 'JP1', 'Korea': 'KR', 'Latin America North': 'LA1', 'Latin America South': 'LA2', 'North America': 'NA1', 'Oceania': 'OC1', 'Russia': 'RU', 'Turkey': 'TR1'}
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+regiony = {'Brasil': 'br1', 'Europe Nordic & East': 'eun1', 'Europe West': 'euw1', 'Japan': 'jp1', 'Korea': 'kr', 'Latin America North': 'la1', 'Latin America South': 'la2', 'North America': 'na1', 'Oceania': 'oc1', 'Russia': 'ru', 'Turkey': 'tr1'}
 
 def zwroc_region(nazwa_regionu):
     return regiony[nazwa_regionu]
 
 def link_do_profilu(username, region):
-    regiony_opgg = {'BR1': 'br', 'EUN1': 'eune', 'EUW1': 'euw', 'JP1': 'jp', 'KR': 'kr', 'LA1': 'lan', 'LA2': 'las', 'NA1': 'na', 'OC1': 'oc', 'RU': 'ru', 'TR1': 'tr'}
-    return {'link':f'https://{regiony_opgg[region]}.op.gg/summoner/userName={username}', "name1":username,}
+    regiony_opgg = {'Brasil': 'br', 'Europe Nordic & East': 'eune', 'Europe West': 'euw', 'Japan': 'jp', 'Korea': 'kr', 'Latin America North': 'lan', 'Latin America South': 'las', 'North America': 'na', 'Oceania': 'oc', 'Russia': 'ru', 'Turkey': 'tr'}
+    return {'link':f'https://{regiony_opgg[region]}.op.gg/summoner/userName={username}'}
+
+async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
+    base_region = zwroc_region(region)
+    base_url = f'https://{base_region}.api.riotgames.com'
+    base_params = {"api_key": riot_api_key}
+    async with session.get('https://ddragon.leagueoflegends.com/api/versions.json') as lv:
+        lv = await lv.json()
+        league_version = lv[0]
+    async with session.get(f'{base_url}/lol/summoner/v4/summoners/by-name/{summonerName}', params=base_params) as response:
+        match response.status:
+            case 200:
+                return_dict = {'error': 'OK'}
+                player_response = await response.json()
+                puuid = player_response['puuid']
+                level = player_response['summonerLevel']
+                return_dict['level'] = level
+                encryptedSummonerId = player_response['id']
+                profileIconLink = f'https://ddragon.leagueoflegends.com/cdn/{league_version}/img/profileicon/{player_response["profileIconId"]}.png'
+                return_dict['profileIconLink'] = profileIconLink
+                async with session.get(f'{base_url}/lol/league/v4/entries/by-summoner/{encryptedSummonerId}', params = base_params) as ranked_response:
+                    ranked_json_response = await ranked_response.json()
+                    for element in ranked_json_response:
+                        if element['queueType'] == 'RANKED_SOLO_5x5':
+                            if element['inactive'] == 'True':
+                                return_dict['tier'] = 'inactive'
+                                break
+                            else:
+                                return_dict['tier'] = element['tier']
+                                return_dict['rank'] = element['rank']
+                                return_dict['leaguePoints'] = element['leaguePoints']
+                                break
+                    return_dict |= link_do_profilu(summonerName, region)
+                    return return_dict
+            case 404:
+                return {'error': 'NOT_FOUND'}
+            case 401 | 429:
+                return {'error': 'API_ERROR'}
 
 
+if __name__ == '__main__':
+    asyncio.run(dane('radekaadek', 'Europe Nordic & East'))

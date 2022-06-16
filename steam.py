@@ -62,6 +62,6 @@ async def checkSteam(username, session):
             "status": status,
             "level": levelsteam["player_level"],
         }
-        return usersummary | {'error': 'OK'}
+        return usersummary | {'error': 'OK'} | {'profileLink': 'https://steamcommunity.com/id/username/'}
     except:
         return {'error': 'NOT_FOUND'}
