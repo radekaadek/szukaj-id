@@ -2,4 +2,4 @@ Pit jest koxem
 
 jak uruchomic?
 
-run uvicorn app: uvicorn xd:app --reload
+run uvicorn app: uvicorn main:app --reload

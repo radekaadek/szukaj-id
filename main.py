@@ -1,5 +1,4 @@
 from fastapi import FastAPI, Request
-from fastapi.responses import FileResponse
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -34,4 +33,4 @@ async def search(username, request: Request):
     return templates.TemplateResponse("new_home.html", zwrot | {'request': request}) 
     
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app)
