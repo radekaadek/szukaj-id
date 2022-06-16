@@ -46,4 +46,4 @@ async def dane(username, session) -> dict:
     except:
         last_seen = False
     player_data = {'online_status': player_status, 'last_seen': last_seen, 'aliases': aliases, 'rank': rank}
-    return player_data | {'skin_url': f'https://mc-heads.net/avatar/{username}'}
+    return player_data | {'skin_url': f'https://mc-heads.net/avatar/{username}', 'error': 'OK'}

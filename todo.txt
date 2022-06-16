@@ -3,8 +3,6 @@ czy ma range w lolu i to wyswietla DONE
 layout informacji ladny w css
 
 wyswietla konto na regionie z najwyzszym poziomem, jezeli nie uzytkownik didnt specify w fortnucie i lolu
-laduje staty tylko po 0.75s nie zmieniania tekstu lub gdy uzytkownik wcisnie enter albo kliknie na ikone lup   i tylko zeby nie ladowalo 100 razy jak bedzie spamil enterem
-tytul strony i krotki opis na gorze - DONE
 ustawienie kafelkami gier
 
 ### wiesiek5monster - ranga w lolsku   elyzy - fortnite    ninja - fortnite prywatne konto  janko - chłop w lolsku bez avataru
@@ -12,5 +10,4 @@ ustawienie kafelkami gier
 hypixel - wycina glowe w zdjeciu albo tworzy model
 
 fortnite -
-    fortnite api
     bar ktory pokazuje poziom battlepassa w fortnite; tych poziomow w nim jest 100

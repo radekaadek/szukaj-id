@@ -1,4 +1,3 @@
-steamwebapi
 flask
 flask[async]
 aiohttp

@@ -1,4 +1,5 @@
-from riotwatcher import LolWatcher, ApiError
+import aiohttp
+import asyncio
 
 #dokumentacja: https://riot-watcher.readthedocs.io/en/latest/index.html
 

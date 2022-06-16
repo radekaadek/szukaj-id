@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 import steam, asyncio, aiohttp, time
 import league_of_legends as lol
 import fortnite as fn
-import hypixel_sync_copy as hyp
+import minecraft as hyp
 
 #regiony = ['Brasil', 'Europe Nordic & East', 'Europe West', 'Japan', 'Korea', 'Latin America North', 'Latin America South', 'North America', 'Oceania', 'Russia', 'Turkey']
 
