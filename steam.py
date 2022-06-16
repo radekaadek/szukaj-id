@@ -2,13 +2,15 @@ import aiohttp, asyncio, operator
 
 sortkey = operator.itemgetter("playtime_forever")
 
+steam_api_key = 'EE03692ACB03E4371522180E26926643'
+
 def arrayToDictionary(arrlist):
     arrlistkeys = dict.fromkeys(range(1, len(arrlist)))
     arrlist = dict(zip(arrlistkeys, arrlist))
     return arrlist
 
 
-async def checkSteam(username, steam_api_key, session):
+async def checkSteam(username, session):
     # dokumentacja: https://pypi.org/project/steamwebapi/
     # deklaracje głównych interfejsów API steam
     try:

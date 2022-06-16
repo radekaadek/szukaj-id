@@ -1,18 +1,37 @@
-import asyncio
-import aiohttp
+from fastapi import FastAPI, Request
+from fastapi.responses import FileResponse
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+import asyncio, aiohttp, uvicorn, time, steam
+import fortnite as fn
+import minecraft as hyp
 
-username = 'gabelogannewell'
-steam_api_key = 'EE03692ACB03E4371522180E26926643'
+app = FastAPI()
 
-asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
 
-async def main(username):
+#regiony = ['Brasil', 'Europe Nordic & East', 'Europe West', 'Japan', 'Korea', 'Latin America North', 'Latin America South', 'North America', 'Oceania', 'Russia', 'Turkey']
+
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy()) #na linuxie usunac
+
+@app.get("/", response_class=HTMLResponse)
+def index(request: Request):
+    return templates.TemplateResponse("new_home.html", {'request': request})
+
+@app.get('/{username}', response_class=HTMLResponse)
+async def search(username, request: Request):
+    #nazwa z formularza
+    start = time.time()
     async with aiohttp.ClientSession() as session:
-        async with session.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v1', params=params) as resp:
-            data = await resp.json()
-            steamid = data['response']['steamid']
-
-
-
-if __name__ == '__main__':
-    asyncio.run(main(username))
+        fortnite_task = asyncio.create_task(fn.dane(username, session))
+        minecraftTask = asyncio.create_task(hyp.dane(username, session))
+        steamTask = asyncio.create_task(steam.checkSteam(username, session))
+        zwrot = {"steam": await steamTask, 'minecraft': await minecraftTask, 'fortnite': await fortnite_task}
+    end = time.time()
+    zwrot = {'essa': zwrot} | {'time': end - start}
+    return templates.TemplateResponse("new_home.html", zwrot | {'request': request}) 
+    
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

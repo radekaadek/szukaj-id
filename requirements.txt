@@ -1,3 +1,6 @@
 flask
 flask[async]
+fastapi[all]
 aiohttp
+uvicorn[standard]
+jinja2
