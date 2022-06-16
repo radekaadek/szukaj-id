@@ -8,7 +8,7 @@ asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 async def main(username):
     async with aiohttp.ClientSession() as session:
-        async with session.get('http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/', params=params) as resp:
+        async with session.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v1', params=params) as resp:
             data = await resp.json()
             steamid = data['response']['steamid']
 

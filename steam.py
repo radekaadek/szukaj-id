@@ -31,9 +31,18 @@ async def checkSteam(username, steam_api_key, session):
         return {'error': 'API_ERROR'}
     try:
         # api request by pozyskać dane w obiektach
-        steamgamesinfo = steamplayerinfo.get_owned_games(steamid, format="json")["response"]
-        usersummary = steamuserinfo.get_player_summaries(steamid, format="json")["response"]["players"][0]
-        levelsteam = steamplayerinfo.get_steam_level(steamid, format="json")["response"]
+        params = {'steamid': steamid, 'key': steam_api_key}
+        async with session.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v1', params=params) as resp:
+            steamgamesinfo_response = await resp.json()
+        steamgamesinfo = steamgamesinfo_response["response"]
+        params2 = {'steamids': steamid, 'key': steam_api_key}
+        async with session.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/', params=params2) as resp:
+            steamgamesinfo_response = await resp.json()
+        usersummary = steamgamesinfo_response["response"]["players"][0]
+        params3 = {'steamid': steamid, 'key': steam_api_key}
+        async with session.get('http://api.steampowered.com/IPlayerService/GetSteamLevel/v1', params=params3) as resp:
+            steamgamesinfo_response = await resp.json()
+        levelsteam = steamgamesinfo_response["response"]
 
         # obróbka obiektów
         count_of_games = steamgamesinfo["game_count"]

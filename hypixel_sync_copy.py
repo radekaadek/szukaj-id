@@ -48,5 +48,4 @@ async def dane(username, session) -> dict:
         return {'error': 'NOT_FOUND'}
 #hypixel data
     player_data = await hypixel_data(session, uuid)
-    print(player_data | {'skin_url': f'https://mc-heads.net/avatar/{username}'})
     return player_data | {'skin_url': f'https://mc-heads.net/avatar/{username}'}
