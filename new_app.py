@@ -21,13 +21,11 @@ async def search(username):
     start = time.time()
     async with aiohttp.ClientSession() as session:
         fortnite_task = asyncio.create_task(fn.dane(username, session))
-        start2 = time.time()
         minecraftTask = asyncio.create_task(hyp.dane(username, session))
         steamTask = asyncio.create_task(steam.checkSteam(username, steam_api_key, session))
-        start3 = time.time()
         zwrot = {"steam": await steamTask, 'minecraft': await minecraftTask, 'fortnite': await fortnite_task}
     end = time.time()
-    zwrot = zwrot | {'time': end - start, 'time2': end - start2, 'time3': end - start3}
+    zwrot = zwrot | {'time': end - start}
     return render_template("new_home.html", zwrot=zwrot) 
     
 if __name__ == "__main__":
