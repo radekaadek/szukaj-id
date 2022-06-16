@@ -26,14 +26,14 @@ async def search():
 
     region_gracza = lol.zwroc_region('Europe Nordic & East')
     graczLOL = lol.player(nazwa_uzytkownika, region_gracza)
-    gracz_FORTNITE = fn.Gracz_fortnite(nazwa_uzytkownika)
+    # gracz_FORTNITE = fn.Gracz_fortnite(nazwa_uzytkownika)
 
     steamTask = asyncio.create_task(steam.checkSteam(nazwa_uzytkownika, steam_api_key))
 
-    if str(gracz_FORTNITE.player) == "the requested account's stats are not public":
-        zwrotFORTNITE = None
-    else:
-        print('a')
+    # if str(gracz_FORTNITE.player) == "the requested account's stats are not public":
+    #     zwrotFORTNITE = None
+    # else:
+    #     print('a')
 
     match graczLOL.czy_istnieje():
             case True : 
