@@ -110,6 +110,16 @@ ul {
     height: 75px;
 }
 
+#githubLink {
+    background-image: url(../static/github.svg);
+    height: 50px;
+    width: 50px;
+    background-size: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+}
+
 /* ul li::before {
     content: "🟢";
     font-size: 5px;
