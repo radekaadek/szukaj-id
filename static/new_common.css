@@ -83,3 +83,7 @@ h1 {
     width: auto;
     height: 75px;
 }
+
+ul {
+    list-style-type: none;
+}
