@@ -5,7 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import asyncio, aiohttp, uvicorn, time, steam
 import fortnite as fn
-import minecraft as hyp
+import minecraft as mc
 
 app = FastAPI()
 
@@ -26,7 +26,7 @@ async def search(username, request: Request):
     start = time.time()
     async with aiohttp.ClientSession() as session:
         fortnite_task = asyncio.create_task(fn.dane(username, session))
-        minecraftTask = asyncio.create_task(hyp.dane(username, session))
+        minecraftTask = asyncio.create_task(mc.dane(username, session))
         steamTask = asyncio.create_task(steam.checkSteam(username, session))
         zwrot = {"steam": await steamTask, 'minecraft': await minecraftTask, 'fortnite': await fortnite_task}
     end = time.time()
