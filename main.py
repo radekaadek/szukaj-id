@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-import asyncio, aiohttp, uvicorn, time, steam
+import asyncio, aiohttp, uvicorn, time, steam, subprocess
 import fortnite as fn
 import minecraft as mc
 
@@ -30,6 +30,13 @@ async def search(username, request: Request):
         zwrot = {"steam": await steamTask, 'minecraft': await minecraftTask, 'fortnite': await fortnite_task}
     end = time.time()
     zwrot = {'essa': zwrot} | {'time': end - start}
+    zwrot1 = str(zwrot)
+    zwrot1 = zwrot1.replace("'", "\"")
+    p = subprocess.Popen(['node', 'hello.js', zwrot1], stdout=subprocess.PIPE)
+    out = p.stdout.read()
+    out = out.decode("utf-8") 
+    with open('hello.txt', 'w') as f:
+        f.write(out)
     return templates.TemplateResponse("new_home.html", zwrot | {'request': request}) 
     
 if __name__ == "__main__":
