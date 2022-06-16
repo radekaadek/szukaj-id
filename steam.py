@@ -1,4 +1,5 @@
-import operator, aiohttp, asyncio
+from steamwebapi.api import ISteamUser, IPlayerService, ISteamUserStats
+import operator
 
 sortkey = operator.itemgetter("playtime_forever")
 

@@ -1,4 +1,5 @@
-import aiohttp, asyncio
+import aiohttp
+import asyncio
 
 hypixel_url = 'https://api.hypixel.net'
 hypixel_api_key = '36da01f0-28b9-4bc1-9c33-d24c57f55399'
