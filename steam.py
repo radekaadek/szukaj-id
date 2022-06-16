@@ -27,7 +27,7 @@ async def checkSteam(username, steam_api_key, session):
         params = {'steamid': steamid, 'key': steam_api_key}
         async with session.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v1', params=params) as resp:
             steamgamesinfo_response = await resp.json()
-            teamgamesinfo = steamgamesinfo_response["response"]
+            steamgamesinfo = steamgamesinfo_response["response"]
 
         params2 = {'steamids': steamid, 'key': steam_api_key}
         async with session.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/', params=params2) as resp:

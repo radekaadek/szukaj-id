@@ -12,16 +12,27 @@ mojang_skin_url = 'https://sessionserver.mojang.com/session/minecraft/profile' #
 
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
-# returns a dict of data from hypixels api
-async def request_pipeline(session, route, uuid) -> dict:
+# rank, aliases last_seen values can be 'False' if not found,
+# this depends on the age of a players account
+# if the skin is default, it will return 'default': True, in this case the skin has a diffrent size
+async def dane(username, session) -> dict:
+    # get uuid from mojang
+    try:
+        async with session.get(f'{mojang_url}{username}') as response:
+            r1 = await response.json()
+            uuid = r1['id']
+    except:
+        return {'error': 'NOT_FOUND'}
+    #hypixel data
+    route = 'status'
     PARAMS = {'key': hypixel_api_key, 'uuid': uuid}
     async with session.get(hypixel_url + '/' + route, params=PARAMS) as response:
-        return await response.json()
-
-async def hypixel_data(session, uuid) -> dict:
-    status_response = await request_pipeline(session, 'status', uuid)
-    stats = await request_pipeline(session, 'player', uuid)
-    player_status = status_response['session']['online']
+        status_response = await response.json()
+        player_status = status_response['session']['online']
+    route2 = 'player'
+    PARAMS = {'key': hypixel_api_key, 'uuid': uuid}
+    async with session.get(hypixel_url + '/' + route2, params=PARAMS) as response:
+        stats = await response.json()
     try:
         rank = stats['player']['rank']
     except:
@@ -34,18 +45,5 @@ async def hypixel_data(session, uuid) -> dict:
         last_seen = stats['player']['lastLogout']
     except:
         last_seen = False
-    return {'online_status': player_status, 'last_seen': last_seen, 'aliases': aliases, 'rank': rank}
-
-# rank, aliases last_seen values can be 'False' if not found,
-# this depends on the age of a players account
-# if the skin is default, it will return 'default': True, in this case the skin has a diffrent size
-async def dane(username, session) -> dict:
-    try:
-        async with session.get(f'{mojang_url}{username}') as response:
-            r1 = await response.json()
-            uuid = r1['id']
-    except:
-        return {'error': 'NOT_FOUND'}
-#hypixel data
-    player_data = await hypixel_data(session, uuid)
+    player_data = {'online_status': player_status, 'last_seen': last_seen, 'aliases': aliases, 'rank': rank}
     return player_data | {'skin_url': f'https://mc-heads.net/avatar/{username}'}
