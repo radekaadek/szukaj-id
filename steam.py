@@ -25,7 +25,8 @@ async def checkSteam(username, session):
         return {'error': 'API_ERROR'}
     try:
         # api request by pozyskać dane w obiektach
-        params = {'steamid': steamid, 'key': steam_api_key}
+        ##definicje: https://github.com/shawnsilva/steamwebapi/blob/devel/steamwebapi/api.py
+        params = {'steamid': steamid, 'key': steam_api_key, 'include_appinfo': 1}
         async with session.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v1', params=params) as resp:
             steamgamesinfo_response = await resp.json()
             steamgamesinfo = steamgamesinfo_response["response"]
@@ -44,7 +45,12 @@ async def checkSteam(username, session):
         count_of_games = steamgamesinfo["game_count"]
         steamgamesinfo = steamgamesinfo["games"]
         steamgamesinfo.sort(key=sortkey, reverse=True)
-
+        for a in steamgamesinfo:
+            del a["playtime_windows_forever"]
+            del a["playtime_mac_forever"]
+            # del a["has_community_visible_stats"] K**WA CZEMU NIE DZIAŁA
+            del a["playtime_linux_forever"]
+            
         match usersummary['personastate']:
             case 0:
                 status = 0
