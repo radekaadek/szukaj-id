@@ -47,16 +47,11 @@ async def checkSteam(username, session):
         steamgamesinfo = steamgamesinfo["games"]
         steamgamesinfo.sort(key=sortkey, reverse=True)
         steamgamesinfo = steamgamesinfo[0:4]
-        print(steamgamesinfo)
-        steamgamesinfo = arrayToDictionary(steamgamesinfo)
-        # for a in steamgamesinfo: #to ma problemy chuj wie czemu
-        #     del a["playtime_windows_forever"]
-        #     del a["playtime_mac_forever"]
-        #     del a["playtime_linux_forever"]
-        #     a 
-        with open('hello.txt', 'w') as f:
-            f.write(str(steamgamesinfo))
-        
+        for a in steamgamesinfo:
+            del a["playtime_windows_forever"]
+            del a["playtime_mac_forever"]
+            del a["playtime_linux_forever"]
+
         match usersummary['personastate']:
             case 0:
                 status = 'offline'
