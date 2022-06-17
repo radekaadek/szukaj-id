@@ -7,6 +7,8 @@ steam_api_key = 'EE03692ACB03E4371522180E26926643'
 def arrayToDictionary(arrlist):
     arrlistkeys = dict.fromkeys(range(1, len(arrlist)))
     arrlist = dict(zip(arrlistkeys, arrlist))
+    keys_values = arrlist.items()
+    arrlist = {str(key): value for key, value in keys_values}
     return arrlist
 
 
@@ -25,7 +27,8 @@ async def checkSteam(username, session):
         return {'error': 'API_ERROR'}
     try:
         # api request by pozyskać dane w obiektach
-        params = {'steamid': steamid, 'key': steam_api_key}
+        ##definicje: https://github.com/shawnsilva/steamwebapi/blob/devel/steamwebapi/api.py
+        params = {'steamid': steamid, 'key': steam_api_key, 'include_appinfo': 1}
         async with session.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v1', params=params) as resp:
             steamgamesinfo_response = await resp.json()
             steamgamesinfo = steamgamesinfo_response["response"]
@@ -44,7 +47,11 @@ async def checkSteam(username, session):
         count_of_games = steamgamesinfo["game_count"]
         steamgamesinfo = steamgamesinfo["games"]
         steamgamesinfo.sort(key=sortkey, reverse=True)
-
+        for a in steamgamesinfo:
+            del a["playtime_windows_forever"]
+            del a["playtime_mac_forever"]
+            del a["playtime_linux_forever"]
+            
         match usersummary['personastate']:
             case 0:
                 status = 0
@@ -62,6 +69,6 @@ async def checkSteam(username, session):
             "status": status,
             "level": levelsteam["player_level"],
         }
-        return usersummary | {'error': 'OK'} | {'profileLink': 'https://steamcommunity.com/id/username/'}
+        return usersummary | {'error': 'OK'}
     except:
         return {'error': 'NOT_FOUND'}
