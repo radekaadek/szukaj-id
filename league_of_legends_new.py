@@ -19,8 +19,10 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
     base_region = zwroc_region(region)
     base_url = f'https://{base_region}.api.riotgames.com'
     base_params = {"api_key": riot_api_key}
-    async with session.get('https://ddragon.leagueoflegends.com/api/versions.json') as lv:
-        lv = await lv.json()
+    async with session.get('https://ddragon.leagueoflegends.com/api/versions.json') as lvr:
+        lv = await lvr.json()
+        if lvr.response.status != 200:
+            return {'error': 'API_ERROR'}
         league_version = lv[0]
     async with session.get(f'{base_url}/lol/summoner/v4/summoners/by-name/{summonerName}', params=base_params) as response:
         match response.status:
@@ -46,6 +48,7 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
                                 return_dict['leaguePoints'] = element['leaguePoints']
                                 break
                     return_dict |= link_do_profilu(summonerName, region)
+                    print(return_dict)
                     return return_dict
             case 404:
                 return {'error': 'NOT_FOUND'}
@@ -54,5 +57,9 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
 
 
 if __name__ == '__main__':
-    # print(await dane('radekaadek', 'Europe Nordic & East')) test
-    asyncio.run(dane('radekaadek', 'Europe Nordic & East'))
+
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    async def main():
+        async with aiohttp.ClientSession() as session:
+            print(await dane('radekaadek', session, 'Europe Nordic & East'))
+    asyncio.run(main())
