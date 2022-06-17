@@ -13,7 +13,7 @@ def arrayToDictionary(arrlist):
 
 
 async def checkSteam(username, session):
-    # dokumentacja: https://pypi.org/project/steamwebapi/
+    # dokumentacja: https://wiki.teamfortress.com/wiki/WebAPI
     # deklaracje głównych interfejsów API steam
     try:
         # api request by pozyskać steam ID
@@ -47,17 +47,15 @@ async def checkSteam(username, session):
     steamgamesinfo = steamgamesinfo["games"]
     steamgamesinfo.sort(key=sortkey, reverse=True)
     steamgamesinfo = steamgamesinfo[0:4]
-    steamgamesinfo = arrayToDictionary(steamgamesinfo)
-    
-    for a in steamgamesinfo:
+    steamgamesinfo2 = arrayToDictionary(steamgamesinfo)
+
+    for a in steamgamesinfo2:
         del a["playtime_windows_forever"]
         del a["playtime_mac_forever"]
         del a["playtime_linux_forever"]
         a['icon_link'] = 'http://media.steampowered.com/steamcommunity/public/images/apps/' + str(a['appid']) + '/' + str(a['img_icon_url'])
         del a["img_icon_url"]
         del a["appid"]
-
-    print(steamgamesinfo)
 
     match usersummary['personastate']:
         case 0:
@@ -71,7 +69,7 @@ async def checkSteam(username, session):
         "avatar": usersummary["avatarfull"],
         "personaname": usersummary["personaname"],
         "url": usersummary["profileurl"],
-        "favgames": steamgamesinfo,
+        "favgames": steamgamesinfo2,
         "status": status,
         "level": levelsteam["player_level"],
     }
