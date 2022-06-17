@@ -1,34 +1,29 @@
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
-const dom = new JSDOM(`<div id="datalists_contaier" class="jsdom"></div>`);
-
-inputObj = JSON.parse(process.argv[2].toString());
+var wtokuapi = false;
 let favgamesplaytime = [];
-// console.log(inputObj);
 
 function rankCreator(input, newLI) {
-    const rankContainer = dom.window.document.createElement('div');
+    const rankContainer = document.createElement('div');
 
     if (input.tier !== null && input.rank !== null && input.isLOL) {
-        const rankImg = dom.window.document.createElement("img");
-        const rankSpan = dom.window.document.createElement("span");
+        const rankImg = document.createElement("img");
+        const rankSpan = document.createElement("span");
     
         rankImg.src = `../static/lolranks/${input.tier}.png`;
         rankImg.classList.add("tierImg");
-        rankSpan.innerHTML = input.tier + input.rank;
+        rankSpan.innerText = input.tier + input.rank;
 
         rankContainer.appendChild(rankImg);
         rankContainer.appendChild(rankSpan);
     }
 
     else if (input.isLOL){
-        const mindBlownImg = dom.window.document.createElement("img");
-        const infoSpan = dom.window.document.createElement("span");
+        const mindBlownImg = document.createElement("img");
+        const infoSpan = document.createElement("span");
 
         mindBlownImg.src = '../static/emoji_mindBlown.svg';
         mindBlownImg.classList.add("mindBlown");
         infoSpan.classList.add("infoSpan");
-        infoSpan.innerHTML = "Chłop nie ma rangi";
+        infoSpan.innerText = "Chłop nie ma rangi";
 
         rankContainer.appendChild(mindBlownImg);
         rankContainer.appendChild(infoSpan);
@@ -51,11 +46,23 @@ function minutesToDhms(seconds) {
     return dDisplay + hDisplay + mDisplay;
 }
 
-function avatar(input, newLI) {
+async function avatar(input, newLI) {
     const urlLink = input.avatar;
-    const profileAvatar = dom.window.document.createElement("a");
+    const profileAvatar = document.createElement("a");
     profileAvatar.classList.add("profileAvatar");
-    if (urlLink !== null) {
+    let exists = false;
+
+    await $.ajax({
+        type: "HEAD",
+        url: urlLink,
+        success: () => {
+            exists = true;
+        }
+    }).catch(() => {
+        console.log("O ja cie w ten czas");
+    });;
+
+    if (urlLink !== null && exists) {
         profileAvatar.style.backgroundImage = `url(${urlLink})`;
         profileAvatar.href = urlLink;
     } else {
@@ -82,22 +89,22 @@ function avatar(input, newLI) {
 }
 
 function gamelist(games) {
-    const gameUL = dom.window.document.createElement("UL");
+    const gameUL = document.createElement("UL");
     gameUL.style.display = "inline-block";
     gameUL.classList.add("gamesList");
     for (const g in games) {
-        const newGame = dom.window.document.createElement("LI");
-        const nSpan = dom.window.document.createElement("span");
-        const tSpan = dom.window.document.createElement("span");
-        const gameIMG = dom.window.document.createElement("IMG");
+        const newGame = document.createElement("LI");
+        const nSpan = document.createElement("span");
+        const tSpan = document.createElement("span");
+        const gameIMG = document.createElement("IMG");
 
         favgamesplaytime[Number(g) - 1] = games[g].playtime_forever;
 
-        nSpan.innerHTML = g + ". " + games[g].name;
+        nSpan.innerText = g + ". " + games[g].name;
         gameIMG.src = `http://media.steampowered.com/steamcommunity/public/images/apps/${games[g].appid}/${games[g].img_icon_url}.jpg`;
         newGame.id = "game" + g;
         tSpan.classList.add("timeIndicator");
-        tSpan.innerHTML = minutesToDhms(favgamesplaytime[Number(g) - 1]);
+        tSpan.innerText = favgamesplaytime[Number(g) - 1] + " minutes";
         tSpan.id = "time" + g;
         newGame.appendChild(gameIMG);
         newGame.appendChild(nSpan);
@@ -110,28 +117,28 @@ function gamelist(games) {
 }
 
 async function newline(input) {
-    const newLI = dom.window.document.createElement("li");
+    const newLI = document.createElement("li");
 
-    avatar(input, newLI);
+    await avatar(input, newLI);
 
-    if (('url' in input) && ('personaname' in input)) {
-        const profileLink = dom.window.document.createElement("a");
-        profileLink.innerHTML = input.personaname;
+    if (input.url !== null && input.personaname !== null) {
+        const profileLink = document.createElement("a");
+        profileLink.innerText = input.personaname;
         profileLink.href = input.url;
         profileLink.classList.add("profileLink");
         newLI.appendChild(profileLink);
     }
 
-    if (('favgames' in input)) {
+    if (input.favgames !== null) {
         const games = gamelist(input.favgames);
         newLI.appendChild(games);
     }
 
     rankCreator(input, newLI); 
 
-    if ('level' in input) {
-        const level = dom.window.document.createElement("span");
-        level.innerHTML = input.level;
+    if (input.url !== null) {
+        const level = document.createElement("span");
+        level.innerText = input.level;
         level.classList.add("levelIndicator");
         newLI.appendChild(level);
     }   
@@ -140,13 +147,14 @@ async function newline(input) {
 }
 
 async function crHtml(res) {
-    const datalistContainerDiv = dom.window.document.querySelector("#datalists_contaier");;
-    const newUL = dom.window.document.createElement("UL");
+    const datalistContainerDiv = document.querySelector("body #datalists_contaier");
+    datalistContainerDiv.innerHTML = "";
+    const newUL = document.createElement("UL");
     for (const d in res) {
-        if (res[d].error !== 'OK') {
+        if (res[d] == null) {
             continue;
         }
-        const logo = dom.window.document.createElement("img");
+        const logo = document.createElement("img");
         const newLine = await newline(res[d]);
 
         newLine.id = d + "Line";
@@ -159,7 +167,37 @@ async function crHtml(res) {
         newUL.appendChild(newLine);
     }
     datalistContainerDiv.appendChild(newUL);
-    console.log(datalistContainerDiv.outerHTML);
 }
 
-crHtml(inputObj);
+function zamienCzas() {
+    for (i = 1; i <= 3; i++) {
+        document.getElementById("time" + i).innerText = minutesToDhms(favgamesplaytime[i - 1]);
+    }
+}
+
+$(document).ready(async function () {
+    $("#livebox").on("input", async function (e) {
+        if (wtokuapi === false) {
+            wtokuapi = true;
+            $("#datalist").empty();
+            setTimeout(() => {
+                $.ajax({
+                    method: "post",
+                    url: "/search",
+                    data: { nazwa_uzytkownika: $("#livebox").val() },
+                    success: async function (res) {
+                        if (res !== "ZAMKOR") {
+                            $("#attentionMessage").css({ display: "none" });
+                            await crHtml(res);
+                            console.log(res);
+                        } else {
+                            $("#attentionMessage").css({ display: "block" });
+                            $("#datalists_contaier").empty();
+                        }
+                    },
+                });
+                wtokuapi = false;
+            }, 750);
+        }
+    });
+});
