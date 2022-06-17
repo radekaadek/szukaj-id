@@ -44,14 +44,15 @@ async def checkSteam(username, session):
             levelsteam = steamgamesinfo_response["response"]
 
         # obróbka obiektów
-        count_of_games = steamgamesinfo["game_count"]
         steamgamesinfo = steamgamesinfo["games"]
         steamgamesinfo.sort(key=sortkey, reverse=True)
+        steamgamesinfo = steamgamesinfo[0:4]
+        print(steamgamesinfo)
         for a in steamgamesinfo:
             del a["playtime_windows_forever"]
             del a["playtime_mac_forever"]
             del a["playtime_linux_forever"]
-            
+
         match usersummary['personastate']:
             case 0:
                 status = 'offline'
@@ -64,7 +65,7 @@ async def checkSteam(username, session):
             "avatar": usersummary["avatarfull"],
             "personaname": usersummary["personaname"],
             "url": usersummary["profileurl"],
-            "favgames": arrayToDictionary(steamgamesinfo[0:4]),
+            "favgames": arrayToDictionary(steamgamesinfo),
             "status": status,
             "level": levelsteam["player_level"],
         }
