@@ -47,7 +47,6 @@ async def checkSteam(username, session):
         steamgamesinfo = steamgamesinfo["games"]
         steamgamesinfo.sort(key=sortkey, reverse=True)
         steamgamesinfo = steamgamesinfo[0:4]
-        print(steamgamesinfo)
         for a in steamgamesinfo:
             del a["playtime_windows_forever"]
             del a["playtime_mac_forever"]

@@ -29,6 +29,7 @@ async def search(username, request: Request):
         steamTask = asyncio.create_task(steam.checkSteam(username, session))
         lolTask = asyncio.create_task(lol.dane(username, session))
         zwrot = {"steam": await steamTask, 'minecraft': await minecraftTask, 'fortnite': await fortnite_task, 'lol': await lolTask}
+        print(str(zwrot))
     # zwrot1 = str(zwrot)
     # zwrot1 = zwrot1.replace("'", "\"")
     # zwrot1 = zwrot1.replace("True", "true")
