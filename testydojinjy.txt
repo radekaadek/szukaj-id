@@ -1,0 +1,57 @@
+{
+   "steam":{
+      "avatar":"https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg",
+      "personaname":"undefined",
+      "url":"https://steamcommunity.com/id/undefined/",
+      "favgames":{
+         "1":{
+            "appid":10,
+            "name":"Counter-Strike",
+            "playtime_forever":0,
+            "img_icon_url":"6b0312cda02f5f777efa2f3318c307ff9acafbb5"
+         },
+         "2":{
+            "appid":20,
+            "name":"Team Fortress Classic",
+            "playtime_forever":0,
+            "img_icon_url":"38ea7ebe3c1abbbbf4eabdbef174c41a972102b9"
+         },
+         "3":{
+            "appid":30,
+            "name":"Day of Defeat",
+            "playtime_forever":0,
+            "img_icon_url":"aadc0ce51ff6ba2042d633f8ec033b0de62091d0"
+         }
+      },
+      "gamequantity":535,
+      "status":offline, online 
+		,in-game,
+      "level":14,
+      "error":"OK"
+   },
+   "minecraft":{
+      "online_status":false,
+      "last_seen":1655186622838,
+      "aliases":[
+         "Undefined_Boss",
+         "Undefined"
+      ],
+      "rank":false,
+      "avatar":"https://mc-heads.net/avatar/undefined",
+      "error":"OK"
+   },
+   "fortnite":{
+      "error":"OK",
+      "name":"undefined",
+      "hoursPlayed":2,
+      "wins":4,
+      "lastPlayed":"2022-05-13T07:27:10Z",
+      "battlepassLevel":1
+   },
+   "lol":{
+      "error":"OK",
+      "level":261,
+      "profileIconLink":"https://ddragon.leagueoflegends.com/cdn/12.11.1/img/profileicon/3615.png",
+      "link":"https://eune.op.gg/summoner/userName=undefined"
+   }
+}

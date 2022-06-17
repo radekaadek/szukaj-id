@@ -6,23 +6,15 @@
         <img class="platformLogo" id="steamLogo" src="../static/steam_icon.svg" />
         {% if zwrot['steam']['error'] == 'OK' %}
         <a class="profileAvatar avatarBorder {{zwrot['steam']['status']}}" href="{{zwrot['steam']['avatar']}}" style="background-image: url({{zwrot['steam']['avatar']}});"></a>
-        <a class="profileLink" href="https://steamcommunity.com/id/radekaadek/"> Mabel Pines </a>
+        <a class="profileLink" href="{{zwrot['steam']['url']}}"> {{zwrot['steam']['personaname']}} </a>
         <ul class="gamesList" style="display: inline-block;">
+          {% for i in [1, 2, 3] %}
           <li class="gameLine" id="game1">
-            <img src="http://media.steampowered.com/steamcommunity/public/images/apps/394360/134bcd93ec4d31ec4a6640d6bdd73f22f0a7619f.jpg" />
-            <span> 1. Hearts of Iron IV </span>
+            <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{zwrot['steam']['favgames'][i]['appid']}}/zwrot['steam']['favgames'][i]['img_icon_url'].jpg" />
+            <span> {{i}}. {{zwrot['steam']['favgames']['i']['name']}}</span>
             <span class="timeIndicator" id="time1"> 26 days, 18 hours, 24 minutes </span>
           </li>
-          <li class="gameLine" id="game2">
-            <img src="http://media.steampowered.com/steamcommunity/public/images/apps/236390/88259dcb7014dcdb109d9ece0cfc70c100bc2f9c.jpg" />
-            <span> 2. War Thunder </span>
-            <span class="timeIndicator" id="time2"> 23 days, 19 hours, 29 minutes </span>
-          </li>
-          <li class="gameLine" id="game3">
-            <img src="http://media.steampowered.com/steamcommunity/public/images/apps/730/69f7ebe2735c366c65c0b33dae00e12dc40edbe4.jpg" />
-            <span> 3. Counter-Strike: Global Offensive </span>
-            <span class="timeIndicator" id="time3"> 16 days, 16 hours, 32 minutes </span>
-          </li>
+          {% endfor %}
         </ul>
         <div class="rankContainer"></div>
         <span class="levelIndicator"> 20 </span>
