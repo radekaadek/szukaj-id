@@ -2,3 +2,4 @@ fastapi[all]
 aiohttp
 uvicorn[standard]
 jinja2
+beautifulsoup4

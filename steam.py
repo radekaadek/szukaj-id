@@ -7,6 +7,8 @@ steam_api_key = 'EE03692ACB03E4371522180E26926643'
 def arrayToDictionary(arrlist):
     arrlistkeys = dict.fromkeys(range(1, len(arrlist)))
     arrlist = dict(zip(arrlistkeys, arrlist))
+    keys_values = arrlist.items()
+    arrlist = {str(key): value for key, value in keys_values}
     return arrlist
 
 

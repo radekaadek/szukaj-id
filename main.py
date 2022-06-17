@@ -29,14 +29,16 @@ async def search(username, request: Request):
         steamTask = asyncio.create_task(steam.checkSteam(username, session))
         zwrot = {"steam": await steamTask, 'minecraft': await minecraftTask, 'fortnite': await fortnite_task}
     end = time.time()
-    zwrot = {'essa': zwrot} | {'time': end - start}
     zwrot1 = str(zwrot)
     zwrot1 = zwrot1.replace("'", "\"")
+    zwrot1 = zwrot1.replace("True", "true")
+    zwrot1 = zwrot1.replace("False", "false")
     p = subprocess.Popen(['node', 'hello.js', zwrot1], stdout=subprocess.PIPE)
     out = p.stdout.read()
     out = out.decode("utf-8") 
     with open('hello.txt', 'w') as f:
         f.write(out)
+        f.write(str(end-start))
     return templates.TemplateResponse("new_home.html", zwrot | {'request': request}) 
     
 if __name__ == "__main__":
