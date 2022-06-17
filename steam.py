@@ -69,7 +69,7 @@ async def checkSteam(username, session):
         "avatar": usersummary["avatarfull"],
         "personaname": usersummary["personaname"],
         "url": usersummary["profileurl"],
-        "favgames": steamgamesinfo2,
+        "favgames": steamgamesinfo,
         "status": status,
         "level": levelsteam["player_level"],
     }
