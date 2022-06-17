@@ -6,9 +6,9 @@ from fastapi.templating import Jinja2Templates
 import asyncio, aiohttp, uvicorn, time, steam, subprocess
 import fortnite as fn
 import minecraft as mc
+import league_of_legends_new as lol
 
 app = FastAPI()
-
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
@@ -28,7 +28,8 @@ async def search(username, request: Request):
         fortnite_task = asyncio.create_task(fn.dane(username, session))
         minecraftTask = asyncio.create_task(mc.dane(username, session))
         steamTask = asyncio.create_task(steam.checkSteam(username, session))
-        zwrot = {"steam": await steamTask, 'minecraft': await minecraftTask, 'fortnite': await fortnite_task}
+        lolTask = asyncio.create_task(lol.dane(username, session))
+        zwrot = {"steam": await steamTask, 'minecraft': await minecraftTask, 'fortnite': await fortnite_task, 'lol': await lolTask}
     end = time.time()
     zwrot1 = str(zwrot)
     zwrot1 = zwrot1.replace("'", "\"")
