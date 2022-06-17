@@ -46,7 +46,6 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
                                 return_dict['leaguePoints'] = element['leaguePoints']
                                 break
                     return_dict |= link_do_profilu(summonerName, region)
-                    print(return_dict)
                     return return_dict
             case 404:
                 return {'error': 'NOT_FOUND'}

@@ -53,7 +53,7 @@ async def checkSteam(username, session):
             del steamgamesinfo[a]["playtime_windows_forever"]
             del steamgamesinfo[a]["playtime_mac_forever"]
             del steamgamesinfo[a]["playtime_linux_forever"]
-            steamgamesinfo[a]['icon_link'] = 'http://media.steampowered.com/steamcommunity/public/images/apps/' + str(a['appid']) + '/' + str(a['img_icon_url'])
+            steamgamesinfo[a]['icon_link'] = f'http://media.steampowered.com/steamcommunity/public/images/apps/{steamgamesinfo[a]["appid"]}/{steamgamesinfo[a]["img_icon_url"]}.jpg'
             del steamgamesinfo[a]["img_icon_url"]
             del steamgamesinfo[a]["appid"]
 
@@ -69,7 +69,7 @@ async def checkSteam(username, session):
         "avatar": usersummary["avatarfull"],
         "personaname": usersummary["personaname"],
         "url": usersummary["profileurl"],
-        "favgames": steamgamesinfo2,
+        "favgames": steamgamesinfo,
         "status": status,
         "level": levelsteam["player_level"],
     }

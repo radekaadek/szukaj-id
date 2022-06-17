@@ -10,7 +10,7 @@
         <ul class="gamesList" style="display: inline-block;">
           {% for i in zwrot['steam']['favgames'] %}
           <li class="gameLine" id="game1">
-            <img src="do zrobienia" />
+            <img src="{{zwrot['steam']['favgames'][i]['icon_link']}}" />
             <span> {{i}}. {{zwrot['steam']['favgames'][i]['name']}}</span>
             <span class="timeIndicator" id="time1"> {{zwrot['steam']['favgames'][i]['playtime_forever']//60}} </span>
           </li>
