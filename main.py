@@ -38,7 +38,7 @@ async def search(username, request: Request):
     p = subprocess.Popen(['node', 'hello.js', zwrot1], stdout=subprocess.PIPE)
     out = p.stdout.read()
     out = out.decode("utf-8") 
-    soup = bs(out)
+    soup = bs(out, features="html.parser")
     out = soup.prettify()
     with open('hello.txt', 'w') as f:
         f.write(out)
