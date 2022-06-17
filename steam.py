@@ -48,13 +48,16 @@ async def checkSteam(username, session):
         steamgamesinfo.sort(key=sortkey, reverse=True)
         steamgamesinfo = steamgamesinfo[0:4]
         steamgamesinfo = arrayToDictionary(steamgamesinfo)
+        
+        for a in steamgamesinfo:
+            del a["playtime_windows_forever"]
+            del a["playtime_mac_forever"]
+            del a["playtime_linux_forever"]
+            a['icon_link'] = 'http://media.steampowered.com/steamcommunity/public/images/apps/' + str(a['appid']) + '/' + str(a['img_icon_url'])
+            del a["img_icon_url"]
+            del a["appid"]
 
-
-        # for a in steamgamesinfo:
-        #     del a["playtime_windows_forever"]
-        #     del a["playtime_mac_forever"]
-        #     del a["playtime_linux_forever"]
-
+        print(steamgamesinfo)
 
         match usersummary['personastate']:
             case 0:
