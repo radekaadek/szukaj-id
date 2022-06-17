@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
+from bs4 import BeautifulSoup as bs
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import asyncio, aiohttp, uvicorn, time, steam, subprocess
@@ -36,10 +37,13 @@ async def search(username, request: Request):
     p = subprocess.Popen(['node', 'hello.js', zwrot1], stdout=subprocess.PIPE)
     out = p.stdout.read()
     out = out.decode("utf-8") 
+    soup = bs(out)
+    out = soup.prettify()
     with open('hello.txt', 'w') as f:
         f.write(out)
         f.write(str(end-start))
-    return templates.TemplateResponse("new_home.html", zwrot | {'request': request}) 
+        f.write(str(zwrot))
+    return templates.TemplateResponse("new_home.html", {"essa":out} | {'request': request}) 
     
 if __name__ == "__main__":
     uvicorn.run(app, port=8000)

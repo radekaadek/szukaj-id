@@ -50,7 +50,6 @@ async def checkSteam(username, session):
         for a in steamgamesinfo:
             del a["playtime_windows_forever"]
             del a["playtime_mac_forever"]
-            # del a["has_community_visible_stats"] K**WA CZEMU NIE DZIAŁA
             del a["playtime_linux_forever"]
             
         match usersummary['personastate']:
