@@ -54,4 +54,5 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
 
 
 if __name__ == '__main__':
+    # print(await dane('radekaadek', 'Europe Nordic & East')) test
     asyncio.run(dane('radekaadek', 'Europe Nordic & East'))
