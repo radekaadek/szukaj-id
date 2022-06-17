@@ -1,9 +1,8 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
-from bs4 import BeautifulSoup as bs
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-import asyncio, aiohttp, uvicorn, steam, subprocess
+import asyncio, aiohttp, uvicorn, steam
 import fortnite as fn
 import minecraft as mc
 import league_of_legends_new as lol
@@ -28,20 +27,7 @@ async def search(username, request: Request):
         minecraftTask = asyncio.create_task(mc.dane(username, session))
         steamTask = asyncio.create_task(steam.checkSteam(username, session))
         lolTask = asyncio.create_task(lol.dane(username, session))
-        zwrot = {"steam": await steamTask, 'minecraft': await minecraftTask, 'fortnite': await fortnite_task, 'lol': await lolTask}
-    # zwrot1 = str(zwrot)
-    # zwrot1 = zwrot1.replace("'", "\"")
-    # zwrot1 = zwrot1.replace("True", "true")
-    # zwrot1 = zwrot1.replace("False", "false")
-    # p = subprocess.Popen(['node', 'hello.js', zwrot1], stdout=subprocess.PIPE)
-    # out = p.stdout.read()
-    # out = out.decode("utf-8") 
-    # soup = bs(out, features="html.parser")
-    # out = soup.prettify()
-    # with open('hello.txt', 'w') as f:
-    #     f.write(out)
-    #     f.write(str(end-start))
-    #     f.write(str(zwrot))
+        zwrot = {"steam": await steamTask, 'minecraft': await minecraftTask,}
     return templates.TemplateResponse("new_home.html", {'request': request, 'zwrot': zwrot})
     
 if __name__ == "__main__":
