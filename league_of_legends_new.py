@@ -2,7 +2,7 @@ import aiohttp, asyncio
 
 #dokumentacja: https://riot-watcher.readthedocs.io/en/latest/index.html
 
-riot_api_key = 'RGAPI-30babb70-cf93-41b8-8e0c-32fb0fb543f2'
+riot_api_key = 'RGAPI-839257c8-7361-417a-8cdd-ed49248b4654'
 
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
@@ -21,8 +21,6 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
     base_params = {"api_key": riot_api_key}
     async with session.get('https://ddragon.leagueoflegends.com/api/versions.json') as lvr:
         lv = await lvr.json()
-        if lvr.response.status != 200:
-            return {'error': 'API_ERROR'}
         league_version = lv[0]
     async with session.get(f'{base_url}/lol/summoner/v4/summoners/by-name/{summonerName}', params=base_params) as response:
         match response.status:

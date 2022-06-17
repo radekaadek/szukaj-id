@@ -27,7 +27,7 @@ async def search(username, request: Request):
         minecraftTask = asyncio.create_task(mc.dane(username, session))
         steamTask = asyncio.create_task(steam.checkSteam(username, session))
         lolTask = asyncio.create_task(lol.dane(username, session))
-        zwrot = {'fortnite': "await fortnite_task", 'lol': "await lolTask", 'minecraft': await minecraftTask, 'steam': await steamTask}
+        zwrot = {'fortnite': await fortnite_task, 'lol': await lolTask, 'minecraft': await minecraftTask, 'steam': await steamTask}
     return templates.TemplateResponse("new_home.html", {'request': request, 'zwrot': zwrot})
     
 if __name__ == "__main__":
