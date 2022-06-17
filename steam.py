@@ -54,18 +54,17 @@ async def checkSteam(username, session):
             
         match usersummary['personastate']:
             case 0:
-                status = 0
+                status = 'offline'
             case 1 | 5 | 6:
-                status = 1
+                status = 'online'
             case 2 | 3 | 4:
-                status = 2
+                status = 'busy'
 
         usersummary = {
             "avatar": usersummary["avatarfull"],
             "personaname": usersummary["personaname"],
             "url": usersummary["profileurl"],
             "favgames": arrayToDictionary(steamgamesinfo[0:4]),
-            "gamequantity": count_of_games,
             "status": status,
             "level": levelsteam["player_level"],
         }

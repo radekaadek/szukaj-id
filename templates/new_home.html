@@ -1,4 +1,48 @@
 {% extends "index.html" %}
 {% block content %}
-{{essa|safe}}
+<div class="jsdom" id="datalists_contaier">
+    <ul>
+      <li class="platformLine" id="steamLine">
+        <img class="platformLogo" id="steamLogo" src="../static/steam_icon.svg" />
+        {% if zwrot['steam']['error'] == 'OK' %}
+        <a class="profileAvatar avatarBorder {{zwrot['steam']['status']}}" href="{{zwrot['steam']['avatar']}}" style="background-image: url({{zwrot['steam']['avatar']}});"></a>
+        <a class="profileLink" href="https://steamcommunity.com/id/radekaadek/"> Mabel Pines </a>
+        <ul class="gamesList" style="display: inline-block;">
+          <li class="gameLine" id="game1">
+            <img src="http://media.steampowered.com/steamcommunity/public/images/apps/394360/134bcd93ec4d31ec4a6640d6bdd73f22f0a7619f.jpg" />
+            <span> 1. Hearts of Iron IV </span>
+            <span class="timeIndicator" id="time1"> 26 days, 18 hours, 24 minutes </span>
+          </li>
+          <li class="gameLine" id="game2">
+            <img src="http://media.steampowered.com/steamcommunity/public/images/apps/236390/88259dcb7014dcdb109d9ece0cfc70c100bc2f9c.jpg" />
+            <span> 2. War Thunder </span>
+            <span class="timeIndicator" id="time2"> 23 days, 19 hours, 29 minutes </span>
+          </li>
+          <li class="gameLine" id="game3">
+            <img src="http://media.steampowered.com/steamcommunity/public/images/apps/730/69f7ebe2735c366c65c0b33dae00e12dc40edbe4.jpg" />
+            <span> 3. Counter-Strike: Global Offensive </span>
+            <span class="timeIndicator" id="time3"> 16 days, 16 hours, 32 minutes </span>
+          </li>
+        </ul>
+        <div class="rankContainer"></div>
+        <span class="levelIndicator"> 20 </span>
+      {% elif zwrot['steam']['error'] == 'NOT_FOUND' %}
+      <div>Nie znaleziono na steamie</div>
+      {% elif zwrot['steam']['error'] == 'API_ERROR' %}
+      <div>Steam api error</div>
+      {% endif %}
+      </li>
+      <li class="platformLine" id="minecraftLine">
+        <a class="profileAvatar" href="https://mc-heads.net/avatar/radekaadek" style="background-image: url(https://mc-heads.net/avatar/radekaadek);"></a>
+        <div class="rankContainer"></div>
+        <img class="platformLogo" id="minecraftLogo" src="../static/minecraft_icon.svg" />
+      </li>
+      <li class="platformLine" id="lolLine">
+        <a class="profileAvatar" href="undefined" style="background-image: url(undefined);"></a>
+        <div class="rankContainer"></div>
+        <span class="levelIndicator"> 214 </span>
+        <img class="platformLogo" id="lolLogo" src="../static/lol_icon.svg" />
+      </li>
+    </ul>
+  </div>
 {% endblock %}
