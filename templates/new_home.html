@@ -1,7 +1,10 @@
 {% extends "index.html" %}
 {% block content %}
 <div class="jsdom" id="datalists_contaier">
-    <ul>
+    <ul,  style="display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;">
       <li class="platformLine" id="steamLine">
         <img class="platformLogo" id="steamLogo" src="../static/steam_icon.svg" />
         {% if zwrot['steam']['error'] == 'OK' %}

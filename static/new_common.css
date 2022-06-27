@@ -3,6 +3,14 @@ html {
     min-height: 100%;
 }
 
+.platformLine {
+    display: flow-root;
+    justify-content: center;
+    width: fit-content;
+    height: fit-content;
+}
+
+
 h1 {
     text-align: center;
     color: rgb(238, 116, 94);
@@ -15,6 +23,7 @@ h1 {
     margin-left: auto;
     width: 500px;
     height: auto;
+    align-items: center
 }
 
 #poleTxt {
