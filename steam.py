@@ -24,7 +24,7 @@ async def checkSteam(username, session):
                 return {'error': 'NOT_FOUND'}
             steamid = data['response']['steamid']
     except:
-        return {'error': 'API_ERROR'}
+        return {'error': 'NOT_FOUND'}
     # try:
     # api request by pozyskać dane w obiektach
     ##definicje: https://github.com/shawnsilva/steamwebapi/blob/devel/steamwebapi/api.py
@@ -44,7 +44,10 @@ async def checkSteam(username, session):
         levelsteam = steamgamesinfo_response["response"]
 
         # obróbka obiektów
-        steamgamesinfo = steamgamesinfo["games"]
+        try:
+            steamgamesinfo = steamgamesinfo["games"]
+        except:
+            return {'error': 'API_ERROR'}
         steamgamesinfo.sort(key=sortkey, reverse=True)
         steamgamesinfo = steamgamesinfo[0:4]
         steamgamesinfo = arrayToDictionary(steamgamesinfo)

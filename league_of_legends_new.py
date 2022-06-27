@@ -2,7 +2,7 @@ import aiohttp, asyncio
 
 #dokumentacja: https://riot-watcher.readthedocs.io/en/latest/index.html
 
-riot_api_key = 'RGAPI-839257c8-7361-417a-8cdd-ed49248b4654'
+riot_api_key = 'RGAPI-63e31cd1-348e-41ca-ad15-3402562d0ac3'
 
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
