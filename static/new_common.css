@@ -15,6 +15,12 @@ h1 {
     color: rgb(238, 116, 94);
 }
 
+h2 {
+    text-align: center;
+    color: rgb(238, 116, 94);
+    font-size: medium;
+}
+
 #centerContainer {
     margin-top: 20px;
     margin-right: auto;
