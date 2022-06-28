@@ -51,6 +51,8 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
                 return {'error': 'NOT_FOUND'}
             case 401 | 429:
                 return {'error': 'API_ERROR'}
+            case 403:
+                return {'error': 'KEY_ERROR'}
 
 
 # if __name__ == '__main__':
