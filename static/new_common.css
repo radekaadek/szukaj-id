@@ -178,3 +178,11 @@ ul {
         height: 0%;
     }
 }
+#serviceLogo{
+    font-size: 2em;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    width: 500px;
+    height: auto;
+}
