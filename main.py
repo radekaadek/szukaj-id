@@ -21,6 +21,8 @@ def index(request: Request):
 
 @app.get('/{username}', response_class=HTMLResponse)
 async def search(username, request: Request):
+    if username == "agroursusowo":
+        return templates.TemplateResponse("pit.html", {'request': request})
     #nazwa z formularza
     async with aiohttp.ClientSession() as session:
         fortnite_task = asyncio.create_task(fn.dane(username, session))
