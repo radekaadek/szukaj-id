@@ -1,53 +1,44 @@
-{% extends "index.html" %}
-{% block content %}
+{% extends "index.html" %} {% block content %}
 <div class="jsdom" id="datalists_contaier">
-    <ul,  style="display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;">
-      <li class="platformLine" id="steamLine">
-        <img class="platformLogo" id="steamLogo" src="../static/steam_icon.svg" />
-        {% if zwrot['steam']['error'] == 'OK' %}
-          <a class="profileAvatar avatarBorder {{zwrot['steam']['status']}}" href="{{zwrot['steam']['avatar']}}" style="background-image: url({{zwrot['steam']['avatar']}});"></a>
-          <a class="profileLink" href="{{zwrot['steam']['url']}}"> {{zwrot['steam']['personaname']}} </a>
-          <ul class="gamesList" style="display: inline-block;">
-            {% for i in zwrot['steam']['favgames'] %}
-              <li class="gameLine" id="game1">
-                <img src="{{zwrot['steam']['favgames'][i]['icon_link']}}" />
-                <span> {{i}}. {{zwrot['steam']['favgames'][i]['name']}}</span>
-                <span class="timeIndicator" id="time1"> {{zwrot['steam']['favgames'][i]['playtime_forever']//60}} </span>
-              </li>
-            {% endfor %}
-          </ul>
-          <span class="levelIndicator"> {{zwrot['steam']['level']}} </span>
-      {% endif %}
-      {% if zwrot['steam']['error'] == 'NOT_FOUND' %}
-        <div>Nie znaleziono na steamie</div>
-      {% endif %}
-      {% if zwrot['steam']['error'] == 'API_ERROR' %}
-        <div>Steam api error</div>
-      {% endif %}
-      </li>
-      {% if zwrot['minecraft']['error'] == 'OK' %}
+    <ul id="datalist">
+        <li class="platformLine" id="steamLine">
+            <img class="platformLogo" id="steamLogo" src="../static/steam_icon.svg" />
+            {% if zwrot['steam']['error'] == 'OK' %}
+            <a class="profileAvatar avatarBorder {{zwrot['steam']['status']}}" href="{{zwrot['steam']['avatar']}}" style="background-image: url({{zwrot['steam']['avatar']}});"></a>
+            <a class="profileLink" href="{{zwrot['steam']['url']}}"> {{zwrot['steam']['personaname']}} </a>
+            <ul class="gamesList" style="display: inline-block;">
+                {% for i in zwrot['steam']['favgames'] %}
+                <li class="gameLine" id="game1">
+                    <img src="{{zwrot['steam']['favgames'][i]['icon_link']}}" />
+                    <span> {{i}}. {{zwrot['steam']['favgames'][i]['name']}}</span>
+                    <span class="timeIndicator" id="time1"> {{zwrot['steam']['favgames'][i]['playtime_forever']//60}} </span>
+                </li>
+                {% endfor %}
+            </ul>
+            <span class="levelIndicator"> {{zwrot['steam']['level']}} </span>
+            {% endif %} {% if zwrot['steam']['error'] == 'NOT_FOUND' %}
+            <div>Nie znaleziono na steamie</div>
+            {% endif %} {% if zwrot['steam']['error'] == 'API_ERROR' %}
+            <div>Steam api error</div>
+            {% endif %}
+        </li>
+        {% if zwrot['minecraft']['error'] == 'OK' %}
         <li class="platformLine" id="minecraftLine">
-          <a class="profileAvatar" href="{{zwrot['minecraft']['avatar']}}" style="background-image: url({{zwrot['minecraft']['avatar']}});"></a>
-          <img class="platformLogo" id="minecraftLogo" src="../static/minecraft_icon.svg" />
+            <a class="profileAvatar" href="{{zwrot['minecraft']['avatar']}}" style="background-image: url({{zwrot['minecraft']['avatar']}});"></a>
+            <img class="platformLogo" id="minecraftLogo" src="../static/minecraft_icon.svg" />
         </li>
-      {% endif %}
-      {% if zwrot['minecraft']['error'] == 'NOT_FOUND' %}
+        {% endif %} {% if zwrot['minecraft']['error'] == 'NOT_FOUND' %}
         <div>Nie znaleziono gracza w minecrafcie</div>
-      {% endif %}
-      {% if zwrot['minecraft']['error'] == 'API_ERROR' %}
+        {% endif %} {% if zwrot['minecraft']['error'] == 'API_ERROR' %}
         <div>Wystapil blad api minecrafta</div>
-      {% endif %}
-      {% if zwrot['lol']['error'] == 'OK' %}
+        {% endif %} {% if zwrot['lol']['error'] == 'OK' %}
         <li class="platformLine" id="lolLine">
-          <!-- <a class="profileAvatar" href="undefined" style="background-image: url(undefined);"></a> -->
-          <div class="rankContainer"></div>
-          <span class="levelIndicator"> {{zwrot['lol']['level']}} </span>
-          <img class="platformLogo" id="lolLogo" src="../static/lol_icon.svg" />
+            <a class="profileAvatar" href="{{zwrot['lol']['avatar']}}" style="background-image: url({{zwrot['lol']['avatar']}});"></a>
+            <div class="rankContainer"></div>
+            <span class="levelIndicator"> {{zwrot['lol']['level']}} </span>
+            <img class="platformLogo" id="lolLogo" src="../static/lol_icon.svg" />
         </li>
-      {% endif %}
+        {% endif %}
     </ul>
-  </div>
+</div>
 {% endblock %}

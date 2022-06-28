@@ -13,7 +13,7 @@ templates = Jinja2Templates(directory="templates")
 
 #regiony = ['Brasil', 'Europe Nordic & East', 'Europe West', 'Japan', 'Korea', 'Latin America North', 'Latin America South', 'North America', 'Oceania', 'Russia', 'Turkey']
 
-asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy()) #na linuxie usunac
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy()) #na linuxie usunac trzeba bedzie
 
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
@@ -28,6 +28,7 @@ async def search(username, request: Request):
         steamTask = asyncio.create_task(steam.checkSteam(username, session))
         lolTask = asyncio.create_task(lol.dane(username, session))
         zwrot = {'fortnite': await fortnite_task, 'lol': await lolTask, 'minecraft': await minecraftTask, 'steam': await steamTask}
+        # print(zwrot)   #debug
     return templates.TemplateResponse("new_home.html", {'request': request, 'zwrot': zwrot})
     
 if __name__ == "__main__":

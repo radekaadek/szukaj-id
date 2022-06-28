@@ -32,7 +32,7 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
                 return_dict['level'] = level
                 encryptedSummonerId = player_response['id']
                 profileIconLink = f'https://ddragon.leagueoflegends.com/cdn/{league_version}/img/profileicon/{player_response["profileIconId"]}.png'
-                return_dict['profileIconLink'] = profileIconLink
+                return_dict['avatar'] = profileIconLink
                 async with session.get(f'{base_url}/lol/league/v4/entries/by-summoner/{encryptedSummonerId}', params = base_params) as ranked_response:
                     ranked_json_response = await ranked_response.json()
                     for element in ranked_json_response:
