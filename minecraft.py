@@ -1,4 +1,5 @@
 import aiohttp, asyncio
+from datetime import datetime, timedelta
 
 hypixel_url = 'https://api.hypixel.net'
 hypixel_api_key = '36da01f0-28b9-4bc1-9c33-d24c57f55399'
@@ -41,7 +42,8 @@ async def dane(username, session) -> dict:
     except:
         aliases = False
     try:
-        last_seen = stats['player']['lastLogout']
+        last_seen_milis = stats['player']['lastLogout']
+        last_seen = datetime(1970, 1, 1) + timedelta(milliseconds=last_seen_milis)
     except:
         last_seen = False
     player_data = {'online_status': player_status, 'last_seen': last_seen, 'aliases': aliases, 'rank': rank}

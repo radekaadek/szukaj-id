@@ -47,7 +47,7 @@ async def checkSteam(username, session):
         try:
             steamgamesinfo = steamgamesinfo["games"]
         except:
-            return {'error': 'API_ERROR'}
+            return {'error': 'NOT_FOUND'}
         steamgamesinfo.sort(key=sortkey, reverse=True)
         steamgamesinfo = steamgamesinfo[0:4]
         steamgamesinfo = arrayToDictionary(steamgamesinfo)
