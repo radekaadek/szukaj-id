@@ -43,7 +43,7 @@ async def dane(username, session) -> dict:
         aliases = False
     try:
         last_seen_milis = stats['player']['lastLogout']
-        last_seen = datetime(1970, 1, 1) + timedelta(milliseconds=last_seen_milis)
+        last_seen = (datetime(1970, 1, 1) + timedelta(milliseconds=last_seen_milis)).replace(microsecond=0)
     except:
         last_seen = False
     player_data = {'online_status': player_status, 'last_seen': last_seen, 'aliases': aliases, 'rank': rank}
