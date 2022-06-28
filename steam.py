@@ -13,7 +13,7 @@ def arrayToDictionary(arrlist):
 
 
 async def checkSteam(username, session):
-    # dokumentacja: https://pypi.org/project/steamwebapi/
+    # dokumentacja: https://wiki.teamfortress.com/wiki/WebAPI
     # deklaracje głównych interfejsów API steam
     try:
         # api request by pozyskać steam ID
@@ -24,51 +24,58 @@ async def checkSteam(username, session):
                 return {'error': 'NOT_FOUND'}
             steamid = data['response']['steamid']
     except:
-        return {'error': 'API_ERROR'}
-    try:
-        # api request by pozyskać dane w obiektach
-        ##definicje: https://github.com/shawnsilva/steamwebapi/blob/devel/steamwebapi/api.py
-        params = {'steamid': steamid, 'key': steam_api_key, 'include_appinfo': 1}
-        async with session.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v1', params=params) as resp:
-            steamgamesinfo_response = await resp.json()
-            steamgamesinfo = steamgamesinfo_response["response"]
+        return {'error': 'NOT_FOUND'}
+    # try:
+    # api request by pozyskać dane w obiektach
+    ##definicje: https://github.com/shawnsilva/steamwebapi/blob/devel/steamwebapi/api.py
+    params = {'steamid': steamid, 'key': steam_api_key, 'include_appinfo': 1}
+    async with session.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v1', params=params) as resp:
+        steamgamesinfo_response = await resp.json()
+        steamgamesinfo = steamgamesinfo_response["response"]
 
-        params2 = {'steamids': steamid, 'key': steam_api_key}
-        async with session.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/', params=params2) as resp:
-            steamgamesinfo_response = await resp.json()
-            usersummary = steamgamesinfo_response["response"]["players"][0]
+    params2 = {'steamids': steamid, 'key': steam_api_key}
+    async with session.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/', params=params2) as resp:
+        steamgamesinfo_response = await resp.json()
+        usersummary = steamgamesinfo_response["response"]["players"][0]
 
-        params3 = {'steamid': steamid, 'key': steam_api_key}
-        async with session.get('http://api.steampowered.com/IPlayerService/GetSteamLevel/v1', params=params3) as resp:
-            steamgamesinfo_response = await resp.json()
-            levelsteam = steamgamesinfo_response["response"]
+    params3 = {'steamid': steamid, 'key': steam_api_key}
+    async with session.get('http://api.steampowered.com/IPlayerService/GetSteamLevel/v1', params=params3) as resp:
+        steamgamesinfo_response = await resp.json()
+        levelsteam = steamgamesinfo_response["response"]
 
         # obróbka obiektów
-        count_of_games = steamgamesinfo["game_count"]
-        steamgamesinfo = steamgamesinfo["games"]
+        try:
+            steamgamesinfo = steamgamesinfo["games"]
+        except:
+            return {'error': 'NOT_FOUND'}
         steamgamesinfo.sort(key=sortkey, reverse=True)
+        steamgamesinfo = steamgamesinfo[0:4]
+        steamgamesinfo = arrayToDictionary(steamgamesinfo)
+        
         for a in steamgamesinfo:
-            del a["playtime_windows_forever"]
-            del a["playtime_mac_forever"]
-            del a["playtime_linux_forever"]
-            
-        match usersummary['personastate']:
-            case 0:
-                status = 0
-            case 1 | 5 | 6:
-                status = 1
-            case 2 | 3 | 4:
-                status = 2
+            del steamgamesinfo[a]["playtime_windows_forever"]
+            del steamgamesinfo[a]["playtime_mac_forever"]
+            del steamgamesinfo[a]["playtime_linux_forever"]
+            steamgamesinfo[a]['icon_link'] = f'http://media.steampowered.com/steamcommunity/public/images/apps/{steamgamesinfo[a]["appid"]}/{steamgamesinfo[a]["img_icon_url"]}.jpg'
+            del steamgamesinfo[a]["img_icon_url"]
+            del steamgamesinfo[a]["appid"]
 
-        usersummary = {
-            "avatar": usersummary["avatarfull"],
-            "personaname": usersummary["personaname"],
-            "url": usersummary["profileurl"],
-            "favgames": arrayToDictionary(steamgamesinfo[0:4]),
-            "gamequantity": count_of_games,
-            "status": status,
-            "level": levelsteam["player_level"],
-        }
-        return usersummary | {'error': 'OK'}
-    except:
-        return {'error': 'NOT_FOUND'}
+    match usersummary['personastate']:
+        case 0:
+            status = 'offline'
+        case 1 | 5 | 6:
+            status = 'online'
+        case 2 | 3 | 4:
+            status = 'busy'
+
+    usersummary = {
+        "avatar": usersummary["avatarfull"],
+        "personaname": usersummary["personaname"],
+        "url": usersummary["profileurl"],
+        "favgames": steamgamesinfo,
+        "status": status,
+        "level": levelsteam["player_level"],
+    }
+    return usersummary | {'error': 'OK'}
+    # except:
+        # return {'error': 'NOT_FOUND'}

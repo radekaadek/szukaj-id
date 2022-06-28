@@ -2,7 +2,7 @@ import aiohttp, asyncio
 
 #dokumentacja: https://riot-watcher.readthedocs.io/en/latest/index.html
 
-riot_api_key = 'RGAPI-30babb70-cf93-41b8-8e0c-32fb0fb543f2'
+riot_api_key = 'RGAPI-63e31cd1-348e-41ca-ad15-3402562d0ac3'
 
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
@@ -19,8 +19,8 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
     base_region = zwroc_region(region)
     base_url = f'https://{base_region}.api.riotgames.com'
     base_params = {"api_key": riot_api_key}
-    async with session.get('https://ddragon.leagueoflegends.com/api/versions.json') as lv:
-        lv = await lv.json()
+    async with session.get('https://ddragon.leagueoflegends.com/api/versions.json') as lvr:
+        lv = await lvr.json()
         league_version = lv[0]
     async with session.get(f'{base_url}/lol/summoner/v4/summoners/by-name/{summonerName}', params=base_params) as response:
         match response.status:
@@ -32,7 +32,7 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
                 return_dict['level'] = level
                 encryptedSummonerId = player_response['id']
                 profileIconLink = f'https://ddragon.leagueoflegends.com/cdn/{league_version}/img/profileicon/{player_response["profileIconId"]}.png'
-                return_dict['profileIconLink'] = profileIconLink
+                return_dict['avatar'] = profileIconLink
                 async with session.get(f'{base_url}/lol/league/v4/entries/by-summoner/{encryptedSummonerId}', params = base_params) as ranked_response:
                     ranked_json_response = await ranked_response.json()
                     for element in ranked_json_response:
@@ -53,5 +53,10 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
                 return {'error': 'API_ERROR'}
 
 
-if __name__ == '__main__':
-    asyncio.run(dane('radekaadek', 'Europe Nordic & East'))
+# if __name__ == '__main__':
+
+#     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+#     async def main():
+#         async with aiohttp.ClientSession() as session:
+#             print(await dane('radekaadek', session, 'Europe Nordic & East'))
+#     asyncio.run(main())
