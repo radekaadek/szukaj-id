@@ -4,10 +4,15 @@ html {
 }
 
 .platformLine {
-    display: flow-root;
+    display: inline-flex;
     justify-content: center;
     width: fit-content;
     height: fit-content;
+    flex-direction: column;
+}
+
+.platformLine > * {
+    margin: auto;
 }
 
 h1 {
@@ -185,4 +190,10 @@ ul {
     display: block;
     width: 500px;
     height: auto;
+}
+
+.gameList{
+    margin-bottom: auto;
+    display: inline-block;
+    margin-top: auto;
 }
