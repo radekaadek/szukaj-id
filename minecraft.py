@@ -46,5 +46,5 @@ async def dane(username, session) -> dict:
         last_seen = (datetime(1970, 1, 1) + timedelta(milliseconds=last_seen_milis)).replace(microsecond=0)
     except:
         last_seen = False
-    player_data = {'online_status': player_status, 'last_seen': last_seen, 'aliases': aliases, 'rank': rank}
+    player_data = {'status': 'online' if player_status else 'offline', 'last_seen': last_seen, 'aliases': aliases, 'rank': rank, 'profile_link': f'https://plancke.io/hypixel/player/stats/{aliases[0]}'}
     return player_data | {'avatar': f'https://mc-heads.net/avatar/{username}/nohelm', 'error': 'OK'}

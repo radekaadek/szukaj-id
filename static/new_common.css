@@ -4,10 +4,7 @@ html {
 }
 
 .platformLine {
-    display: flow-root;
-    justify-content: center;
-    width: fit-content;
-    height: fit-content;
+    display: flex;
 }
 
 h1 {
