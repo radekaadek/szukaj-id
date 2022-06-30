@@ -67,10 +67,10 @@
         <li class="platformLine" id="fortniteLine">
             <img class="platformLogo" id="fortniteLogo" src="../static/fortnite_icon.svg" />
             {% if zwrot['fortnite']['error'] == 'OK' %}
-            <div>name: {{zwrot['fortnite']['name']}}</div>
-            <div>hours played: {{zwrot['fortnite']['hoursPlayed']}}</div>
-            <div>wins: {{zwrot['fortnite']['wins']}}</div>
-            <div>last seen on fortnite: {{zwrot['fortnite']['lastPlayed']}}</div>
+            <div>Name: {{zwrot['fortnite']['name']}}</div>
+            <div>Hours played: {{zwrot['fortnite']['hoursPlayed']}}</div>
+            <div>Wins: {{zwrot['fortnite']['wins']}}</div>
+            <div>Last seen on fortnite: {{zwrot['fortnite']['lastPlayed']}}</div>
             <span class="levelIndicator">Battlepass Level: {{zwrot['fortnite']['battlepassLevel']}} </span>
             {% endif %} {% if zwrot['fortnite']['error'] == 'NOT_FOUND' %}
             <div>Player was not found</div>
