@@ -3,10 +3,13 @@
 <div class="jsdom" id="datalists_contaier">
     <ul id="datalist">
         <li class="platformLine" id="steamLine">
-            <img class="platformLogo" id="steamLogo" src="../static/steam_icon.svg" />
             {% if zwrot['steam']['error'] == 'OK' %}
-                <a class="profileAvatar avatarBorder {{zwrot['steam']['status']}}" href="{{zwrot['steam']['avatar']}}" style="background-image: url({{zwrot['steam']['avatar']}});"></a>
-                <a class="profileLink" href="{{zwrot['steam']['url']}}"> {{zwrot['steam']['personaname']}} </a>
+                <div>
+                    <div class="imageDescription">
+                        <a class="profileLink" href="{{zwrot['steam']['url']}}"> {{zwrot['steam']['personaname']}} </a>
+                    </div>
+                    <a class="profileAvatar avatarBorder {{zwrot['steam']['status']}}" href="{{zwrot['steam']['avatar']}}" style="background-image: url({{zwrot['steam']['avatar']}});"></a>
+                </profile>
                 <ul class="gamesList" style="display: inline-block;">
                     {% for i in zwrot['steam']['favgames'] %}
                     <li class="gameLine" id="game1">
@@ -24,12 +27,19 @@
             {% if zwrot['steam']['error'] == 'API_ERROR' %}
                 <div>Steam API error</div>
             {% endif %}
+            <img class="platformLogo" id="steamLogo" src="../static/steam_icon.svg" />
         </li>
         {% if zwrot['minecraft']['error'] == 'OK' %}
         <li class="platformLine" id="minecraftLine">
             <a class="profileAvatar" href="{{zwrot['minecraft']['avatar']}}" style="background-image: url({{zwrot['minecraft']['avatar']}});"></a>
             <div>last seen on hypixel: {{zwrot['minecraft']['last_seen']}}</div>
             <img class="platformLogo" id="minecraftLogo" src="../static/minecraft_icon.svg" />
+            <div class="aliasLine">
+                <div>Minecraft aliases: </div>
+                {% for alias in zwrot['minecraft']['aliases'] %}
+                    <span>{{alias}} </span>
+                {% endfor %}
+            </div>
         </li>
         {% endif %}
         {% if zwrot['minecraft']['error'] == 'NOT_FOUND' %}
