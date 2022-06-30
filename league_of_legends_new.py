@@ -55,12 +55,3 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
                 return {'error': 'API_ERROR'}
             case 403:
                 return {'error': 'KEY_ERROR'}
-
-
-# if __name__ == '__main__':
-
-#     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-#     async def main():
-#         async with aiohttp.ClientSession() as session:
-#             print(await dane('radekaadek', session, 'Europe Nordic & East'))
-#     asyncio.run(main())
