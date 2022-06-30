@@ -25,13 +25,11 @@
         {% if zwrot['minecraft']['error'] == 'OK' %}
         <li class="platformLine" id="minecraftLine"><li class="platformLine" id="minecraftLine" style="display: flex;">
             <a class="profileAvatar avatarBorder {{zwrot['minecraft']['status']}}" href="{{zwrot['minecraft']['avatar']}}" style="background-image: url({{zwrot['minecraft']['avatar']}});"></a>
-            <div href="{{zwrot['minecraft']['link']}}">{{zwrot['minecraft']['aliases'][0]}}</div>
+            <div href="{{zwrot['minecraft']['link']}}">{{zwrot['minecraft']['name']}}</div>
             <div>last seen on hypixel: {{zwrot['minecraft']['last_seen']}}</div>
             <div class="aliasLine">
                 <div>Minecraft aliases:</div>
-                {% for alias in zwrot['minecraft']['aliases'] %}
-                <span>{{alias}} </span>
-                {% endfor %}
+                <span>{{zwrot['minecraft']['aliases']}} </span>
             </div>
             <img class="platformLogo" id="minecraftLogo" src="../static/minecraft_icon.svg" />
         </li>
@@ -41,7 +39,6 @@
         <div>Minecraft API error</div>
         {% endif %}
         <li class="platformLine" id="lolLine">
-            <img class="platformLogo" id="lolLogo" src="../static/lol_icon.svg" />
             {% if zwrot['lol']['error'] == 'OK' %}
             <a href="{{zwrot['lol']['link']}}">{{zwrot['lol']['name']}}</a>
                 <a class="profileAvatar" href="{{zwrot['lol']['avatar']}}" style="background-image: url({{zwrot['lol']['avatar']}});"></a>
@@ -65,6 +62,7 @@
             {% endif %} {% if zwrot['lol']['error'] == 'KEY_ERROR' %}
             <div>League of Legends API key has expired</div>
             {% endif %}
+            <img class="platformLogo" id="lolLogo" src="../static/lol_icon.svg" />
         </li>
         <li class="platformLine" id="fortniteLine">
             <img class="platformLogo" id="fortniteLogo" src="../static/fortnite_icon.svg" />

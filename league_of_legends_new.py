@@ -1,4 +1,5 @@
 import aiohttp, asyncio
+from datetime import datetime, timedelta
 
 #dokumentacja: https://riot-watcher.readthedocs.io/en/latest/index.html
 
@@ -30,7 +31,7 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
                 puuid = player_response['puuid']
                 level = player_response['summonerLevel']
                 return_dict['level'] = level
-                return_dict['revisionDate'] = player_response['revisionDate']
+                return_dict['revisionDate'] = (datetime(1970, 1, 1) + timedelta(milliseconds=player_response['revisionDate'])).replace(microsecond=0)
                 return_dict['name'] = player_response['name']
                 encryptedSummonerId = player_response['id']
                 profileIconLink = f'https://ddragon.leagueoflegends.com/cdn/{league_version}/img/profileicon/{player_response["profileIconId"]}.png'
