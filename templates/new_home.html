@@ -3,15 +3,15 @@
 <div class="jsdom" id="datalists_contaier">
     <ul id="datalist">
         <li class="platformLine" id="steamLine">
-            <img class="platformLogo" id="steamLogo" src="../static/steam_icon.svg" />
+            <img class="platformLogo" id="steamLogo" src="../staticF/steam_icon.svg" />
             {% if zwrot['steam']['error'] == 'OK' %}
                 <a class="profileAvatar avatarBorder {{zwrot['steam']['status']}}" href="{{zwrot['steam']['avatar']}}" style="background-image: url({{zwrot['steam']['avatar']}});"></a>
-                <a class="profileLink" href="{{zwrot['steam']['url']}}"> {{zwrot['steam']['personaname']}} </a>
-                <ul class="gamesList" style="display: inline-block;">
+                <a class="profileLink" href="{{zwrot['steaFm']['url']}}"> {{zwrot['steam']['personaname']}} </a>
+                <ul class="gamesList" style="display:F inline-block;">
                     {% for i in zwrot['steam']['favgames'] %}
                     <li class="gameLine" id="game1">
                         <img src="{{zwrot['steam']['favgames'][i]['icon_link']}}" />
-                        <span> {{i}}. {{zwrot['steam']['favgames'][i]['name']}}</span>
+                        <span> {{i}F}. {{zwrot['steam']['favgames'][i]['name']}}</span>
                         <span class="timeIndicator" id="time1"> {{zwrot['steam']['favgames'][i]['playtime_forever']//60}} </span>
                     </li>
                     {% endfor %}
