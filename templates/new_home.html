@@ -1,31 +1,24 @@
-{% extends "index.html" %} {% block content %}
-{{zwrot}}
+{% extends "index.html" %} {% block content %} {{zwrot}}
 <div class="jsdom" id="datalists_contaier">
     <ul id="datalist">
         <li class="platformLine" id="steamLine">
             {% if zwrot['steam']['error'] == 'OK' %}
-                <div>
-                    <div class="imageDescription">
-                        <a class="profileLink" href="{{zwrot['steam']['url']}}"> {{zwrot['steam']['personaname']}} </a>
-                    </div>
-                    <a class="profileAvatar avatarBorder {{zwrot['steam']['status']}}" href="{{zwrot['steam']['avatar']}}" style="background-image: url({{zwrot['steam']['avatar']}});"></a>
-                </profile>
-                <ul class="gamesList" style="display: inline-block;">
-                    {% for i in zwrot['steam']['favgames'] %}
-                    <li class="gameLine" id="game1">
-                        <img src="{{zwrot['steam']['favgames'][i]['icon_link']}}" />
-                        <span> {{i}}. {{zwrot['steam']['favgames'][i]['name']}}</span>
-                        <span class="timeIndicator" id="time1"> {{zwrot['steam']['favgames'][i]['playtime_forever']//60}} </span>
-                    </li>
-                    {% endfor %}
-                </ul>
-                <span class="levelIndicator">level: {{zwrot['steam']['level']}} </span>
-            {% endif %}
-            {% if zwrot['steam']['error'] == 'NOT_FOUND' %}
-                <div>The player was not found on steam</div>
-            {% endif %}
-            {% if zwrot['steam']['error'] == 'API_ERROR' %}
-                <div>Steam API error</div>
+            <a class="profileLink" href="{{zwrot['steam']['url']}}"> {{zwrot['steam']['personaname']}} </a>
+            <a class="profileAvatar avatarBorder {{zwrot['steam']['status']}}" href="{{zwrot['steam']['avatar']}}" style="background-image: url({{zwrot['steam']['avatar']}});"></a>
+            <ul class="gamesList" style="display: inline-block;">
+                {% for i in zwrot['steam']['favgames'] %}
+                <li class="gameLine" id="game1">
+                    <img src="{{zwrot['steam']['favgames'][i]['icon_link']}}" />
+                    <span> {{i}}. {{zwrot['steam']['favgames'][i]['name']}}</span>
+                    <span class="timeIndicator" id="time1"> {{zwrot['steam']['favgames'][i]['playtime_forever']//60}} </span>
+                </li>
+                {% endfor %}
+            </ul>
+            <span class="levelIndicator">level: {{zwrot['steam']['level']}} </span>
+            {% endif %} {% if zwrot['steam']['error'] == 'NOT_FOUND' %}
+            <div>The player was not found on steam</div>
+            {% endif %} {% if zwrot['steam']['error'] == 'API_ERROR' %}
+            <div>Steam API error</div>
             {% endif %}
             <img class="platformLogo" id="steamLogo" src="../static/steam_icon.svg" />
         </li>
@@ -35,64 +28,56 @@
             <div href="{{zwrot['minecraft']['link']}}">{{zwrot['minecraft']['aliases'][0]}}</div>
             <div>last seen on hypixel: {{zwrot['minecraft']['last_seen']}}</div>
             <div class="aliasLine">
-                <div>Minecraft aliases: </div>
+                <div>Minecraft aliases:</div>
                 {% for alias in zwrot['minecraft']['aliases'] %}
-                    <span>{{alias}} </span>
+                <span>{{alias}} </span>
                 {% endfor %}
             </div>
             <img class="platformLogo" id="minecraftLogo" src="../static/minecraft_icon.svg" />
         </li>
-        {% endif %}
-        {% if zwrot['minecraft']['error'] == 'NOT_FOUND' %}
-            <div>The player was not found</div>
-        {% endif %}
-        {% if zwrot['minecraft']['error'] == 'API_ERROR' %}
-            <div>Minecraft API error</div>
+        {% endif %} {% if zwrot['minecraft']['error'] == 'NOT_FOUND' %}
+        <div>The player was not found</div>
+        {% endif %} {% if zwrot['minecraft']['error'] == 'API_ERROR' %}
+        <div>Minecraft API error</div>
         {% endif %}
         <li class="platformLine" id="lolLine">
             <img class="platformLogo" id="lolLogo" src="../static/lol_icon.svg" />
             {% if zwrot['lol']['error'] == 'OK' %}
-                <a class="profileAvatar" href="{{zwrot['lol']['avatar']}}" style="background-image: url({{zwrot['lol']['avatar']}});"></a>
-                    {% if zwrot['lol']['tier'] != 'inactive' %}
-                    <div class="rankContainer">
-                        <div class="rank">
-                            <span class="rankTier">{{zwrot['lol']['tier']}}</span>
-                            <span class="rankRank">{{zwrot['lol']['rank']}}</span>
-                            <span class="rankLP">{{zwrot['lol']['leaguePoints']}}</span>
-                        </div>
-                    </div>
-                    {% else %}
-                    <div>This player has no soloq rank this season</div>
-                    {% endif %}
-                <span class="levelIndicator">level: {{zwrot['lol']['level']}} </span>
+            <a class="profileAvatar" href="{{zwrot['lol']['avatar']}}" style="background-image: url({{zwrot['lol']['avatar']}});"></a>
+            {% if zwrot['lol']['tier'] != 'inactive' %}
+            <div class="rankContainer">
+                <div class="rank">
+                    <span class="rankTier">{{zwrot['lol']['tier']}}</span>
+                    <span class="rankRank">{{zwrot['lol']['rank']}}</span>
+                    <span class="rankLP">{{zwrot['lol']['leaguePoints']}}</span>
+                </div>
+            </div>
+            {% else %}
+            <div>This player has no soloq rank this season</div>
             {% endif %}
-            {% if zwrot['lol']['error'] == 'NOT_FOUND' %}
-                <div>Player was not found</div>
-            {% endif %}
-            {% if zwrot['lol']['error'] == 'API_ERROR' %}
-                <div>League of Legends API error</div>
-            {% endif %}
-            {% if zwrot['lol']['error'] == 'KEY_ERROR' %}
-                <div>League of Legends API key has expired</div>
+            <span class="levelIndicator">level: {{zwrot['lol']['level']}} </span>
+            {% endif %} {% if zwrot['lol']['error'] == 'NOT_FOUND' %}
+            <div>Player was not found</div>
+            {% endif %} {% if zwrot['lol']['error'] == 'API_ERROR' %}
+            <div>League of Legends API error</div>
+            {% endif %} {% if zwrot['lol']['error'] == 'KEY_ERROR' %}
+            <div>League of Legends API key has expired</div>
             {% endif %}
         </li>
         <li class="platformLine" id="fortniteLine">
             <img class="platformLogo" id="fortniteLogo" src="../static/fortnite_icon.svg" />
             {% if zwrot['fortnite']['error'] == 'OK' %}
-                <div>name: {{zwrot['fortnite']['name']}}</div>
-                <div>hours played: {{zwrot['fortnite']['hoursPlayed']}}</div>
-                <div>wins: {{zwrot['fortnite']['wins']}}</div>
-                <div>last seen on fortnite: {{zwrot['fortnite']['lastPlayed']}}</div>
-                <span class="levelIndicator">Battlepass Level: {{zwrot['fortnite']['battlepassLevel']}} </span>
-            {% endif %}
-            {% if zwrot['fortnite']['error'] == 'NOT_FOUND' %}
-                <div>Player was not found</div>
-            {% endif %}
-            {% if zwrot['fortnite']['error'] == 'PRIVATE' %}
-                <div>The account is private in fortnite</div>
-            {% endif %}
-            {% if zwrot['fortnite']['error'] == 'KEY_ERROR' %}
-                <div>Fortnite API key has expired</div>
+            <div>name: {{zwrot['fortnite']['name']}}</div>
+            <div>hours played: {{zwrot['fortnite']['hoursPlayed']}}</div>
+            <div>wins: {{zwrot['fortnite']['wins']}}</div>
+            <div>last seen on fortnite: {{zwrot['fortnite']['lastPlayed']}}</div>
+            <span class="levelIndicator">Battlepass Level: {{zwrot['fortnite']['battlepassLevel']}} </span>
+            {% endif %} {% if zwrot['fortnite']['error'] == 'NOT_FOUND' %}
+            <div>Player was not found</div>
+            {% endif %} {% if zwrot['fortnite']['error'] == 'PRIVATE' %}
+            <div>The account is private in fortnite</div>
+            {% endif %} {% if zwrot['fortnite']['error'] == 'KEY_ERROR' %}
+            <div>Fortnite API key has expired</div>
             {% endif %}
         </li>
     </ul>
