@@ -17,7 +17,7 @@
             </ul>
             <span class="levelIndicator">level: {{zwrot['steam']['level']}} </span>
             {% endif %} {% if zwrot['steam']['error'] == 'NOT_FOUND' %}
-            <div>The player was not found on steam</div>
+            <div>The player was not found on Steam</div>
             {% endif %} {% if zwrot['steam']['error'] == 'API_ERROR' %}
             <div>Steam API error</div>
             {% endif %}
@@ -70,7 +70,6 @@
             <img class="platformLogo" id="lolLogo" src="../static/lol_icon.svg" />
         </li>
         <li class="platformLine" id="fortniteLine">
-            <img class="platformLogo" id="fortniteLogo" src="../static/fortnite_icon.svg" />
             {% if zwrot['fortnite']['error'] == 'OK' %}
             <div>Name: {{zwrot['fortnite']['name']}}</div>
             <div>Hours played: {{zwrot['fortnite']['hoursPlayed']}}</div>
@@ -84,6 +83,7 @@
             {% endif %} {% if zwrot['fortnite']['error'] == 'KEY_ERROR' %}
             <div>Fortnite API key has expired</div>
             {% endif %}
+            <img class="platformLogo" id="fortniteLogo" src="../static/fortnite_icon.svg" />
         </li>
     </ul>
 </div>

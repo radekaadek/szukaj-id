@@ -11,23 +11,18 @@ html {
     padding: 10px;
     height: fit-content;
     flex-direction: column;
-    outline: 5px dotted green;
+    outline: 5px dotted #94240a;
 }
 
 .platformLine > * {
-    margin: auto;
+    margin: 4px auto;
 }
 
 h1 {
     text-align: center;
-    color: rgb(238, 116, 94);
+    color: rgb(233 71 116);
 }
 
-h2 {
-    text-align: center;
-    color: rgb(238, 116, 94);
-    font-size: 1.5em;
-}
 
 #centerContainer {
     margin-top: 20px;
@@ -118,6 +113,8 @@ ul {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    font-size: 18px;
+    color: #b00b69;
 }
 
 .content {
