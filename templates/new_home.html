@@ -1,4 +1,4 @@
-{% extends "index.html" %} {% block content %} {{zwrot}}
+{% extends "index.html" %} {% block content %} <!-- {{zwrot}} -->
 <div class="jsdom" id="datalists_contaier">
     <ul id="datalist">
         <li class="platformLine" id="steamLine">
@@ -31,6 +31,7 @@
             <div>Profile username was not found</div>
             {% endif %}
             <div>Last seen on hypixel: {{zwrot['minecraft']['last_seen']}}</div>
+            {% if zwrot['minecraft']['aliases'] != 'gsrukgf@#$uygau68465khsgf' %}
             <div class="aliasLine">
                 <div>Minecraft aliases:</div>
                 {% if zwrot['minecraft'['aliases']] != False %}
@@ -39,7 +40,7 @@
                 <div>No aliases found</div>
                 {% endif %}
             </div>
-            
+            {% endif %}
             <img class="platformLogo" id="minecraftLogo" src="../static/minecraft_icon.svg" />
         </li>
         {% endif %} {% if zwrot['minecraft']['error'] == 'NOT_FOUND' %}

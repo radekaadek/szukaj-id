@@ -44,15 +44,13 @@ async def dane(username, session) -> dict:
         rank = False
     try:
         aliases = stats['player']['knownAliases']
-        name_data['name': aliases[-1]]
-        name_data['aliases': ', '.join(aliases)]
     except:
-        aliases = False
-        name_data['name'] = username
+        aliases = ["gsrukgf@#$uygau68465khsgf"]
     try:
         last_seen_milis = stats['player']['lastLogout']
         last_seen = (datetime(1970, 1, 1) + timedelta(milliseconds=last_seen_milis)).replace(microsecond=0)
     except:
         last_seen = False
-    player_data = name_data | {'last_seen': last_seen, 'rank': rank, 'profile_link': f'https://plancke.io/hypixel/player/stats/{name_data["name"]}'}
-    return player_data | {'avatar': f'https://mc-heads.net/avatar/{username}/nohelm', 'error': 'OK'}
+    # print(aliases)    
+    player_data = {'last_seen': last_seen, 'name': username, 'rank': rank, 'profile_link': f'https://plancke.io/hypixel/player/stats/{username}', 'status': 'online' if player_status else 'offline'}
+    return player_data | {'avatar': f'https://mc-heads.net/avatar/{username}/nohelm', 'error': 'OK', 'aliases': ', '.join(aliases)}
