@@ -74,6 +74,9 @@ h2 {
 
 .avatarBorder {
     border: solid 5px;
+    width: 170px !important;
+    background-size: 170px 170px !important;
+    height: 170px !important;
 }
 
 .online {
