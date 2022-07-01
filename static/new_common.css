@@ -7,10 +7,11 @@ html {
     display: inline-flex;
     justify-content: center;
     width: fit-content;
-    margin-left: 10px;
+    margin: 20px;
+    padding: 10px;
     height: fit-content;
     flex-direction: column;
-    margin-right: 10px;
+    outline: 5px dotted green;
 }
 
 .platformLine > * {

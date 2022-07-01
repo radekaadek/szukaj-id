@@ -1,3 +1,4 @@
+from xmlrpc.client import Boolean
 import aiohttp, asyncio
 from datetime import datetime, timedelta
 
@@ -29,6 +30,10 @@ async def dane(username, session) -> dict:
     async with session.get(hypixel_url + '/' + route, params=PARAMS) as response:
         status_response = await response.json()
         player_status = status_response['session']['online']
+        if player_status:
+            name_data = {'status': 'online'}
+        else:
+            name_data = {'status': 'offline'}
     route2 = 'player'
     PARAMS = {'key': hypixel_api_key, 'uuid': uuid}
     async with session.get(hypixel_url + '/' + route2, params=PARAMS) as response:
@@ -39,12 +44,15 @@ async def dane(username, session) -> dict:
         rank = False
     try:
         aliases = stats['player']['knownAliases']
+        name_data['name': aliases[-1]]
+        name_data['aliases': ', '.join(aliases)]
     except:
         aliases = False
+        name_data['name'] = username
     try:
         last_seen_milis = stats['player']['lastLogout']
         last_seen = (datetime(1970, 1, 1) + timedelta(milliseconds=last_seen_milis)).replace(microsecond=0)
     except:
         last_seen = False
-    player_data = {'status': 'online' if player_status else 'offline', 'last_seen': last_seen, 'name': aliases[-1], 'rank': rank, 'profile_link': f'https://plancke.io/hypixel/player/stats/{aliases[0]}'}
-    return player_data | {'avatar': f'https://mc-heads.net/avatar/{username}/nohelm', 'error': 'OK', 'aliases': ', '.join(aliases)}
+    player_data = name_data | {'last_seen': last_seen, 'rank': rank, 'profile_link': f'https://plancke.io/hypixel/player/stats/{name_data["name"]}'}
+    return player_data | {'avatar': f'https://mc-heads.net/avatar/{username}/nohelm', 'error': 'OK'}

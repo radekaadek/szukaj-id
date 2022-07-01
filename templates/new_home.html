@@ -23,14 +23,23 @@
             <img class="platformLogo" id="steamLogo" src="../static/steam_icon.svg" />
         </li>
         {% if zwrot['minecraft']['error'] == 'OK' %}
-        <li class="platformLine" id="minecraftLine"><li class="platformLine" id="minecraftLine" style="display: flex;">
+        <li class="platformLine" id="minecraftLine">
             <a class="profileAvatar avatarBorder {{zwrot['minecraft']['status']}}" href="{{zwrot['minecraft']['avatar']}}" style="background-image: url({{zwrot['minecraft']['avatar']}});"></a>
+            {% if zwrot['minecraft']['aliases'] != False %}
             <div href="{{zwrot['minecraft']['link']}}">{{zwrot['minecraft']['name']}}</div>
-            <div>last seen on hypixel: {{zwrot['minecraft']['last_seen']}}</div>
+            {% else %}
+            <div>Profile username was not found</div>
+            {% endif %}
+            <div>Last seen on hypixel: {{zwrot['minecraft']['last_seen']}}</div>
             <div class="aliasLine">
                 <div>Minecraft aliases:</div>
+                {% if zwrot['minecraft'['aliases']] != False %}
                 <span>{{zwrot['minecraft']['aliases']}} </span>
+                {%else%}
+                <div>No aliases found</div>
+                {% endif %}
             </div>
+            
             <img class="platformLogo" id="minecraftLogo" src="../static/minecraft_icon.svg" />
         </li>
         {% endif %} {% if zwrot['minecraft']['error'] == 'NOT_FOUND' %}
