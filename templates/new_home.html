@@ -1,4 +1,5 @@
-{% extends "index.html" %} {% block content %} <!-- {{zwrot}} -->
+{% extends "index.html" %} {% block content %}
+{{zwrot}}
 <div class="jsdom" id="datalists_contaier">
     <ul id="datalist">
         <li class="platformLine" id="steamLine">
@@ -25,22 +26,16 @@
         {% if zwrot['minecraft']['error'] == 'OK' %}
         <li class="platformLine" id="minecraftLine">
             <a class="profileAvatar avatarBorder {{zwrot['minecraft']['status']}}" href="{{zwrot['minecraft']['avatar']}}" style="background-image: url({{zwrot['minecraft']['avatar']}});"></a>
-            {% if zwrot['minecraft']['aliases'] != False %}
             <div href="{{zwrot['minecraft']['link']}}">{{zwrot['minecraft']['name']}}</div>
-            {% else %}
-            <div>Profile username was not found</div>
-            {% endif %}
             <div>Last seen on hypixel: {{zwrot['minecraft']['last_seen']}}</div>
-            {% if zwrot['minecraft']['aliases'] != 'gsrukgf@#$uygau68465khsgf' %}
             <div class="aliasLine">
+                {% if zwrot['minecraft']['aliases'] != 0 %}
                 <div>Minecraft aliases:</div>
-                {% if zwrot['minecraft'['aliases']] != False %}
                 <span>{{zwrot['minecraft']['aliases']}} </span>
-                {%else%}
+                {% else %}
                 <div>No aliases found</div>
                 {% endif %}
             </div>
-            {% endif %}
             <img class="platformLogo" id="minecraftLogo" src="../static/minecraft_icon.svg" />
         </li>
         {% endif %} {% if zwrot['minecraft']['error'] == 'NOT_FOUND' %}

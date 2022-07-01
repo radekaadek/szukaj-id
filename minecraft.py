@@ -1,3 +1,4 @@
+from unicodedata import name
 from xmlrpc.client import Boolean
 import aiohttp, asyncio
 from datetime import datetime, timedelta
@@ -26,14 +27,11 @@ async def dane(username, session) -> dict:
         return {'error': 'NOT_FOUND'}
     #hypixel data
     route = 'status'
+    name_data = {}
     PARAMS = {'key': hypixel_api_key, 'uuid': uuid}
     async with session.get(hypixel_url + '/' + route, params=PARAMS) as response:
         status_response = await response.json()
         player_status = status_response['session']['online']
-        if player_status:
-            name_data = {'status': 'online'}
-        else:
-            name_data = {'status': 'offline'}
     route2 = 'player'
     PARAMS = {'key': hypixel_api_key, 'uuid': uuid}
     async with session.get(hypixel_url + '/' + route2, params=PARAMS) as response:
@@ -44,13 +42,18 @@ async def dane(username, session) -> dict:
         rank = False
     try:
         aliases = stats['player']['knownAliases']
+        name_data['aliases'] = ', '.join(aliases)
     except:
-        aliases = ["gsrukgf@#$uygau68465khsgf"]
+        name_data['aliases'] = 0
     try:
         last_seen_milis = stats['player']['lastLogout']
         last_seen = (datetime(1970, 1, 1) + timedelta(milliseconds=last_seen_milis)).replace(microsecond=0)
     except:
-        last_seen = False
-    # print(aliases)    
-    player_data = {'last_seen': last_seen, 'name': username, 'rank': rank, 'profile_link': f'https://plancke.io/hypixel/player/stats/{username}', 'status': 'online' if player_status else 'offline'}
-    return player_data | {'avatar': f'https://mc-heads.net/avatar/{username}/nohelm', 'error': 'OK', 'aliases': ', '.join(aliases)}
+        last_seen = False 
+    if name_data['aliases'] == 0:
+        name_data['name'] = username
+    else:
+        name_data['name'] = aliases[-1]
+    player_data = name_data | {'last_seen': last_seen, 'rank': rank, 'profile_link': f'https://plancke.io/hypixel/player/stats/{username}', 'status': 'online' if player_status else 'offline'}
+    print(name_data)
+    return player_data | {'avatar': f'https://mc-heads.net/avatar/{username}/nohelm', 'error': 'OK'}
