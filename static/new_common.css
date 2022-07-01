@@ -11,7 +11,7 @@ html {
     padding: 10px;
     height: fit-content;
     flex-direction: column;
-    outline: 5px dotted #94240a;
+    outline: 5px dotted rgb(148, 36, 10);
 }
 
 .platformLine > * {
@@ -114,7 +114,7 @@ ul {
     align-items: center;
     flex-wrap: wrap;
     font-size: 18px;
-    color: #b00b69;
+    color: rgb(176, 11, 105);
 }
 
 .content {
