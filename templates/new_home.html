@@ -27,10 +27,12 @@
             <a class="profileAvatar avatarBorder {{zwrot['minecraft']['status']}}" href="{{zwrot['minecraft']['avatar']}}" style="background-image: url({{zwrot['minecraft']['avatar']}});"></a>
             <div href="{{zwrot['minecraft']['link']}}">{{zwrot['minecraft']['name']}}</div>
             <div>last seen on hypixel: {{zwrot['minecraft']['last_seen']}}</div>
+            {% if zwrot['minecraft']['aliases'] != 'gsrukgf@#$uygau68465khsgf' %}
             <div class="aliasLine">
                 <div>Minecraft aliases:</div>
                 <span>{{zwrot['minecraft']['aliases']}} </span>
             </div>
+            {% endif %}
             <img class="platformLogo" id="minecraftLogo" src="../static/minecraft_icon.svg" />
         </li>
         {% endif %} {% if zwrot['minecraft']['error'] == 'NOT_FOUND' %}
