@@ -55,5 +55,4 @@ async def dane(username, session) -> dict:
     else:
         name_data['name'] = aliases[-1]
     player_data = name_data | {'last_seen': last_seen, 'rank': rank, 'profile_link': f'https://plancke.io/hypixel/player/stats/{username}', 'status': 'online' if player_status else 'offline'}
-    print(name_data)
     return player_data | {'avatar': f'https://mc-heads.net/avatar/{username}/nohelm', 'error': 'OK'}
