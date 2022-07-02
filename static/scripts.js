@@ -1,15 +1,22 @@
-function loadingScreen() {
+{let loadingScreen = function () {
   $(window).on("load", function () {
       $(".loader-wrapper").fadeOut("slow");
   });
 }
 
+let redirFu = function () {
+      window.location.replace("../" + $("#webSearchInput").val());
+      $(".loader-wrapper").fadeIn("slow");
+}
+
 $(document).ready(() => {
-  document.querySelector("#poleTxt").addEventListener("keypress", function (e) {
-      if (e.key === "Enter") {
-          window.location.replace("../" + $("#poleTxt").val());
-          $(".loader-wrapper").fadeIn("slow");
-      }
-  });
+  document.querySelector("#webSearchInput").addEventListener("keypress",(e)=>{
+    if (e.key === "Enter") {
+        redirFu();
+    }
+});
+
+  document.querySelector(".web-search-submit").addEventListener("click", redirFu);
   loadingScreen();
 });
+}
