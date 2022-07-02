@@ -11,7 +11,7 @@ html {
     padding: 10px;
     height: fit-content;
     flex-direction: column;
-    outline: 5px dotted rgb(148, 36, 10);
+    outline: 4px dotted rgb(148, 36, 10);
 }
 
 .platformLine > * {
@@ -21,6 +21,14 @@ html {
 h1 {
     text-align: center;
     color: rgb(233 71 116);
+}
+
+.playerStatusoffline {
+    color: red;
+}
+
+.playerStatusonline {
+    color: green;
 }
 
 #centerContainer {
@@ -35,12 +43,12 @@ h1 {
 
 #githubLink {
     background-image: url(../static/github.svg);
-    height: 50px;
     width: 50px;
     background-size: 50px;
     background-repeat: no-repeat;
     background-position: center;
     display: inline-block;
+    max-width: 20%;
 }
 
 .profileAvatar {
@@ -185,6 +193,7 @@ ul {
     display: block;
     width: 500px;
     height: auto;
+    max-width: 90%;
 }
 
 .gameList {
