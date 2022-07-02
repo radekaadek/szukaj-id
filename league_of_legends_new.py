@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 
 #dokumentacja: https://riot-watcher.readthedocs.io/en/latest/index.html
 
-riot_api_key = 'RGAPI-10d3a2fa-39c3-4a35-afb6-09062c076400'
+riot_api_key = 'RGAPI-483611af-d536-4456-a630-b43566cfa4cc'
 
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 

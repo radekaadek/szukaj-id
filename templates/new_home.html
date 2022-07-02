@@ -56,15 +56,16 @@
                     {% if zwrot['lol']['tier'] != 'inactive' %}
                     <div class="rankContainer">
                         <div class="rank">
+                            <span>Rank: </span>
                             <span class="rankTier">{{zwrot['lol']['tier']}}</span>
                             <span class="rankRank">{{zwrot['lol']['rank']}}</span>
-                            <span class="rankLP">{{zwrot['lol']['leaguePoints']}}</span>
+                            <span class="rankLP">{{zwrot['lol']['leaguePoints']}} LP</span>
                         </div>
                     </div>
                     {% else %}
                     <div>This player has no soloq rank this season</div>
                     {% endif %}
-                <span class="levelIndicator">level: {{zwrot['lol']['level']}} </span>
+                <span class="levelIndicator">Level: {{zwrot['lol']['level']}} </span>
             <div>Last updated: {{zwrot['lol']['revisionDate']}}</div>
             {% endif %} {% if zwrot['lol']['error'] == 'NOT_FOUND' %}
             <div>Player was not found</div>
