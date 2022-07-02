@@ -8,15 +8,14 @@ hypixel_api_key = '36da01f0-28b9-4bc1-9c33-d24c57f55399'
 mojang_url = 'https://api.mojang.com/users/profiles/minecraft/'
 mojang_skin_url = 'https://sessionserver.mojang.com/session/minecraft/profile' #/uuid
 
-# api do glowy: https://mc-heads.net
+# head api: https://mc-heads.net
 #mojang api docs: https://wiki.vg/Mojang_API
 #hypixel api docs: https://api.hypixel.net/#tag/Player-Data/paths/~1player/get
 
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 # rank, aliases last_seen values can be 'False' if not found,
-# this depends on the age of a players account
-# if the skin is default, it will return 'default': True, in this case the skin has a diffrent size
+# this depends on the age of a players account and hypixels data
 async def dane(username, session) -> dict:
     # get uuid from mojang
     try:

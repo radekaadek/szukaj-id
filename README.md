@@ -1,5 +1,11 @@
-Pit jest koxem
+Running the server: enter the project directory in your operating systems terminal and run
 
-jak uruchomic?
+On powershell (windows):
 
-run uvicorn app: uvicorn main:app
+1. ./venv/scripts/activate
+2. uvicorn main:app
+
+On bash (linux/mac):
+
+1. source venv/bin/activate
+2. uvicorn main:app

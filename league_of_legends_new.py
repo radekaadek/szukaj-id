@@ -1,23 +1,21 @@
 import aiohttp, asyncio
 from datetime import datetime, timedelta
 
-#dokumentacja: https://riot-watcher.readthedocs.io/en/latest/index.html
+#documentation: https://riot-watcher.readthedocs.io/en/latest/index.html
 
 riot_api_key = 'RGAPI-483611af-d536-4456-a630-b43566cfa4cc'
 
-asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-
 regiony = {'Brasil': 'br1', 'Europe Nordic & East': 'eun1', 'Europe West': 'euw1', 'Japan': 'jp1', 'Korea': 'kr', 'Latin America North': 'la1', 'Latin America South': 'la2', 'North America': 'na1', 'Oceania': 'oc1', 'Russia': 'ru', 'Turkey': 'tr1'}
 
-def zwroc_region(nazwa_regionu):
+def return_region(nazwa_regionu):
     return regiony[nazwa_regionu]
 
-def link_do_profilu(username, region):
+def profile_link(username, region):
     regiony_opgg = {'Brasil': 'br', 'Europe Nordic & East': 'eune', 'Europe West': 'euw', 'Japan': 'jp', 'Korea': 'kr', 'Latin America North': 'lan', 'Latin America South': 'las', 'North America': 'na', 'Oceania': 'oc', 'Russia': 'ru', 'Turkey': 'tr'}
     return {'link':f'https://{regiony_opgg[region]}.op.gg/summoner/userName={username}'}
 
-async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
-    base_region = zwroc_region(region)
+async def data(summonerName, session, region='Europe Nordic & East') -> dict:
+    base_region = return_region(region)
     base_url = f'https://{base_region}.api.riotgames.com'
     base_params = {"api_key": riot_api_key}
     async with session.get('https://ddragon.leagueoflegends.com/api/versions.json') as lvr:
@@ -51,7 +49,7 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
                                 break
                     if 'queueType' not in element:
                         return_dict['tier'] = 'inactive'
-                    return_dict |= link_do_profilu(summonerName, region)
+                    return_dict |= profile_link(summonerName, region)
                     return return_dict
             case 404:
                 return {'error': 'NOT_FOUND'}

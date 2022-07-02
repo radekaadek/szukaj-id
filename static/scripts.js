@@ -9,6 +9,7 @@ let redirFu = function () {
       $(".loader-wrapper").fadeIn("slow");
 }
 
+// Search Bar
 $(document).ready(() => {
   document.querySelector("#webSearchInput").addEventListener("keypress",(e)=>{
     if (e.key === "Enter") {

@@ -13,8 +13,7 @@ def arrayToDictionary(arrlist):
 
 
 async def checkSteam(username, session):
-    # dokumentacja: https://wiki.teamfortress.com/wiki/WebAPI
-    # deklaracje głównych interfejsów API steam
+    # documentation: https://wiki.teamfortress.com/wiki/WebAPI
     try:
         # api request by pozyskać steam ID
         params = {'vanityurl': username, 'key': steam_api_key}
@@ -25,7 +24,6 @@ async def checkSteam(username, session):
             steamid = data['response']['steamid']
     except:
         return {'error': 'NOT_FOUND'}
-    # try:
     # api request by pozyskać dane w obiektach
     ##definicje: https://github.com/shawnsilva/steamwebapi/blob/devel/steamwebapi/api.py
     params = {'steamid': steamid, 'key': steam_api_key, 'include_appinfo': 1}
@@ -77,5 +75,3 @@ async def checkSteam(username, session):
         "level": levelsteam["player_level"],
     }
     return usersummary | {'error': 'OK'}
-    # except:
-        # return {'error': 'NOT_FOUND'}
