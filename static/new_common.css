@@ -44,6 +44,7 @@ h1 {
 #githubLink {
     background-image: url(../static/github.svg);
     width: 50px;
+    height: 50px;
     background-size: 50px;
     background-repeat: no-repeat;
     background-position: center;
@@ -105,6 +106,8 @@ ul {
     flex-wrap: wrap;
     font-size: 20px;
     color: rgb(176, 11, 105);
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .content {
@@ -187,7 +190,6 @@ ul {
 }
 
 #serviceLogo {
-    font-size: 2em;
     margin-right: auto;
     margin-left: auto;
     display: block;
