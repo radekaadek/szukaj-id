@@ -12,4 +12,5 @@ On bash (linux/mac):
 1. source venv/bin/activate
 2. uvicorn main:app
 
-Every api request uses an async aiohttp session
+Build with Fast API
+Every api request uses an aiohttp session
