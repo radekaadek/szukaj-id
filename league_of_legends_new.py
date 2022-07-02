@@ -36,6 +36,7 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
                 encryptedSummonerId = player_response['id']
                 profileIconLink = f'https://ddragon.leagueoflegends.com/cdn/{league_version}/img/profileicon/{player_response["profileIconId"]}.png'
                 return_dict['avatar'] = profileIconLink
+                element = {}
                 async with session.get(f'{base_url}/lol/league/v4/entries/by-summoner/{encryptedSummonerId}', params = base_params) as ranked_response:
                     ranked_json_response = await ranked_response.json()
                     for element in ranked_json_response:
@@ -48,6 +49,8 @@ async def dane(summonerName, session, region='Europe Nordic & East') -> dict:
                                 return_dict['rank'] = element['rank']
                                 return_dict['leaguePoints'] = element['leaguePoints']
                                 break
+                    if 'queueType' not in element:
+                        return_dict['tier'] = 'inactive'
                     return_dict |= link_do_profilu(summonerName, region)
                     return return_dict
             case 404:

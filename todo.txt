@@ -1,19 +1,17 @@
-obramowka steama zmienia kolor na podstawie statusu: in game/online/offline - DONE
 czy ma range w lolu i to wyswietla DONE
-layout informacji ladny w css
 
 wyswietla konto na regionie z najwyzszym poziomem, jezeli nie uzytkownik didnt specify w fortnucie i lolu
-ustawienie kafelkami gier
 
 ### wiesiek5monster - ranga w lolsku   elyzy - fortnite    ninja - fortnite prywatne konto  janko - chłop w lolsku bez avataru
 #### git for-each-ref --format '%(refname:short)' refs/heads | grep -v "master\|main" | xargs git branch -D   #usuwa zbędne locale
 #### git remote update origin --prune            #aktualizuje brancze z remota
 #### .\pipunall.ps1
 
-minecraft - skiy z oouid
 https://github.com/crafatar/crafatar/blob/9d2fe0c45424de3ebc8e0b10f9446e7d5c3738b2/lib/skins.js#L90-L108
 
 fortnite -
     bar ktory pokazuje poziom battlepassa w fortnite; tych poziomow w nim jest 100
 
 lol - poprawic wyswietlanie jak ktoś nie ma avatara
+
+
