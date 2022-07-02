@@ -29,6 +29,6 @@ async def dane(username, session, platform='epic') -> dict:
         lastPlayed = game_data['lastModified']
     if lastPlayed == '1970-01-01T00:00:00Z' or not hoursPlayed:
         return {'error': 'NOT_FOUND'}
-
+    lastPlayed = lastPlayed.replace('T', ' ').replace('Z', '')
     return {'error': 'OK', 'name': name, 'hoursPlayed': hoursPlayed, 'wins': wins, 'lastPlayed': lastPlayed, 'battlepassLevel': bp_level}
     
