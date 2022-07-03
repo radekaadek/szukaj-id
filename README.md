@@ -6,14 +6,17 @@ Enter the project directory in your operating systems terminal and run:
 
 On powershell (windows):
 
-1. pip install requirements.txt  // install requirements
-2. ./venv/scripts/activate  // activate virtual environment
-3. uvicorn main:app  // run server
+1. pip install venv // install virtual enviroment
+2. ./venv/scripts/activate  // activate
+3. pip install requirements.txt  // install requirements
+4. uvicorn main:app  // run server
 
 On bash (linux/mac):
 
-1. source venv/bin/activate
-2. uvicorn main:app
+1. pip install venv // install virtual enviroment
+2. pip install requirements.txt  // install requirements
+3. source venv/bin/activate
+4. uvicorn main:app
 
 Build with Fast API
 Every api request uses an aiohttp session
