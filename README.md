@@ -1,7 +1,7 @@
 A website that allows you to check someones ingame stats!
 
 Running the server: 
-Make sure to have python 3.10+ interpreter installed on your mashine,
+Make sure to have a Python 3.10+ interpreter installed on your machine,
 Enter the project directory in your operating systems terminal and run:
 
 On powershell (windows):
