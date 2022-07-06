@@ -6,12 +6,12 @@
             {% if zwrot['steam']['error'] == 'OK' %}
             <a class="profileLink" href="{{zwrot['steam']['url']}}"> {{zwrot['steam']['personaname']}} </a>
             <a class="profileAvatar avatarBorder {{zwrot['steam']['status']}}" href="{{zwrot['steam']['avatar']}}" style="background-image: url({{zwrot['steam']['avatar']}});"></a>
-            <ul class="gamesList" style="display: inline-block;">
+            <ul class="gamesList" style="text-align: left;">
                 {% for i in zwrot['steam']['favgames'] %}
                 <li class="gameLine" id="game1">
                     <img src="{{zwrot['steam']['favgames'][i]['icon_link']}}" />
                     <span> {{i}}. {{zwrot['steam']['favgames'][i]['name']}}</span>
-                    <span class="timeIndicator" id="time1"> {{zwrot['steam']['favgames'][i]['playtime_forever']//60}} </span>
+                    <span class="timeIndicator" id="time1">Hours played: {{zwrot['steam']['favgames'][i]['playtime_forever']//60}} </span>
                 </li>
                 {% endfor %}
             </ul>

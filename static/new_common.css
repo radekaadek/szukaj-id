@@ -23,6 +23,8 @@ h1 {
     color: rgb(233 71 116);
 }
 
+
+
 .playerStatusoffline {
     color: red;
 }
@@ -204,6 +206,7 @@ ul {
     margin-bottom: auto;
     display: inline-block;
     margin-top: auto;
+    text-align: left;
 }
 
 .web-search {
@@ -214,6 +217,10 @@ ul {
     display: block;
     height: fit-content;
     pointer-events: all;
+    max-width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+
 }
 
 .web-search-inner-container {
