@@ -1,5 +1,7 @@
 elementy u gory w jednej linii!!
 
+gta api do dodania: https://rockstar-api.readthedocs.io/en/latest/
+
 wyswietla konto na regionie z najwyzszym poziomem, jezeli nie uzytkownik didnt specify w fortnucie i lolu
 
 ### wiesiek5monster - ranga w lolsku   elyzy - fortnite    ninja - fortnite prywatne konto  janko - chłop w lolsku bez avataru

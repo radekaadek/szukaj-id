@@ -23,8 +23,6 @@ h1 {
     color: rgb(233 71 116);
 }
 
-
-
 .playerStatusoffline {
     color: red;
 }
@@ -293,4 +291,11 @@ ul {
     box-sizing: border-box;
     height: 36px;
     width: calc(100% - 36px);
+}
+
+progress {
+	display:inline-block;
+	width:190px;
+	height:10px;
+	background:none;
 }
