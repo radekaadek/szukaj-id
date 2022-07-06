@@ -11,9 +11,6 @@ wyswietla konto na regionie z najwyzszym poziomem, jezeli nie uzytkownik didnt s
 
 https://github.com/crafatar/crafatar/blob/9d2fe0c45424de3ebc8e0b10f9446e7d5c3738b2/lib/skins.js#L90-L108
 
-fortnite -
-    bar ktory pokazuje poziom battlepassa w fortnite; tych poziomow w nim jest 100
-
 lol - poprawic wyswietlanie jak ktoś nie ma avatara
 
 
