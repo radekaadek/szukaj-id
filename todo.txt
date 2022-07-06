@@ -1,4 +1,4 @@
-czy ma range w lolu i to wyswietla DONE
+elementy u gory w jednej linii!!
 
 wyswietla konto na regionie z najwyzszym poziomem, jezeli nie uzytkownik didnt specify w fortnucie i lolu
 

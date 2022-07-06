@@ -23,8 +23,8 @@
             {% endif %}
             <img class="platformLogo" id="steamLogo" src="../static/steam_icon.svg" />
         </li>
-        {% if zwrot['minecraft']['error'] == 'OK' %}
         <li class="platformLine" id="minecraftLine">
+            {% if zwrot['minecraft']['error'] == 'OK' %}
             <a class="profileAvatar avatarBorder {{zwrot['minecraft']['status']}}" href="{{zwrot['minecraft']['avatar']}}" style="background-image: url({{zwrot['minecraft']['avatar']}});"></a>
             <div href="{{zwrot['minecraft']['link']}}">{{zwrot['minecraft']['name']}}</div>
             <div class="playerStatus{{zwrot['minecraft']['status']}}">Status: {{zwrot['minecraft']['status'].capitalize()}}</div>
@@ -46,12 +46,12 @@
                 {% endif %}
             </div>
             <img class="platformLogo" id="minecraftLogo" src="../static/minecraft_icon.svg" />
-        </li>
         {% endif %} {% if zwrot['minecraft']['error'] == 'NOT_FOUND' %}
         <div>Player was not found</div>
         {% endif %} {% if zwrot['minecraft']['error'] == 'API_ERROR' %}
         <div>Minecraft API error</div>
         {% endif %}
+        </li>
         <li class="platformLine" id="lolLine">
             {% if zwrot['lol']['error'] == 'OK' %}
             <a href="{{zwrot['lol']['link']}}">{{zwrot['lol']['name']}}</a>
@@ -85,7 +85,10 @@
             <div>Hours played: {{zwrot['fortnite']['hoursPlayed']}}</div>
             <div>Wins: {{zwrot['fortnite']['wins']}}</div>
             <div>Last seen on fortnite: {{zwrot['fortnite']['lastPlayed']}}</div>
-            <span class="levelIndicator">Battlepass Level: {{zwrot['fortnite']['battlepassLevel']}} </span>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                <span class="levelIndicator">Battlepass Level: {{zwrot['fortnite']['battlepassLevel']}} </span>
+            </div>
             {% endif %} {% if zwrot['fortnite']['error'] == 'NOT_FOUND' %}
             <div>Player was not found</div>
             {% endif %} {% if zwrot['fortnite']['error'] == 'PRIVATE' %}
