@@ -8,15 +8,16 @@ On powershell (windows):
 
 1. pip install venv // install virtual enviroment
 2. ./venv/scripts/activate  // activate
-3. pip install requirements.txt  // install requirements
+3. pip install -r requirements.txt  // install requirements
 4. uvicorn main:app  // run server
 
 On bash (linux/mac):
 
 1. pip install venv // install virtual enviroment
-2. source venv/bin/activate
-3. pip install requirements.txt  // install requirements
-4. uvicorn main:app
+2. source venv/bin/activate //activate
+3. pip install -r requirements.txt // install requirements
+4. uvicorn main:app // run server
+
 
 Build with Fast API
 Every api request uses an aiohttp session
