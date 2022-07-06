@@ -3,6 +3,10 @@ html {
     min-height: 100%;
 }
 
+h1 {
+    font-size: min(2em, 9vw);
+}
+
 .platformLine {
     display: inline-flex;
     justify-content: center;
