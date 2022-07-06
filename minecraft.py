@@ -41,7 +41,10 @@ async def dane(username, session) -> dict:
         rank = False
     try:
         aliases = stats['player']['knownAliases']
-        name_data['aliases'] = aliases
+        if len(aliases) > 1:
+            name_data['aliases'] = aliases
+        else:
+            name_data['aliases'] = 0
     except:
         name_data['aliases'] = 0
     try:
