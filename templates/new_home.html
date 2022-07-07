@@ -1,11 +1,11 @@
 {% extends "index.html" %} {% block content %}
-{{zwrot}}
 <div class="jsdom" id="datalists_contaier">
     <ul id="datalist">
         <li class="platformLine" id="steamLine">
             {% if zwrot['steam']['error'] == 'OK' %}
             <a class="profileLink" href="{{zwrot['steam']['url']}}"> {{zwrot['steam']['personaname']}} </a>
             <a class="profileAvatar avatarBorder {{zwrot['steam']['status']}}" href="{{zwrot['steam']['avatar']}}" style="background-image: url({{zwrot['steam']['avatar']}});"></a>
+            <div class="playerStatus{{zwrot['steam']['status']}}">Status: {{zwrot['steam']['status'].capitalize()}}</div>
             <ul class="gamesList" style="text-align: left;">
                 {% for i in zwrot['steam']['favgames'] %}
                 <li class="gameLine" id="game1">
@@ -16,6 +16,19 @@
                 {% endfor %}
             </ul>
             <span class="levelIndicator">level: {{zwrot['steam']['level']}} </span>
+            {% if zwrot['steam']['number_of_friends'] != 0 %}
+            <div class="dropdown scroll">
+                <button class="dropbtn">Friends</button>
+                <div class="dropdown-content">
+                {% for friend in zwrot['steam']['friends'] %}
+                    <img src="{{friend['avatar']}}"></img>
+                    <a href="{{friend['profileurl']}}">{{friend['personaname']}}</a>
+                {% endfor %}
+                </div>
+            </div>
+            {% else %}
+            <div>Players friends were not found</div>
+            {% endif %}
             {% endif %} {% if zwrot['steam']['error'] == 'NOT_FOUND' %}
             <div>Player was not found on Steam</div>
             {% endif %} {% if zwrot['steam']['error'] == 'API_ERROR' %}
@@ -25,8 +38,8 @@
         </li>
         <li class="platformLine" id="minecraftLine">
             {% if zwrot['minecraft']['error'] == 'OK' %}
-            <a class="profileAvatar avatarBorder {{zwrot['minecraft']['status']}}" href="{{zwrot['minecraft']['avatar']}}" style="background-image: url({{zwrot['minecraft']['avatar']}});"></a>
             <div href="{{zwrot['minecraft']['link']}}">{{zwrot['minecraft']['name']}}</div>
+            <a class="profileAvatar avatarBorder {{zwrot['minecraft']['status']}}" href="{{zwrot['minecraft']['avatar']}}" style="background-image: url({{zwrot['minecraft']['avatar']}});"></a>
             <div class="playerStatus{{zwrot['minecraft']['status']}}">Status: {{zwrot['minecraft']['status'].capitalize()}}</div>
             {% if zwrot['minecraft']['last_seen'] != False %}
             <div>Last seen on hypixel: {{zwrot['minecraft']['last_seen']}}</div>

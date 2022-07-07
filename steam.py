@@ -11,12 +11,14 @@ def arrayToDictionary(arrlist) -> dict:
     arrlist = {str(key): value for key, value in keys_values}
     return arrlist
 
+def get_name(usersummary):
+    return usersummary['personaname']
 
-async def checkSteam(username, session) -> dict:
+
+async def checkSteam(username, session, steamid='') -> dict:
     # documentation: https://wiki.teamfortress.com/wiki/WebAPI
-
     try:
-        # api request by pozyskać steam ID
+        # api request to get steam ID
         params = {'vanityurl': username, 'key': steam_api_key}
         async with session.get('http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/', params=params) as resp:
             data = await resp.json()
@@ -44,19 +46,28 @@ async def checkSteam(username, session) -> dict:
     params = {'steamid': steamid, 'key': steam_api_key, 'relationship': 'friend'}
     async with session.get('http://api.steampowered.com/ISteamUser/GetFriendList/v1', params=params) as resp:
         steamfriends_response = await resp.json()
-        friend_dict['number_of_friends'] = len(steamfriends_response['friendslist']['friends'])
-        for friend in steamfriends_response['friendslist']['friends']:
-            friend_ids += f',{friend["steamid"]}'
+        if steamfriends_response == {}:
+            friend_dict['number_of_friends'] = 0
+        else:    
+            friend_dict['number_of_friends'] = len(steamfriends_response['friendslist']['friends'])
+            for friend in steamfriends_response['friendslist']['friends']:
+                friend_ids += f',{friend["steamid"]}'
 
     params2 = {'steamids': f'{steamid}{friend_ids}', 'key': steam_api_key}
     async with session.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/', params=params2) as resp:
         steamgamesinfo_response = await resp.json()
         # find target player in summaries
-        for player in steamgamesinfo_response['response']['players']:
-            if str(player['steamid']) == steamid:
-                usersummary = player
-                break
-        
+        if friend_dict['number_of_friends'] != 0:
+            for player in steamgamesinfo_response['response']['players']:
+                if str(player['steamid']) == steamid:
+                    usersummary = player
+                    friend_dict['friends'] = steamgamesinfo_response['response']['players']
+                    friend_dict['friends'].remove(player)
+                    friend_dict['friends'].sort(key=get_name)
+                    break
+        else:
+            usersummary = steamgamesinfo_response['response']['players'][0]
+            friend_dict['friends'] = []
         
         # obróbka obiektów
         try:
@@ -76,13 +87,15 @@ async def checkSteam(username, session) -> dict:
             del steamgamesinfo[a]["appid"]
     
 
+
     match usersummary['personastate']:
         case 0:
             status = 'offline'
         case 1 | 5 | 6:
             status = 'online'
         case 2 | 3 | 4:
-            status = 'busy'
+            status = 'busy' 
+
 
     usersummary = {
         "avatar": usersummary["avatarfull"],
