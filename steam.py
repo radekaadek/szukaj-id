@@ -4,7 +4,7 @@ sortkey = operator.itemgetter("playtime_forever")
 
 steam_api_key = 'EE03692ACB03E4371522180E26926643'
 
-def arrayToDictionary(arrlist):
+def arrayToDictionary(arrlist) -> dict:
     arrlistkeys = dict.fromkeys(range(1, len(arrlist)))
     arrlist = dict(zip(arrlistkeys, arrlist))
     keys_values = arrlist.items()
@@ -12,8 +12,9 @@ def arrayToDictionary(arrlist):
     return arrlist
 
 
-async def checkSteam(username, session):
+async def checkSteam(username, session) -> dict:
     # documentation: https://wiki.teamfortress.com/wiki/WebAPI
+
     try:
         # api request by pozyskać steam ID
         params = {'vanityurl': username, 'key': steam_api_key}
@@ -31,16 +32,32 @@ async def checkSteam(username, session):
         steamgamesinfo_response = await resp.json()
         steamgamesinfo = steamgamesinfo_response["response"]
 
-    params2 = {'steamids': steamid, 'key': steam_api_key}
-    async with session.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/', params=params2) as resp:
-        steamgamesinfo_response = await resp.json()
-        usersummary = steamgamesinfo_response["response"]["players"][0]
-
-    params3 = {'steamid': steamid, 'key': steam_api_key}
+    # get players level
+    params3 = {'steamid': f'{steamid}', 'key': steam_api_key}
     async with session.get('http://api.steampowered.com/IPlayerService/GetSteamLevel/v1', params=params3) as resp:
         steamgamesinfo_response = await resp.json()
         levelsteam = steamgamesinfo_response["response"]
 
+    friend_dict = {}
+    friend_ids = ''
+    # friends
+    params = {'steamid': steamid, 'key': steam_api_key, 'relationship': 'friend'}
+    async with session.get('http://api.steampowered.com/ISteamUser/GetFriendList/v1', params=params) as resp:
+        steamfriends_response = await resp.json()
+        friend_dict['number_of_friends'] = len(steamfriends_response['friendslist']['friends'])
+        for friend in steamfriends_response['friendslist']['friends']:
+            friend_ids += f',{friend["steamid"]}'
+
+    params2 = {'steamids': f'{steamid}{friend_ids}', 'key': steam_api_key}
+    async with session.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/', params=params2) as resp:
+        steamgamesinfo_response = await resp.json()
+        # find target player in summaries
+        for player in steamgamesinfo_response['response']['players']:
+            if str(player['steamid']) == steamid:
+                usersummary = player
+                break
+        
+        
         # obróbka obiektów
         try:
             steamgamesinfo = steamgamesinfo["games"]
@@ -57,6 +74,7 @@ async def checkSteam(username, session):
             steamgamesinfo[a]['icon_link'] = f'http://media.steampowered.com/steamcommunity/public/images/apps/{steamgamesinfo[a]["appid"]}/{steamgamesinfo[a]["img_icon_url"]}.jpg'
             del steamgamesinfo[a]["img_icon_url"]
             del steamgamesinfo[a]["appid"]
+    
 
     match usersummary['personastate']:
         case 0:
@@ -74,4 +92,4 @@ async def checkSteam(username, session):
         "status": status,
         "level": levelsteam["player_level"],
     }
-    return usersummary | {'error': 'OK'}
+    return friend_dict | usersummary | {'error': 'OK'}

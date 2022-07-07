@@ -7,10 +7,10 @@ riot_api_key = 'RGAPI-483611af-d536-4456-a630-b43566cfa4cc'
 
 regiony = {'Brasil': 'br1', 'Europe Nordic & East': 'eun1', 'Europe West': 'euw1', 'Japan': 'jp1', 'Korea': 'kr', 'Latin America North': 'la1', 'Latin America South': 'la2', 'North America': 'na1', 'Oceania': 'oc1', 'Russia': 'ru', 'Turkey': 'tr1'}
 
-def return_region(nazwa_regionu):
+def return_region(nazwa_regionu) -> str:
     return regiony[nazwa_regionu]
 
-def profile_link(username, region):
+def profile_link(username, region) -> dict:
     regiony_opgg = {'Brasil': 'br', 'Europe Nordic & East': 'eune', 'Europe West': 'euw', 'Japan': 'jp', 'Korea': 'kr', 'Latin America North': 'lan', 'Latin America South': 'las', 'North America': 'na', 'Oceania': 'oc', 'Russia': 'ru', 'Turkey': 'tr'}
     return {'link':f'https://{regiony_opgg[region]}.op.gg/summoner/userName={username}'}
 

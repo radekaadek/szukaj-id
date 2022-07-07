@@ -13,7 +13,7 @@ templates = Jinja2Templates(directory="templates")
 
 #regions = ['Brasil', 'Europe Nordic & East', 'Europe West', 'Japan', 'Korea', 'Latin America North', 'Latin America South', 'North America', 'Oceania', 'Russia', 'Turkey']
 
-asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy()) #na linuxie usunac trzeba bedzie
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy()) # delete on linux
 
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
