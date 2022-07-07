@@ -1,10 +1,10 @@
 html {
-    background: linear-gradient(rgb(228, 198, 124) 0, rgb(221, 113, 84) 100%);
     min-height: 100%;
 }
 
-h1 {
-    font-size: min(2em, 9vw);
+html,
+.loader-wrapper {
+    background: linear-gradient(rgb(228, 198, 124) 0, rgb(221, 113, 84) 100%);
 }
 
 .platformLine {
@@ -24,15 +24,16 @@ h1 {
 
 h1 {
     text-align: center;
+    font-size: min(2em, 9vw);
     color: rgb(233 71 116);
 }
 
 .playerStatusoffline {
-    color: red;
+    color: rgb(255, 0, 0);
 }
 
 .playerStatusonline {
-    color: green;
+    color: rgb(0, 128, 0);
 }
 
 #centerContainer {
@@ -130,7 +131,6 @@ ul {
     position: absolute;
     top: 0;
     left: 0;
-    background: linear-gradient(rgb(218, 199, 186) 0, rgb(197, 141, 126) 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -268,7 +268,7 @@ ul {
 }
 
 .web-search .web-search-submit {
-    background: url(../static/search.svg);
+    background: url("../static/search.svg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 30px;
@@ -288,7 +288,8 @@ ul {
 .web-search #webSearchInput {
     border: 0;
     box-shadow: none;
-    border-color: var(--opera-search-border-color);
+    font-family: monospace !important;
+    border-color: rgb(153, 255, 0);
     border-radius: 8px;
     font: inherit;
     padding: 0 4px;
