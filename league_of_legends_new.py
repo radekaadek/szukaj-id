@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 
 #documentation: https://riot-watcher.readthedocs.io/en/latest/index.html
 
-riot_api_key = 'RGAPI-483611af-d536-4456-a630-b43566cfa4cc'
+riot_api_key = 'RGAPI-a0ff872d-236c-4567-a2c8-8953b47df3ef'
 
 regiony = {'Brasil': 'br1', 'Europe Nordic & East': 'eun1', 'Europe West': 'euw1', 'Japan': 'jp1', 'Korea': 'kr', 'Latin America North': 'la1', 'Latin America South': 'la2', 'North America': 'na1', 'Oceania': 'oc1', 'Russia': 'ru', 'Turkey': 'tr1'}
 
