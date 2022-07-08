@@ -64,8 +64,10 @@
                     <button class="dropbtn">Friends</button>
                     <div class="dropdown-content">
                     {% for friend in zwrot['minecraft']['friends'] %}
+                    <div class="dropdown-line"></div>
                         <img src="{{friend['avatar']}}"></img>
                         <a href="./{{friend['name']}}">{{friend['name']}}</a>
+                        </div>
                     {% endfor %}
                     </div>
                 </div>
