@@ -105,4 +105,5 @@ async def checkSteam(username, session, steamid='') -> dict:
         "status": status,
         "level": levelsteam["player_level"],
     }
+    print('steam done!')
     return friend_dict | usersummary | {'error': 'OK'}

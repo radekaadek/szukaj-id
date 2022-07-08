@@ -51,6 +51,7 @@ async def data(summonerName, session, region='Europe Nordic & East') -> dict:
                     if 'queueType' not in element:
                         return_dict['tier'] = 'inactive'
                     return_dict |= profile_link(summonerName, region)
+                    print('lol done!')
                     return return_dict
             case 404:
                 return {'error': 'NOT_FOUND'}

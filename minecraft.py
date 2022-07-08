@@ -69,5 +69,5 @@ async def dane(username, session) -> dict:
     except:
         last_seen = False 
     player_data = name_data | {'last_seen': last_seen, 'rank': rank, 'profile_link': f'https://plancke.io/hypixel/player/stats/{username}', 'status': 'online' if player_status else 'offline'}
-    print(friends_list)
+    print('minecraft done!')
     return player_data | {'avatar': f'https://mc-heads.net/avatar/{username}/nohelm', 'error': 'OK'} | {'friends': friends_list, 'number_of_friends': len(friends_list)}
