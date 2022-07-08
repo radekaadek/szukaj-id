@@ -37,14 +37,14 @@
             <img class="platformLogo" id="steamLogo" src="../static/steam_icon.svg" />
         </li>
         <li class="platformLine" id="minecraftLine">
-            {% if zwrot['minecraft']['error'] == 'OK' %}
+        {% if zwrot['minecraft']['error'] == 'OK' %}
             <div href="{{zwrot['minecraft']['link']}}">{{zwrot['minecraft']['name']}}</div>
             <a class="profileAvatar avatarBorder {{zwrot['minecraft']['status']}}" href="{{zwrot['minecraft']['avatar']}}" style="background-image: url({{zwrot['minecraft']['avatar']}});"></a>
             <div class="playerStatus{{zwrot['minecraft']['status']}}">Status: {{zwrot['minecraft']['status'].capitalize()}}</div>
             {% if zwrot['minecraft']['last_seen'] != False %}
             <div>Last seen on hypixel: {{zwrot['minecraft']['last_seen']}}</div>
             {% else %}
-            <div>Never seen on hypixel</div>
+            <div>Never seen on hypixel or never recorded</div>
             {% endif %}
             <div class="aliasLine">
                 {% if zwrot['minecraft']['aliases'] != 0%}
@@ -57,12 +57,23 @@
                     <div>No aliases found</div>
                 {% endif %}
             </div>
-            <img class="platformLogo" id="minecraftLogo" src="../static/minecraft_icon.svg" />
+            {% if zwrot['minecraft']['number_of_friends'] != 0 %}
+                <div class="dropdown scroll">
+                    <button class="dropbtn">Friends</button>
+                    <div class="dropdown-content">
+                    {% for friend in zwrot['minecraft']['friends'] %}
+                        <img src="{{friend['avatar']}}"></img>
+                        <a href="./{{friend['name']}}">{{friend['name']}}</a>
+                    {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
         {% endif %} {% if zwrot['minecraft']['error'] == 'NOT_FOUND' %}
         <div>Player was not found</div>
         {% endif %} {% if zwrot['minecraft']['error'] == 'API_ERROR' %}
         <div>Minecraft API error</div>
         {% endif %}
+        <img class="platformLogo" id="minecraftLogo" src="../static/minecraft_icon.svg" />
         </li>
         <li class="platformLine" id="lolLine">
             {% if zwrot['lol']['error'] == 'OK' %}

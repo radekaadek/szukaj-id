@@ -9,8 +9,8 @@ mojang_url = 'https://api.mojang.com/users/profiles/minecraft/'
 mojang_skin_url = 'https://sessionserver.mojang.com/session/minecraft/profile' #/uuid
 
 # head api: https://mc-heads.net
-#mojang api docs: https://wiki.vg/Mojang_API
-#hypixel api docs: https://api.hypixel.net/#tag/Player-Data/paths/~1player/get
+# mojang api docs: https://wiki.vg/Mojang_API
+# hypixel api docs: https://api.hypixel.net/#tag/Player-Data/paths/~1player/get
 
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
@@ -25,16 +25,29 @@ async def dane(username, session) -> dict:
     except:
         return {'error': 'NOT_FOUND'}
     #hypixel data
-    route = 'status'
     name_data = {}
+    friends_list = []
+    friend_uuids = []
     PARAMS = {'key': hypixel_api_key, 'uuid': uuid}
-    async with session.get(hypixel_url + '/' + route, params=PARAMS) as response:
+    async with session.get(hypixel_url + '/status', params=PARAMS) as response:
         status_response = await response.json()
         player_status = status_response['session']['online']
-    route2 = 'player'
-    PARAMS = {'key': hypixel_api_key, 'uuid': uuid}
-    async with session.get(hypixel_url + '/' + route2, params=PARAMS) as response:
+
+    async with session.get(hypixel_url + '/player', params=PARAMS) as response:
         stats = await response.json()
+    async with session.get(hypixel_url + '/friends', params=PARAMS) as response:
+        friends = await response.json()
+    for friend in friends['records']:
+        if friend['uuidSender'] != uuid:
+            friend_uuids.append(friend['uuidSender'])
+        else:
+            friend_uuids.append(friend['uuidReceiver'])
+    for friend_uuid in friend_uuids:
+        async with session.get(hypixel_url + '/player', params={'key': hypixel_api_key, 'uuid': friend_uuid}) as response:
+            friend_data = await response.json()
+            if friend_data['success'] == True:
+                friends_list.append( {'name': friend_data['player']['displayname'], 'avatar': f'https://mc-heads.net/avatar/{friend_data["player"]["displayname"]}/nohelm'})
+    friends_list.sort(key=lambda x: x['name'])
     try:
         rank = stats['player']['rank']
     except:
@@ -56,4 +69,5 @@ async def dane(username, session) -> dict:
     except:
         last_seen = False 
     player_data = name_data | {'last_seen': last_seen, 'rank': rank, 'profile_link': f'https://plancke.io/hypixel/player/stats/{username}', 'status': 'online' if player_status else 'offline'}
-    return player_data | {'avatar': f'https://mc-heads.net/avatar/{username}/nohelm', 'error': 'OK'}
+    print(friends_list)
+    return player_data | {'avatar': f'https://mc-heads.net/avatar/{username}/nohelm', 'error': 'OK'} | {'friends': friends_list, 'number_of_friends': len(friends_list)}

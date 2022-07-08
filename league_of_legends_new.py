@@ -1,9 +1,10 @@
 import aiohttp, asyncio
 from datetime import datetime, timedelta
 
-#documentation: https://riot-watcher.readthedocs.io/en/latest/index.html
+# documentation: https://riot-watcher.readthedocs.io/en/latest/index.html
+# https://developer.riotgames.com/apis
 
-riot_api_key = 'RGAPI-a0ff872d-236c-4567-a2c8-8953b47df3ef'
+riot_api_key = 'RGAPI-b6841544-2d17-464a-ae16-b118ca757da0'
 
 regiony = {'Brasil': 'br1', 'Europe Nordic & East': 'eun1', 'Europe West': 'euw1', 'Japan': 'jp1', 'Korea': 'kr', 'Latin America North': 'la1', 'Latin America South': 'la2', 'North America': 'na1', 'Oceania': 'oc1', 'Russia': 'ru', 'Turkey': 'tr1'}
 
