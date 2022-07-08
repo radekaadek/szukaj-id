@@ -21,8 +21,10 @@
                 <button class="dropbtn">Friends</button>
                 <div class="dropdown-content">
                 {% for friend in zwrot['steam']['friends'] %}
+                    <div class="dropdown-line">
                     <img src="{{friend['avatar']}}"></img>
                     <a href="{{friend['profileurl']}}">{{friend['personaname']}}</a>
+                    </div>
                 {% endfor %}
                 </div>
             </div>

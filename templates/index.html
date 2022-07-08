@@ -4,36 +4,24 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
         <script src="../static/scripts.js"></script>
         <link rel="stylesheet" type="text/css" href="../static/new_common.css" />
         <link rel="icon" type="svg+xml" href="../static/logo1.svg" />
     </head>
     <title>Player Stalker</title>
     <body>
-        <div class="upperPage">
+        <span class="upper-page">
             <a id="githubLink" href="https://github.com/radekaadek/szukaj-id"></a>
-            <div id="donate-button-container">
-                <div id="donate-button"></div>
-                <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
-                <script>
-                PayPal.Donation.Button({
-                env:'production',
-                hosted_button_id:'948Y2AG949RVY',
-                image: {
-                src:'https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif',
-                alt:'Donate with PayPal button',
-                title:'PayPal - The safer, easier way to pay online!',
-                }
-                }).render('#donate-button');
-                </script>
-            </div>
-            <img id="serviceLogo" src="../static/logo text.svg" />
-        </div>
+            <div id="donateButton"></div>
+        </span>
+
+        <img id="serviceLogo" src="../static/logo text.svg" />
         <h1>Type a username to search someones stats!</h1>
         <div class="web-search">
             <div class="web-search-inner-container">
                 <span class="web-search-logo-container"><span class="web-search-logo shiny"></span></span>
-                <div class="suggestion-input-container"><input id="webSearchInput" autocomplete="off" incremental="" placeholder="Type here..." tabindex="2000" type="search", autofocus="autofocus" /></div>
+                <div class="suggestion-input-container"><input id="webSearchInput" autocomplete="off" incremental="" placeholder="Type here..." tabindex="2000" type="search" , autofocus="autofocus" /></div>
                 <button class="web-search-submit" tabindex="2000" type="submit">Szukaj</button>
             </div>
         </div>
