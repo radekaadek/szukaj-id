@@ -348,3 +348,7 @@ progress {
 .dropdown:hover .dropbtn {
     background-color: rgb(0, 158, 100);
 }
+
+#donateButton {
+    display: inline-block;
+}
