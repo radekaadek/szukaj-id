@@ -8,7 +8,7 @@
             <div class="playerStatus{{zwrot['steam']['status']}}">Status: {{zwrot['steam']['status'].capitalize()}}</div>
             <ul class="gamesList" style="text-align: left;">
                 {% for i in zwrot['steam']['favgames'] %}
-                <li class="gameLine" id="game1">
+                <li class="gameLine" id="game{{i}}">
                     <img src="{{zwrot['steam']['favgames'][i]['icon_link']}}" />
                     <span> {{i}}. {{zwrot['steam']['favgames'][i]['name']}}</span>
                     <span class="timeIndicator" id="time1">Hours played: {{zwrot['steam']['favgames'][i]['playtime_forever']//60}} </span>
@@ -84,10 +84,13 @@
                     {% if zwrot['lol']['tier'] != 'inactive' %}
                     <div class="rankContainer">
                         <div class="rank">
-                            <span>Rank: </span>
-                            <span class="rankTier">{{zwrot['lol']['tier']}}</span>
-                            <span class="rankRank">{{zwrot['lol']['rank']}}</span>
-                            <span class="rankLP"> {{zwrot['lol']['leaguePoints']}} LP</span>
+                            <div class="rankName">
+                                <div>Rank: </div>
+                                <span class="rankTier">{{zwrot['lol']['tier']}}</span>
+                                <span class="rankRank">{{zwrot['lol']['rank']}}</span>
+                                <span class="rankLP"> {{zwrot['lol']['leaguePoints']}} LP</span>
+                                <img src="/static/lolranks/{{zwrot['lol']['tier']}}.png"/>
+                            </div>
                         </div>
                     </div>
                     {% else %}

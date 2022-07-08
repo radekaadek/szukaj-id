@@ -44,7 +44,7 @@ async def data(summonerName, session, region='Europe Nordic & East') -> dict:
                                 return_dict['tier'] = 'inactive'
                                 break
                             else:
-                                return_dict['tier'] = element['tier']
+                                return_dict['tier'] = element['tier'].lower().capitalize()
                                 return_dict['rank'] = element['rank']
                                 return_dict['leaguePoints'] = element['leaguePoints']
                                 break

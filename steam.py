@@ -103,7 +103,7 @@ async def checkSteam(username, session, steamid='') -> dict:
         "url": usersummary["profileurl"],
         "favgames": steamgamesinfo,
         "status": status,
-        "level": levelsteam["player_level"],
+        "level": levelsteam["player_level"]
     }
     print('steam done!')
     return friend_dict | usersummary | {'error': 'OK'}
