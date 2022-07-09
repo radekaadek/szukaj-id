@@ -1,4 +1,4 @@
-A website that allows you to check someones ingame stats!
+# A website that allows you to check someones ingame stats!
 
 Running the server: 
 Make sure to have a Python 3.10+ interpreter installed on your machine,
@@ -18,6 +18,7 @@ On bash (linux/mac):
 3. pip install -r requirements.txt // install requirements
 4. uvicorn main:app // run server
 
+For running the image_cropper.py script use pip install Pillow
 
 Build with Fast API
 Every api request uses an aiohttp session

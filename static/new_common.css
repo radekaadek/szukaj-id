@@ -365,7 +365,7 @@ progress {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: max(0.75vw, 10px);
     background-color: #ebebeb;
 }
 
