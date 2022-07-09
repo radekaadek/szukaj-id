@@ -84,17 +84,18 @@
             <a href="{{zwrot['lol']['link']}}">{{zwrot['lol']['name']}}</a>
                 <a class="profileAvatar" href="{{zwrot['lol']['avatar']}}" style="background-image: url({{zwrot['lol']['avatar']}});"></a>
                     {% if zwrot['lol']['tier'] != 'inactive' %}
-                    <div class="rankContainer">
-                        <div class="rank">
+                    
+                        <span class="rank">
                             <div class="rankName">
-                                <div>Rank: </div>
+                                <span>Rank: </span>
+                                <br/>
                                 <span class="rankTier">{{zwrot['lol']['tier']}}</span>
                                 <span class="rankRank">{{zwrot['lol']['rank']}}</span>
                                 <span class="rankLP"> {{zwrot['lol']['leaguePoints']}} LP</span>
-                                <img src="/static/lolranks/{{zwrot['lol']['tier']}}.png", class="tierImg"/>
                             </div>
-                        </div>
-                    </div>
+                            <img src="/static/lolranks/{{zwrot['lol']['tier']}}.png", class="tierImg"/>
+                        </span>
+                    
                     {% else %}
                     <div>This player has no soloq rank this season</div>
                     {% endif %}
