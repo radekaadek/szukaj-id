@@ -347,6 +347,11 @@ progress {
     background-color: rgb(221, 221, 221);
 }
 
+.dropdown-line > img {
+    width: 35px;
+    height: auto;
+}
+
 .dropdown:hover .dropdown-content {
     display: block;
 }
