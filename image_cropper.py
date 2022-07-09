@@ -3,9 +3,6 @@ import os
 
 # Removes transparent rows and columns from the start and end of an image
 
-# Set images folder directory
-images_path = "./static/lolranks"
-
 def crop_image(image, x, y, width, height) -> Image:
     image = image.crop((x, y, x+width, y+height))
     return image
@@ -53,6 +50,8 @@ def crop_transparency(im) -> Image:
     return cropped_image
 
 def main():
+    # Set images folder directory
+    images_path = "./static/lolranks"
     # Iterate over images in directory
     for path in os.listdir(images_path):
         image_path = os.path.join(images_path, path)
