@@ -299,7 +299,7 @@ ul {
     box-sizing: border-box;
     height: 36px;
     width: calc(100% - 36px);
-    background: #ffeccf;
+    background: rgb(255, 236, 207);
 }
 
 progress {
@@ -347,6 +347,11 @@ progress {
     background-color: rgb(221, 221, 221);
 }
 
+.dropdown-line > img {
+    width: 35px;
+    height: auto;
+}
+
 .dropdown:hover .dropdown-content {
     display: block;
 }
@@ -362,14 +367,19 @@ progress {
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #5c2626;
+    background-color: rgb(92, 38, 38);
 }
 
 ::-webkit-scrollbar {
     width: max(0.75vw, 10px);
-    background-color: #ebebeb;
+    background-color: rgb(235, 235, 235);
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #f3a023;
+    background-color: rgb(243, 160, 35);
+}
+
+.rankName {
+    display:inline-block;
+    text-align: left;
 }
