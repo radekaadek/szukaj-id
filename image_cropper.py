@@ -1,6 +1,9 @@
 from PIL import Image
 import os
 
+# Removes transparent rows and columns from the start and end of an image
+
+# Set images folder directory
 images_path = "./static/lolranks"
 
 def crop_image(image, x, y, width, height, image_path):
@@ -19,7 +22,7 @@ def check_transparent_column(image, column):
             return False
     return True
 
-# Iterate directory
+# Iterate over images in directory
 for path in os.listdir(images_path):
     image_path = os.path.join(images_path, path)
     im = Image.open(image_path)
@@ -27,17 +30,36 @@ for path in os.listdir(images_path):
     width, height = im.size
     rows = []
     columns = []
+    front_transparent_collumns = 0
+    back_transparent_columns = 0
+    front_transparent_rows = 0
+    back_transparent_row = 0
     # check for transparent rows and columns
     for row in range(height):
         if check_transparent_row(im, row):
-            rows.append(row)
+            front_transparent_rows += 1
+        else:
+            break
+    cropped_image = im.crop((0, front_transparent_rows, width, height))
     for column in range(width):
         if check_transparent_column(im, column):
-            columns.append(column)
-    # crop image
-    for row in rows:
-        crop_image(im, 0, row, width, 1, image_path)
-    for column in columns:
-        crop_image(im, column, 0, 1, height, image_path)
+            front_transparent_collumns += 1
+        else:
+            break
+    cropped_image = cropped_image.crop((front_transparent_collumns, 0, width, height))
+    for row in reversed(range(height)):
+        if check_transparent_row(im, row):
+            back_transparent_row += 1
+        else:
+            break
+    cropped_image = cropped_image.crop((0, 0, width-back_transparent_columns, height-back_transparent_row))
+    for column in reversed(range(width)):
+        if check_transparent_column(im, column):
+            back_transparent_columns += 1
+        else:
+            break
+    cropped_image = cropped_image.crop((0, 0, width-back_transparent_columns, height-back_transparent_row))
+
+    cropped_image.save(image_path)
     im.close()
 
