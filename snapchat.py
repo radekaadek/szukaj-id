@@ -1,15 +1,21 @@
-import profile
-from urllib.request import urlopen
+import asyncio
+import aiohttp
 from bs4 import BeautifulSoup
 
-username = 'marti1241'
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy()) # delete on linux
 
-site = f"https://www.snapchat.com/add/{username}"
-html = urlopen(site)
-bs = BeautifulSoup(html, 'html.parser')
-
-profile_card = bs.find('span', class_ = 'UserDetailsCard_title__trfvf UserDetailsCard_oneLineTruncation__uhOF5')
-print(profile_card.string.encode('unicode-escape').decode('utf-8'))
-
-bitmoji_link = f'https://app.snapchat.com/web/deeplink/snapcode?username={username}&type=SVG&bitmoji=enable'
+async def data(username, session):
+    site_url = f"https://www.snapchat.com/add/{username}"
+    async with session.get(site_url) as response:
+        match response.status:
+            case 200:
+                bs = BeautifulSoup(await response.text(), 'html.parser')
+                profile_card = str(bs.find('span', class_ = 'UserDetailsCard_title__trfvf UserDetailsCard_oneLineTruncation__uhOF5').string)
+                bitmoji_link = f'https://app.snapchat.com/web/deeplink/snapcode?username={username}&type=SVG&bitmoji=enable'
+                print('snap done!')
+                return {'profile_card': profile_card, 'bitmoji_link': bitmoji_link, 'error': 'OK'}
+            case 404:
+                return {'error': 'NOT_FOUND'}
+            case _:
+                return {'error': 'UNKNOWN_ERROR'}
 

@@ -1,5 +1,8 @@
 # A website that allows you to check someones ingame stats!
 
+No one likes to manualy check someones ingame profiles on every platform,
+to find out who they are, so we made a website for that!
+
 Running the server: 
 Make sure to have a Python 3.10+ interpreter installed on your machine,
 Enter the project directory in your operating systems terminal and run:
@@ -19,7 +22,6 @@ On bash (linux/mac):
 4. uvicorn main:app // run server
 
 For running the image_cropper.py script use pip install Pillow
-For running the snapchat.py script use pip install bs4 and pip install lxml
 
 Build with Fast API
 Every api request uses an aiohttp session

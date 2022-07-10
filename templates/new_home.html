@@ -1,4 +1,5 @@
 {% extends "index.html" %} {% block content %}
+{{zwrot['snap']}}
 <div class="jsdom" id="datalists_contaier">
     <ul id="datalist">
         <li class="platformLine" id="steamLine">
@@ -124,6 +125,17 @@
             <div>Fortnite API key has expired</div>
             {% endif %}
             <img class="platformLogo" id="fortniteLogo" src="../static/fortnite_icon.svg" />
+        </li>
+        <li class="platformLine" id="snapLine">
+            {% if zwrot['snap']['error'] == 'OK' %}
+            <div>{{zwrot['snap']['profile_card']}}</div>
+            <img src="{{zwrot['snap']['bitmoji_link']}}" class="profileAvatar"></img>
+            {% endif %} {% if zwrot['snap']['error'] == 'NOT_FOUND' %}
+            <div>User was not found</div>
+            {% endif %} {% if zwrot['snap']['error'] == 'UNKNOWN_ERROR' %}
+            <div>Unknown snap error</div>
+            {% endif %}
+            <img class="platformLogo" id="snapLogo" src="../static/snap_icon.svg" />
         </li>
     </ul>
 </div>
