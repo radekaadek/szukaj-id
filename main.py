@@ -16,11 +16,11 @@ templates = Jinja2Templates(directory="templates")
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy()) # delete on linux
 
 @app.get("/", response_class=HTMLResponse)
-def index(request: Request):
+def index(request: Request) -> HTMLResponse:
     return templates.TemplateResponse("index.html", {'request': request})
 
 @app.get('/{username}', response_class=HTMLResponse)
-async def search(username, request: Request):
+async def search(username, request: Request) -> HTMLResponse:
     # easter egg
     if username == "agroursusowo":
         return templates.TemplateResponse("pit.html", {'request': request})
