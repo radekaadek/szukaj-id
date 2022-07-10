@@ -1,12 +1,15 @@
+import profile
+from urllib.request import urlopen
 from bs4 import BeautifulSoup
-import requests
 
-# Fetch the page and create a Beautiful Soup object
-page = requests.get("https://www.snapchat.com/add/marti1241")
-soup = BeautifulSoup(page.text, "html.parser")
+username = 'marti1241'
 
-print(soup.encode('utf-8'))
+site = f"https://www.snapchat.com/add/{username}"
+html = urlopen(site)
+bs = BeautifulSoup(html, 'html.parser')
 
-# Locate every div tags that has class name of "UserCard_container__A4JCG"
-s = soup.find_all("div", class_="UserCard_container__A4JCG", encoding='utf-8')
-print(s)
+profile_card = bs.find('span', class_ = 'UserDetailsCard_title__trfvf UserDetailsCard_oneLineTruncation__uhOF5')
+print(profile_card.string.encode('unicode-escape').decode('utf-8'))
+
+bitmoji_link = f'https://app.snapchat.com/web/deeplink/snapcode?username={username}&type=SVG&bitmoji=enable'
+
