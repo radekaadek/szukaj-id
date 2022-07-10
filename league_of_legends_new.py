@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 # documentation: https://riot-watcher.readthedocs.io/en/latest/index.html
 # https://developer.riotgames.com/apis
 
-riot_api_key = 'RGAPI-b6841544-2d17-464a-ae16-b118ca757da0'
+riot_api_key = 'RGAPI-5cf575c3-0d1c-43e0-9bda-65d8a17d475e'
 
 regiony = {'Brasil': 'br1', 'Europe Nordic & East': 'eun1', 'Europe West': 'euw1', 'Japan': 'jp1', 'Korea': 'kr', 'Latin America North': 'la1', 'Latin America South': 'la2', 'North America': 'na1', 'Oceania': 'oc1', 'Russia': 'ru', 'Turkey': 'tr1'}
 

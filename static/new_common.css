@@ -345,7 +345,7 @@ progress {
 
 .dropdown-content .dropdown-line {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     padding: 0px 10px;
 }
