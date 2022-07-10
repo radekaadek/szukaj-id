@@ -1,9 +1,10 @@
 # A website that allows you to check someones ingame stats!
 
-No one likes to manualy check someones ingame profiles on every platform,
-to find out who they are, so we made a website for that!
+No one likes to manualy check someones profiles on major platforms
+to find out who they are, so we made a website for that
+Open-source, without any annoying ads and tracking!
 
-Running the server: 
+# Running the server: 
 Make sure to have a Python 3.10+ interpreter installed on your machine,
 Enter the project directory in your operating systems terminal and run:
 
