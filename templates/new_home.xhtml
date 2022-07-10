@@ -50,10 +50,9 @@
             {% endif %}
             <div class="aliasLine">
                 {% if zwrot['minecraft']['aliases'] != 0%}
-                    <div>Minecraft aliases:</div>
+                    <div id ="minecraftAliases">Minecraft aliases:</div>
                     {% for i in zwrot['minecraft']['aliases'] %}
                         <a href="./{{i}}">{{i}}</a>
-                        <span> </span>
                     {% endfor %}
                 {% else %}
                     <div>No aliases found</div>
@@ -70,7 +69,7 @@
                         </div>
                     {% endfor %}
                     </div>
-                
+                </div>
             {% endif %}
         {% endif %} {% if zwrot['minecraft']['error'] == 'NOT_FOUND' %}
         <div>Player was not found</div>

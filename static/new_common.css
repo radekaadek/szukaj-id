@@ -390,3 +390,7 @@ progress {
     display: inline-block;
     text-align: left;
 }
+
+#minecraftAliases{
+    padding-right: 22px;
+}
