@@ -20,6 +20,8 @@
       });
       document.querySelector(".web-search-submit").addEventListener("click", redirFu);
   };
+  
+  //paypal
   let paypalBar = async function () {
       PayPal.Donation.Button({
           env: "production",
@@ -32,6 +34,7 @@
       }).render("#donateButton");
   };
 
+  //onload
   $(document).ready(() => {
       searchBar();
       paypalBar();
