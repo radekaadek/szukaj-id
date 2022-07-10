@@ -34,4 +34,4 @@ async def search(username, request: Request) -> HTMLResponse:
     return templates.TemplateResponse("new_home.html", {'request': request, 'zwrot': zwrot})
     
 if __name__ == "__main__":
-    uvicorn.run(app, port=8000)
+    uvicorn.run(app, port=80)
