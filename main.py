@@ -6,6 +6,7 @@ import asyncio, aiohttp, uvicorn, steam
 import fortnite as fn
 import minecraft as mc
 import league_of_legends_new as lol
+import snapchat as snap
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -29,7 +30,8 @@ async def search(username, request: Request) -> HTMLResponse:
         minecraftTask = asyncio.create_task(mc.dane(username, session))
         steamTask = asyncio.create_task(steam.checkSteam(username, session))
         lolTask = asyncio.create_task(lol.data(username, session))
-        zwrot = {'fortnite': await fortnite_task, 'lol': await lolTask, 'minecraft': await minecraftTask, 'steam': await steamTask}
+        snapTask = asyncio.create_task(snap.data(username, session))
+        zwrot = {'fortnite': await fortnite_task, 'lol': await lolTask, 'minecraft': await minecraftTask, 'steam': await steamTask, 'snap': await snapTask}
         # print(zwrot)   #debug
     return templates.TemplateResponse("new_home.html", {'request': request, 'zwrot': zwrot})
     

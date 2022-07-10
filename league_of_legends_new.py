@@ -27,7 +27,7 @@ async def data(summonerName, session, region='Europe Nordic & East') -> dict:
             case 200:
                 return_dict = {'error': 'OK'}
                 player_response = await response.json()
-                puuid = player_response['puuid']
+                # puuid = player_response['puuid'] # might be useful later
                 level = player_response['summonerLevel']
                 return_dict['level'] = level
                 return_dict['revisionDate'] = (datetime(1970, 1, 1) + timedelta(milliseconds=player_response['revisionDate'])).replace(microsecond=0)
