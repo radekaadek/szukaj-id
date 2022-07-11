@@ -1,9 +1,8 @@
 import aiohttp, asyncio
 from datetime import datetime, timedelta
-try:
-    from api_keys import riot_api_key
-except:
-    print('Riot api key found!')
+from api_keys import riot_api_key
+if riot_api_key == "":
+    print("Please set your riot api key in api_keys.py")
 
 # documentation: https://riot-watcher.readthedocs.io/en/latest/index.html
 # https://developer.riotgames.com/apis

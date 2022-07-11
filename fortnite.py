@@ -1,9 +1,8 @@
 import aiohttp
 import asyncio
-try:
-    from api_keys import fortnite_api_key
-except:
-    print('Fortnite api key not found!')
+from api_keys import fortnite_api_key
+if fortnite_api_key == "":
+    print("Please set your fortnite api key in api_keys.py")
 
 fortnite_api_website = 'https://fortnite-api.com/v2/stats/br/v2'
 

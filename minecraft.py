@@ -1,9 +1,8 @@
 import aiohttp, asyncio
 from datetime import datetime, timedelta
-try:
-    from api_keys import hypixel_api_key
-except:
-    print('Hypixel api key found')
+from api_keys import hypixel_api_key
+if hypixel_api_key == "":
+    print("Please set your hypixel api key in api_keys.py")
 
 hypixel_url = 'https://api.hypixel.net'
 mojang_url = 'https://api.mojang.com/users/profiles/minecraft'
