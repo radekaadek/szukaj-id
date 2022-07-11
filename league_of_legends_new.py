@@ -1,10 +1,12 @@
 import aiohttp, asyncio
 from datetime import datetime, timedelta
+try:
+    from api_keys import riot_api_key
+except:
+    print('Riot api key found!')
 
 # documentation: https://riot-watcher.readthedocs.io/en/latest/index.html
 # https://developer.riotgames.com/apis
-
-riot_api_key = 'RGAPI-5cf575c3-0d1c-43e0-9bda-65d8a17d475e'
 
 regiony = {'Brasil': 'br1', 'Europe Nordic & East': 'eun1', 'Europe West': 'euw1', 'Japan': 'jp1', 'Korea': 'kr', 'Latin America North': 'la1', 'Latin America South': 'la2', 'North America': 'na1', 'Oceania': 'oc1', 'Russia': 'ru', 'Turkey': 'tr1'}
 

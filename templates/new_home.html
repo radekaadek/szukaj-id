@@ -46,7 +46,7 @@
             {% if zwrot['minecraft']['last_seen'] != False %}
             <div>Last seen on hypixel: {{zwrot['minecraft']['last_seen']}}</div>
             {% else %}
-            <div>Never seen on hypixel or never recorded</div>
+            <div>Never never recorded or never seen on hypixel</div>
             {% endif %}
             <div class="aliasLine">
                 {% if zwrot['minecraft']['aliases'] != 0%}
@@ -72,7 +72,7 @@
                 </div>
             {% endif %}
         {% endif %} {% if zwrot['minecraft']['error'] == 'NOT_FOUND' %}
-        <div>Player was not found</div>
+        <div>Player was not found on minecraft</div>
         {% endif %} {% if zwrot['minecraft']['error'] == 'API_ERROR' %}
         <div>Minecraft API error</div>
         {% endif %}

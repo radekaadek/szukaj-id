@@ -1,5 +1,8 @@
 import aiohttp, asyncio, operator
-from api_keys import steam_api_key
+try:
+    from api_keys import steam_api_key
+except:
+    print('Steam api key not found!')
 
 sortkey = operator.itemgetter("playtime_forever")
 

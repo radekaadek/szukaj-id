@@ -1,7 +1,9 @@
 import aiohttp
 import asyncio
-from api_keys import fortnite_api_key
-
+try:
+    from api_keys import fortnite_api_key
+except:
+    print('Fortnite api key not found!')
 
 fortnite_api_website = 'https://fortnite-api.com/v2/stats/br/v2'
 
@@ -12,6 +14,7 @@ async def dane(username, session, platform='epic') -> dict:
     headers = {'Authorization': fortnite_api_key}
     async with session.get(fortnite_api_website, params=params, headers=headers) as response:
         json_response = await response.json()
+        print(json_response)
         match json_response['status']:
             case 403:
                 # players account stats are private
@@ -19,7 +22,7 @@ async def dane(username, session, platform='epic') -> dict:
             case 404:
                 # player not found
                 return {'error': 'NOT_FOUND'}
-            case 400:
+            case 400 | 401:
                 return {'error': 'API_ERROR'}
         name = json_response['data']['account']['name']
         bp_level = json_response['data']['battlePass']['level']
