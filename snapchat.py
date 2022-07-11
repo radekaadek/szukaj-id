@@ -2,7 +2,6 @@ import asyncio
 import aiohttp
 from bs4 import BeautifulSoup
 
-asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy()) # delete on linux
 
 async def data(username, session):
     site_url = f"https://www.snapchat.com/add/{username}"

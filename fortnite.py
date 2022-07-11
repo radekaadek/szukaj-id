@@ -1,7 +1,8 @@
 import aiohttp
 import asyncio
+from api_keys import fortnite_api_key
 
-fortnite_api_key = 'b4dab92b-ac98-4d0f-8cc9-5e2bc93de384'
+
 fortnite_api_website = 'https://fortnite-api.com/v2/stats/br/v2'
 
 #dokumentacja: https://dash.fortnite-api.com/endpoints/stats

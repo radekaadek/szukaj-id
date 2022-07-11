@@ -5,8 +5,16 @@ to find out who they are, so we made a website for that
 Open-source, without any annoying ads and tracking!
 
 # Running the server: 
-Make sure to have a Python 3.10+ interpreter installed on your machine,
-Enter the project directory in your operating systems terminal and run:
+
+1. Make sure to have a Python 3.10+ interpreter installed on your machine,
+2. Put your api keys in the api_keys.py
+    Your can get them from:
+        https://steamcommunity.com/dev/apikey
+        https://developer.riotgames.com
+        https://dash.fortnite-api.com/account
+        https://api.hypixel.net/#section/Authentication
+
+3. Enter the project directory in your operating systems terminal and run:
 
 On powershell (windows):
 

@@ -1,9 +1,9 @@
 import aiohttp, asyncio
 from datetime import datetime, timedelta
+from api_keys import hypixel_api_key
 
 hypixel_url = 'https://api.hypixel.net'
-hypixel_api_key = '36da01f0-28b9-4bc1-9c33-d24c57f55399'
-mojang_url = 'https://api.mojang.com/users/profiles/minecraft/'
+mojang_url = 'https://api.mojang.com/users/profiles/minecraft'
 mojang_skin_url = 'https://sessionserver.mojang.com/session/minecraft/profile' #/uuid
 
 # head api: https://mc-heads.net
@@ -17,7 +17,7 @@ asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 async def dane(username, session) -> dict:
     # get uuid from mojang
     try:
-        async with session.get(f'{mojang_url}{username}') as response:
+        async with session.get(f'{mojang_url}/{username}') as response:
             r1 = await response.json()
             uuid = r1['id']
     except:

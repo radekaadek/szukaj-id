@@ -1,8 +1,7 @@
 import aiohttp, asyncio, operator
+from api_keys import steam_api_key
 
 sortkey = operator.itemgetter("playtime_forever")
-
-steam_api_key = 'EE03692ACB03E4371522180E26926643'
 
 def arrayToDictionary(arrlist) -> dict:
     arrlistkeys = dict.fromkeys(range(1, len(arrlist)))
