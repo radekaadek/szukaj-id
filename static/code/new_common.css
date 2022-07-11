@@ -47,7 +47,7 @@ h1 {
 }
 
 #githubLink {
-    background-image: url(../static/github.svg);
+    background-image: url(../platforms/github.svg);
     width: 70px;
     height: 70px;
     background-size: 70px;
@@ -253,7 +253,7 @@ ul {
 }
 
 .web-search .web-search-logo {
-    background-image: url("../static/logo1.svg");
+    background-image: url("../grelems/logo1.svg");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -271,7 +271,7 @@ ul {
 }
 
 .web-search .web-search-submit {
-    background: url("../static/search.svg");
+    background: url("../grelems/search.svg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 30px;

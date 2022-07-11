@@ -1,5 +1,4 @@
 {% extends "index.html" %} {% block content %}
-{{zwrot}}
 <div class="jsdom" id="datalists_contaier">
     <ul id="datalist">
         <li class="platformLine" id="steamLine">
@@ -37,7 +36,7 @@
             {% endif %} {% if zwrot['steam']['error'] == 'API_ERROR' %}
             <div>Steam API error</div>
             {% endif %}
-            <img class="platformLogo" id="steamLogo" src="../static/steam_icon.svg" />
+            <img class="platformLogo" id="steamLogo" src="../static/platforms/Steam_icon.svg" />
         </li>
         <li class="platformLine" id="minecraftLine">
         {% if zwrot['minecraft']['error'] == 'OK' %}
@@ -77,7 +76,7 @@
         {% endif %} {% if zwrot['minecraft']['error'] == 'API_ERROR' %}
         <div>Minecraft API error</div>
         {% endif %}
-        <img class="platformLogo" id="minecraftLogo" src="../static/minecraft_icon.svg" />
+        <img class="platformLogo" id="minecraftLogo" src="../static/platforms/minecraft_icon.svg" />
         </li>
         <li class="platformLine" id="lolLine">
             {% if zwrot['lol']['error'] == 'OK' %}
@@ -107,7 +106,7 @@
             {% endif %} {% if zwrot['lol']['error'] == 'KEY_ERROR' %}
             <div>League of Legends API key has expired</div>
             {% endif %}
-            <img class="platformLogo" id="lolLogo" src="../static/lol_icon.svg" />
+            <img class="platformLogo" id="lolLogo" src="../static/platforms/LoL_icon.svg" />
         </li>
         <li class="platformLine" id="fortniteLine">
             {% if zwrot['fortnite']['error'] == 'OK' %}
@@ -124,7 +123,7 @@
             {% endif %} {% if zwrot['fortnite']['error'] == 'KEY_ERROR' %}
             <div>Fortnite API key has expired</div>
             {% endif %}
-            <img class="platformLogo" id="fortniteLogo" src="../static/fortnite_icon.svg" />
+            <img class="platformLogo" id="fortniteLogo" src="../static/platforms/fortnite_icon.svg" />
         </li>
         <li class="platformLine" id="snapLine">
             {% if zwrot['snap']['error'] == 'OK' %}
@@ -135,7 +134,7 @@
             {% endif %} {% if zwrot['snap']['error'] == 'UNKNOWN_ERROR' %}
             <div>Unknown snap error</div>
             {% endif %}
-            <img class="platformLogo" id="snapLogo" src="../static/snap_icon.svg" />
+            <img class="platformLogo" id="snapLogo" src="../static/platforms/Snap_icon.svg" />
         </li>
     </ul>
 </div>

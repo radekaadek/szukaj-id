@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
-        <script src="../static/scripts.js"></script>
-        <link rel="stylesheet" type="text/css" href="../static/new_common.css" />
-        <link rel="icon" type="svg+xml" href="../static/logo1.svg" />
+        <script src="../static/code/scripts.js"></script>
+        <link rel="stylesheet" type="text/css" href="../static/code/new_common.css" />
+        <link rel="icon" type="svg+xml" href="../static/grelems/logo1.svg" />
     </head>
     <title>Player Stalker</title>
     <body>
@@ -16,13 +16,13 @@
             <div id="donateButton"></div>
         </span>
 
-        <img id="serviceLogo" src="../static/logo text.svg" />
+        <img id="serviceLogo" src="../static/grelems/logo text.svg" />
         <h1>Type a username to search someones stats!</h1>
         <div class="web-search">
             <div class="web-search-inner-container">
                 <span class="web-search-logo-container"><span class="web-search-logo shiny"></span></span>
                 <div class="suggestion-input-container"><input id="webSearchInput" autocomplete="off" incremental="" placeholder="Type here..." tabindex="2000" type="search" , autofocus="autofocus" /></div>
-                <button class="web-search-submit" tabindex="2000" type="submit">Szukaj</button>
+                <button class="web-search-submit" tabindex="2000" type="submit">Search</button>
             </div>
         </div>
         {%block content %} {%endblock%}
