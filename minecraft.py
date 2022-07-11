@@ -30,8 +30,12 @@ async def dane(username, session) -> dict:
     friend_uuids = []
     PARAMS = {'key': hypixel_api_key, 'uuid': uuid}
     async with session.get(hypixel_url + '/status', params=PARAMS) as response:
-        status_response = await response.json()
-        player_status = status_response['session']['online']
+        match response.status:
+            case 200:
+                status_response = await response.json()
+                player_status = status_response['session']['online']
+            case _:
+                return {'error': 'API_ERROR'}
 
     async with session.get(hypixel_url + '/player', params=PARAMS) as response:
         stats = await response.json()

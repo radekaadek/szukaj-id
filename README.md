@@ -7,7 +7,15 @@ Open-source, without any annoying ads and tracking!
 # Running the server: 
 
 1. Make sure to have a Python 3.10+ interpreter installed on your machine,
-2. Put your api keys in the api_keys.py
+2. Create an api_keys.py file in the same directory as this file with the following content:
+
+    steam_api_key = ""
+    riot_api_key = ""
+    fortnite_api_key = ""
+    hypixel_api_key = ""
+
+    Now insert your api keys into the api_keys.py file.
+
     Your can get them from:
         https://steamcommunity.com/dev/apikey
         https://developer.riotgames.com
@@ -34,5 +42,4 @@ For running the image_cropper.py script use pip install Pillow
 
 Build with Fast API
 Every api request uses an aiohttp session
-
 

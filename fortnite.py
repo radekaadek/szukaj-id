@@ -13,7 +13,6 @@ async def dane(username, session, platform='epic') -> dict:
     headers = {'Authorization': fortnite_api_key}
     async with session.get(fortnite_api_website, params=params, headers=headers) as response:
         json_response = await response.json()
-        print(json_response)
         match json_response['status']:
             case 403:
                 # players account stats are private

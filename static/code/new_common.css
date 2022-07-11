@@ -7,6 +7,11 @@ html,
     background: linear-gradient(rgb(228, 198, 124) 0, rgb(221, 113, 84) 100%);
 }
 
+.upper-page {
+    display: flex;
+    justify-content: space-between;
+}
+
 .platformLine {
     display: inline-flex;
     justify-content: center;
