@@ -1,1 +1,0 @@
-Pit jest koxem

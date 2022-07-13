@@ -6,7 +6,7 @@ import fortnite as fn
 #regiony = ['Brasil', 'Europe Nordic & East', 'Europe West', 'Japan', 'Korea', 'Latin America North', 'Latin America South', 'North America', 'Oceania', 'Russia', 'Turkey']
 
 app = Flask(__name__)
-steam_api_key = 'EE03692ACB03E4371522180E26926643'
+steam_api_key = ''
 
 def czy_wszystko_none(dane):
     for i in dane:
