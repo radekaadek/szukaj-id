@@ -29,14 +29,14 @@ On powershell (windows):
 1. pip install venv // install virtual enviroment
 2. ./venv/scripts/activate  // activate
 3. pip install -r requirements.txt  // install requirements
-4. uvicorn main:app  // run server
+4. uvicorn main:app --reload --port 80  // run server
 
 On bash (linux/mac):
 
 1. pip install venv // install virtual enviroment
 2. source venv/bin/activate //activate
 3. pip install -r requirements.txt // install requirements
-4. uvicorn main:app // run server
+4. uvicorn main:app --reload --port 80 // run server
 
 For running the image_cropper.py script use pip install Pillow
 
