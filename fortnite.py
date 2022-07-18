@@ -21,8 +21,6 @@ async def dane(username, session, platform='epic') -> dict:
             return {'error': 'NOT_FOUND'}
         elif json_response['status'] == 400 or json_response['status'] == 401:
             return {'error': 'API_ERROR'}
-        else:
-            return {'error': 'API_ERROR'}
         name = json_response['data']['account']['name']
         bp_level = json_response['data']['battlePass']['level']
         game_data = json_response['data']['stats']['all']['overall']     
