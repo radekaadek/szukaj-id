@@ -88,14 +88,12 @@ async def checkSteam(username, session, steamid='') -> dict:
             del steamgamesinfo[a]["appid"]
     
 
-
-    match usersummary['personastate']:
-        case 0:
-            status = 'offline'
-        case 1 | 5 | 6:
-            status = 'online'
-        case 2 | 3 | 4:
-            status = 'busy' 
+    if usersummary['personastate'] == 0:
+        status = 'offline'
+    elif usersummary['personastate'] == 1 or usersummary['personastate'] == 5 or usersummary['personastate'] == 6:
+        status = 'online'
+    elif usersummary['personastate'] == 2 or usersummary['personastate'] == 3 or usersummary['personastate'] == 4:
+        status = 'busy' 
 
 
     usersummary = {
