@@ -13,15 +13,16 @@ async def dane(username, session, platform='epic') -> dict:
     headers = {'Authorization': fortnite_api_key}
     async with session.get(fortnite_api_website, params=params, headers=headers) as response:
         json_response = await response.json()
-        match json_response['status']:
-            case 403:
-                # players account stats are private
-                return {'error': 'PRIVATE'}
-            case 404:
-                # player not found
-                return {'error': 'NOT_FOUND'}
-            case 400 | 401:
-                return {'error': 'API_ERROR'}
+        if json_response['status'] == 403:
+            # players account stats are private
+            return {'error': 'PRIVATE'}
+        elif json_response['status'] == 404:
+            # player not found
+            return {'error': 'NOT_FOUND'}
+        elif json_response['status'] == 400 or json_response['status'] == 401:
+            return {'error': 'API_ERROR'}
+        else:
+            return {'error': 'API_ERROR'}
         name = json_response['data']['account']['name']
         bp_level = json_response['data']['battlePass']['level']
         game_data = json_response['data']['stats']['all']['overall']     
