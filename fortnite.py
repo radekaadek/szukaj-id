@@ -1,5 +1,3 @@
-import aiohttp
-import asyncio
 from api_keys import fortnite_api_key
 if fortnite_api_key == "":
     print("Please set your fortnite api key in api_keys.py")

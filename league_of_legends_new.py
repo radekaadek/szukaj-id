@@ -1,4 +1,3 @@
-import aiohttp, asyncio
 from datetime import datetime, timedelta
 from api_keys import riot_api_key
 if riot_api_key == "":

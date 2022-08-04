@@ -1,5 +1,3 @@
-import aiohttp
-import asyncio
 
 token_base_url = 'api.instagram.com'
 

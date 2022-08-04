@@ -1,4 +1,3 @@
-import aiohttp, asyncio
 from datetime import datetime, timedelta
 from api_keys import hypixel_api_key
 if hypixel_api_key == "":

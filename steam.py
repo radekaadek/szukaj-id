@@ -1,4 +1,4 @@
-import aiohttp, asyncio, operator
+import operator
 from api_keys import steam_api_key
 if steam_api_key == "":
     print("Please set your steam api key in api_keys.py")
