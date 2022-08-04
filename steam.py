@@ -69,7 +69,7 @@ async def checkSteam(username, session, steamid='') -> dict:
         else:
             usersummary = steamgamesinfo_response['response']['players'][0]
             friend_dict['friends'] = []
-        
+
         # obróbka obiektów
         try:
             steamgamesinfo = steamgamesinfo["games"]
@@ -78,7 +78,7 @@ async def checkSteam(username, session, steamid='') -> dict:
         steamgamesinfo.sort(key=sortkey, reverse=True)
         steamgamesinfo = steamgamesinfo[0:4]
         steamgamesinfo = arrayToDictionary(steamgamesinfo)
-        
+
         for a in steamgamesinfo:
             del steamgamesinfo[a]["playtime_windows_forever"]
             del steamgamesinfo[a]["playtime_mac_forever"]
@@ -86,7 +86,7 @@ async def checkSteam(username, session, steamid='') -> dict:
             steamgamesinfo[a]['icon_link'] = f'http://media.steampowered.com/steamcommunity/public/images/apps/{steamgamesinfo[a]["appid"]}/{steamgamesinfo[a]["img_icon_url"]}.jpg'
             del steamgamesinfo[a]["img_icon_url"]
             del steamgamesinfo[a]["appid"]
-    
+
 
     if usersummary['personastate'] == 0:
         status = 'offline'

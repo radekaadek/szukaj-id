@@ -32,4 +32,3 @@ async def dane(username, session, platform='epic') -> dict:
     lastPlayed = lastPlayed.replace('T', ' ').replace('Z', '')
     print('fortnite done!')
     return {'error': 'OK', 'name': name, 'hoursPlayed': hoursPlayed, 'wins': wins, 'lastPlayed': lastPlayed, 'battlepassLevel': bp_level}
-    

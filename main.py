@@ -34,6 +34,6 @@ async def search(username, request: Request) -> HTMLResponse:
         zwrot = {'fortnite': await fortnite_task, 'lol': await lolTask, 'minecraft': await minecraftTask, 'steam': await steamTask, 'snap': await snapTask}
         # print(zwrot)   #debug
     return templates.TemplateResponse("new_home.html", {'request': request, 'zwrot': zwrot})
-    
+
 if __name__ == "__main__":
     uvicorn.run(app, port=80)
