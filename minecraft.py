@@ -46,7 +46,7 @@ async def dane(username, session) -> dict:
     for friend_uuid in friend_uuids:
         async with session.get(hypixel_url + '/player', params={'key': hypixel_api_key, 'uuid': friend_uuid}) as response:
             friend_data = await response.json()
-            if friend_data['success'] == True:
+            if friend_data['success'] is True:
                 friends_list.append( {'name': friend_data['player']['displayname'], 'avatar': f'https://mc-heads.net/avatar/{friend_data["player"]["displayname"]}/nohelm'})
     friends_list.sort(key=lambda x: x['name'])
     try:
