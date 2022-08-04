@@ -55,7 +55,7 @@ async def data(summonerName, session, region='Europe Nordic & East') -> dict:
                 return return_dict
         elif response.status == 404:
             return {'error': 'NOT_FOUND'}
-        elif response.status == 401 or response.status == 429:
+        elif response.status in (401, 429):
             return {'error': 'API_ERROR'}
         elif response.status == 403:
             return {'error': 'KEY_ERROR'}
