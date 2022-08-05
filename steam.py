@@ -5,7 +5,7 @@ if steam_api_key == "":
 
 sortkey = operator.itemgetter("playtime_forever")
 
-def arrayToDictionary(arrlist) -> dict:
+def array_to_dict(arrlist) -> dict:
     arrlistkeys = dict.fromkeys(range(1, len(arrlist)))
     arrlist = dict(zip(arrlistkeys, arrlist))
     keys_values = arrlist.items()
@@ -16,7 +16,7 @@ def get_name(usersummary):
     return usersummary['personaname']
 
 
-async def checkSteam(username, session, steamid='') -> dict:
+async def check_steam(username, session, steamid='') -> dict:
     # documentation: https://wiki.teamfortress.com/wiki/WebAPI
     try:
         # api request to get steam ID
@@ -77,7 +77,7 @@ async def checkSteam(username, session, steamid='') -> dict:
             return {'error': 'NOT_FOUND'}
         steamgamesinfo.sort(key=sortkey, reverse=True)
         steamgamesinfo = steamgamesinfo[0:4]
-        steamgamesinfo = arrayToDictionary(steamgamesinfo)
+        steamgamesinfo = array_to_dict(steamgamesinfo)
         
         for a in steamgamesinfo:
             del steamgamesinfo[a]["playtime_windows_forever"]

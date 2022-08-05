@@ -24,12 +24,12 @@ async def dane(username, session, platform='epic') -> dict:
         name = json_response['data']['account']['name']
         bp_level = json_response['data']['battlePass']['level']
         game_data = json_response['data']['stats']['all']['overall']     
-        hoursPlayed = game_data['minutesPlayed']//60
+        hours_played = game_data['minutesPlayed']//60
         wins = game_data['wins']
-        lastPlayed = game_data['lastModified']
-    if lastPlayed == '1970-01-01T00:00:00Z' or not hoursPlayed:
+        last_played = game_data['lastModified']
+    if last_played == '1970-01-01T00:00:00Z' or not hours_played:
         return {'error': 'NOT_FOUND'}
-    lastPlayed = lastPlayed.replace('T', ' ').replace('Z', '')
+    last_played = last_played.replace('T', ' ').replace('Z', '')
     print('fortnite done!')
-    return {'error': 'OK', 'name': name, 'hoursPlayed': hoursPlayed, 'wins': wins, 'lastPlayed': lastPlayed, 'battlepassLevel': bp_level}
+    return {'error': 'OK', 'name': name, 'hoursPlayed': hours_played, 'wins': wins, 'lastPlayed': last_played, 'battlepassLevel': bp_level}
     

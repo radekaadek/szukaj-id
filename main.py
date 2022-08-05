@@ -27,11 +27,11 @@ async def search(username, request: Request) -> HTMLResponse:
         return templates.TemplateResponse("pit.html", {'request': request})
     async with aiohttp.ClientSession() as session:
         fortnite_task = asyncio.create_task(fn.dane(username, session))
-        minecraftTask = asyncio.create_task(mc.dane(username, session))
-        steamTask = asyncio.create_task(steam.checkSteam(username, session))
-        lolTask = asyncio.create_task(lol.data(username, session))
-        snapTask = asyncio.create_task(snap.data(username, session))
-        zwrot = {'fortnite': await fortnite_task, 'lol': await lolTask, 'minecraft': await minecraftTask, 'steam': await steamTask, 'snap': await snapTask}
+        minecraft_task = asyncio.create_task(mc.dane(username, session))
+        steam_task = asyncio.create_task(steam.check_steam(username, session))
+        lol_task = asyncio.create_task(lol.data(username, session))
+        snap_task = asyncio.create_task(snap.data(username, session))
+        zwrot = {'fortnite': await fortnite_task, 'lol': await lol_task, 'minecraft': await minecraft_task, 'steam': await steam_task, 'snap': await snap_task}
         # print(zwrot)   #debug
     return templates.TemplateResponse("new_home.html", {'request': request, 'zwrot': zwrot})
     

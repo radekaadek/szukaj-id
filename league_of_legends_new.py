@@ -16,14 +16,14 @@ def profile_link(username, region) -> dict:
     regiony_opgg = {'Brasil': 'br', 'Europe Nordic & East': 'eune', 'Europe West': 'euw', 'Japan': 'jp', 'Korea': 'kr', 'Latin America North': 'lan', 'Latin America South': 'las', 'North America': 'na', 'Oceania': 'oc', 'Russia': 'ru', 'Turkey': 'tr'}
     return {'link':f'https://{regiony_opgg[region]}.op.gg/summoner/userName={username}'}
 
-async def data(summonerName, session, region='Europe Nordic & East') -> dict:
+async def data(summoner_name, session, region='Europe Nordic & East') -> dict:
     base_region = return_region(region)
     base_url = f'https://{base_region}.api.riotgames.com'
     base_params = {"api_key": riot_api_key}
     async with session.get('https://ddragon.leagueoflegends.com/api/versions.json') as lvr:
         lv = await lvr.json()
         league_version = lv[0]
-    async with session.get(f'{base_url}/lol/summoner/v4/summoners/by-name/{summonerName}', params=base_params) as response:
+    async with session.get(f'{base_url}/lol/summoner/v4/summoners/by-name/{summoner_name}', params=base_params) as response:
         if response.status == 200:
             return_dict = {'error': 'OK'}
             player_response = await response.json()
@@ -32,11 +32,11 @@ async def data(summonerName, session, region='Europe Nordic & East') -> dict:
             return_dict['level'] = level
             return_dict['revisionDate'] = (datetime(1970, 1, 1) + timedelta(milliseconds=player_response['revisionDate'])).replace(microsecond=0)
             return_dict['name'] = player_response['name']
-            encryptedSummonerId = player_response['id']
-            profileIconLink = f'https://ddragon.leagueoflegends.com/cdn/{league_version}/img/profileicon/{player_response["profileIconId"]}.png'
-            return_dict['avatar'] = profileIconLink
+            encrypted_summoner_id = player_response['id']
+            profile_icon_link = f'https://ddragon.leagueoflegends.com/cdn/{league_version}/img/profileicon/{player_response["profileIconId"]}.png'
+            return_dict['avatar'] = profile_icon_link
             element = {}
-            async with session.get(f'{base_url}/lol/league/v4/entries/by-summoner/{encryptedSummonerId}', params = base_params) as ranked_response:
+            async with session.get(f'{base_url}/lol/league/v4/entries/by-summoner/{encrypted_summoner_id}', params = base_params) as ranked_response:
                 ranked_json_response = await ranked_response.json()
                 for element in ranked_json_response:
                     if element['queueType'] == 'RANKED_SOLO_5x5':
@@ -50,7 +50,7 @@ async def data(summonerName, session, region='Europe Nordic & East') -> dict:
                             break
                 if 'queueType' not in element:
                     return_dict['tier'] = 'inactive'
-                return_dict |= profile_link(summonerName, region)
+                return_dict |= profile_link(summoner_name, region)
                 print('lol done!')
                 return return_dict
         elif response.status == 404:
