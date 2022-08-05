@@ -70,11 +70,11 @@ async def data(summoner_name, session, region='Europe Nordic & East') -> dict:
                 return_dict['level'] = level
                 return_dict['revisionDate'] = (datetime(1970, 1, 1) + timedelta(milliseconds=player_response['revisionDate'])).replace(microsecond=0)
                 return_dict['name'] = player_response['name']
-                encryptedSummonerId = player_response['id']
-                profileIconLink = f'https://ddragon.leagueoflegends.com/cdn/{league_version}/img/profileicon/{player_response["profileIconId"]}.png'
-                return_dict['avatar'] = profileIconLink
+                encrypted_summmoner_id = player_response['id']
+                profile_icon_link = f'https://ddragon.leagueoflegends.com/cdn/{league_version}/img/profileicon/{player_response["profileIconId"]}.png'
+                return_dict['avatar'] = profile_icon_link
                 element = {}
-                async with session.get(f'{base_url}/lol/league/v4/entries/by-summoner/{encryptedSummonerId}', params = base_params) as ranked_response:
+                async with session.get(f'{base_url}/lol/league/v4/entries/by-summoner/{encrypted_summmoner_id}', params = base_params) as ranked_response:
                     ranked_json_response = await ranked_response.json()
                     for element in ranked_json_response:
                         if element['queueType'] == 'RANKED_SOLO_5x5':
