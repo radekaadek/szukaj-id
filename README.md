@@ -9,10 +9,10 @@ Open-source, without any annoying ads and tracking!
 1. Make sure to have a Python 3.10+ interpreter installed on your machine,
 2. Create an api_keys.py file in the same directory as this file with the following content:
 
-    steam_api_key = ""
-    riot_api_key = ""
-    fortnite_api_key = ""
-    hypixel_api_key = ""
+    steam_api_key = ""<br\>
+    riot_api_key = ""<br\>
+    fortnite_api_key = ""<br\>
+    hypixel_api_key = ""<br\>
 
     Now insert your api keys into the api_keys.py file.
 
@@ -27,16 +27,19 @@ Open-source, without any annoying ads and tracking!
 On powershell (windows):
 
 1. pip install venv // install virtual enviroment
-2. ./venv/scripts/activate  // activate
-3. pip install -r requirements.txt  // install requirements
-4. uvicorn main:app --reload --port 80  // run server
+2. python3 -m venv venv // create virtual environment
+3. ./venv/scripts/activate  // activate
+4. pip install -r requirements.txt  // install requirements
+5. uvicorn main:app --reload --port 80  // run server
 
 On bash (linux/mac):
 
 1. pip install venv // install virtual enviroment
-2. source venv/bin/activate //activate
-3. pip install -r requirements.txt // install requirements
-4. uvicorn main:app --reload --port 80 // run server
+2. python3 -m venv venv // create virtual environment
+3. source venv/bin/activate //activate
+4. pip install -r requirements.txt // install requirements
+5. Delete line 15 in main.py
+5. uvicorn main:app --reload --port 80 // run server
 
 For running the image_cropper.py script use pip install Pillow
 
