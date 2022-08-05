@@ -59,3 +59,41 @@ async def data(summoner_name, session, region='Europe Nordic & East') -> dict:
             return {'error': 'API_ERROR'}
         elif response.status == 403:
             return {'error': 'KEY_ERROR'}
+
+    async with session.get(f'{base_url}/lol/summoner/v4/summoners/by-name/{summonerName}', params=base_params) as response:
+        match response.status:
+            case 200:
+                return_dict = {'error': 'OK'}
+                player_response = await response.json()
+                # puuid = player_response['puuid'] # might be useful later
+                level = player_response['summonerLevel']
+                return_dict['level'] = level
+                return_dict['revisionDate'] = (datetime(1970, 1, 1) + timedelta(milliseconds=player_response['revisionDate'])).replace(microsecond=0)
+                return_dict['name'] = player_response['name']
+                encryptedSummonerId = player_response['id']
+                profileIconLink = f'https://ddragon.leagueoflegends.com/cdn/{league_version}/img/profileicon/{player_response["profileIconId"]}.png'
+                return_dict['avatar'] = profileIconLink
+                element = {}
+                async with session.get(f'{base_url}/lol/league/v4/entries/by-summoner/{encryptedSummonerId}', params = base_params) as ranked_response:
+                    ranked_json_response = await ranked_response.json()
+                    for element in ranked_json_response:
+                        if element['queueType'] == 'RANKED_SOLO_5x5':
+                            if element['inactive'] == 'True':
+                                return_dict['tier'] = 'inactive'
+                                break
+                            else:
+                                return_dict['tier'] = element['tier'].lower().capitalize()
+                                return_dict['rank'] = element['rank']
+                                return_dict['leaguePoints'] = element['leaguePoints']
+                                break
+                    if 'queueType' not in element:
+                        return_dict['tier'] = 'inactive'
+                    return_dict |= profile_link(summonerName, region)
+                    print('lol done!')
+                    return return_dict
+            case 404:
+                return {'error': 'NOT_FOUND'}
+            case 401 | 429:
+                return {'error': 'API_ERROR'}
+            case 403:
+                return {'error': 'KEY_ERROR'}
