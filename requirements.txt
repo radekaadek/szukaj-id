@@ -1,4 +1,4 @@
-fastapi
+fastapi[all]
 aiohttp
 uvicorn[standard]
 jinja2
