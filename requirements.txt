@@ -3,3 +3,4 @@ aiohttp
 uvicorn[standard]
 jinja2
 bs4
+autopep8
