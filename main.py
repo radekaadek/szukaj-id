@@ -6,7 +6,7 @@ import asyncio, aiohttp, uvicorn, steam
 import fortnite as fn
 import minecraft as mc
 import league_of_legends_new as lol
-import snapchat as snap
+import snapname as snap
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
