@@ -4,6 +4,10 @@ No one likes to manualy check someones profiles on major platforms
 to find out who they are, so we made a website for that
 Open-source, without any annoying ads and tracking!
 
+# Demo
+
+![stalkerdemo](https://user-images.githubusercontent.com/77837063/205462378-25762e22-8f8b-4ed1-ba4b-197a86c5285d.png)
+
 # Running the server: 
 
 1. Make sure to have a Python 3.10+ interpreter installed on your machine,
